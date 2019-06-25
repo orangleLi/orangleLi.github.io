@@ -1,0 +1,12 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, ul, li{
+	margin: 0;
+	padding: 0;
+	background: transparent;
+}
+
+ol, ul {
+	list-style: none;
+}
