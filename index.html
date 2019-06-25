@@ -26,6 +26,7 @@
 		.btnGroup{
 			margin-left: 50px;
 			margin-top: 50px;
+			position: relative;
 		}
 		#canvas{
 			border: 1px solid #e3e3e3;
@@ -52,12 +53,12 @@
 			top: 0;
 			left: 0;
 		}
-		#magnification{
+		.selectCls{
 			border: 1px solid #dcdfe6;
 			box-sizing: border-box;
 		    color: #606266;
 		    display: inline-block;
-		    font-size: inherit;
+		    font-size: 14px;
 		    height: 40px;
 		    line-height: 40px;
 		    outline: none;
@@ -97,22 +98,58 @@
 			border-right: 1px solid #e3e3e3!important;
 			border-bottom: 1px solid #e3e3e3!important;
 		}
+		.clippingFrame{
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+			pointer-events:none;
+		}
+		.mask{
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+			background-color: rgba(0, 0, 0, 0.5);
+			pointer-events:none;
+		}
+		.downloadImg img{
+			width: 100%;
+			height: 100%;
+		}
+		.downloadImg{
+			text-decoration: none;
+			width: 30px;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.dist{
+			margin-left: 30px;
+		}
 	</style>
 </head>
 <body>
 	<ul id="top" class="rules"></ul>
 	<ul id="left" class="rules"></ul>
 
-	<div class="btnGroup">
+	<div class="btnGroup" style="width: 722px;">
 		<button id="refreshSelectImg" class="borderCls">重新选择图片</button>
 		<button id="dragAndDrop" class="borderCls">拖拽</button>
-		<button id="magnifier" class="borderCls">放大镜</button>
-		<select name="" id="magnification" onchange="changeMagnification(this)">
+		<button id="rotate" class="borderCls dist">旋转</button>
+		<select name="" class="selectCls" id="changeRotate">
+			<option value="1">顺时针</option>
+			<option value="2">逆时针</option>
+		</select>
+		<button id="magnifier" class="borderCls dist">放大镜</button>
+		<select name="" class="selectCls" id="magnification" onchange="changeMagnification(this)">
 			<option value="">2</option>
 			<option value="">3</option>
 			<option value="">4</option>
 			<option value="">5</option>
 		</select>
+		<a class="downloadImg"><img src="./download.png" alt=""></a>
 	</div>
 	<div class="main" style="width: 722px;">
 		<canvas id="canvas" width="720" height="405">该浏览器暂不支持canvas</canvas>
@@ -123,8 +160,11 @@
 		<input id="scale-range" type="range" min="0.5" max="3.0" step="0.01" value="1.0" style="">
 		<canvas style="display: none;" id="watermarkCanvas"></canvas>
 		<canvas style="display: none;" id="magnifierCanvas"></canvas>
+		<!-- 裁剪框
+		<div class="clippingFrame"></div>
+		<div class="mask"></div> -->
 	</div>	
-
+	<canvas style="margin-left: 60px;display: none;" id="rotateCanvas"></canvas>
 	<script src="./imageHandle.js" type="text/javascript"></script>
 </body>
 <script>
