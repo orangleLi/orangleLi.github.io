@@ -1,7 +1,7 @@
 # orangleLi.github.io
 
 这是一个图片处理的小项目
-https://orangleli.github.io/
+https://orangleli.github.io/imageHandle/index.html
 
 使用 JavaScript + Canvas 完成  实现图片的缩放，旋转，拖拽，放大镜等效果
 
