@@ -1,15 +1,11 @@
 var dom = document.getElementById('canvas');
 var ctx = dom.getContext('2d');
 
-var watermarkCanvas = document.getElementById('watermarkCanvas');
-var watermarkCtx = watermarkCanvas.getContext('2d');
-
 var magnifierCanvas = document.getElementById('magnifierCanvas');
 var magnifierCtx = magnifierCanvas.getContext('2d');
 
-
-var rotateCanvas = document.getElementById('rotateCanvas');
-var rotateCtx = rotateCanvas.getContext('2d');
+var offScreenCanvas = document.getElementById('offScreenCanvas');
+var offScreenCtx = offScreenCanvas.getContext('2d');
 
 // 获取按钮dom
 var refreshSelectImgDom = document.getElementById('refreshSelectImg');
@@ -20,6 +16,7 @@ var magnifierDom = document.getElementById('magnifier');
 var selectImgClsDom = document.getElementsByClassName('selectImgCls')[0];
 
 var image = new Image();
+var offScreenImage = new Image();
 
 var defaultWidth = 720;
 var defaultHeight = 405;
@@ -33,8 +30,6 @@ var magSize = 202;
 var magnification = 2;
 magnifierCanvas.width = magSize;
 magnifierCanvas.height = magSize;
-watermarkCanvas.width = 300;
-watermarkCanvas.height = 100;
 
 // 逆时针旋转/顺时针旋转
 var angle = 0;
@@ -80,14 +75,8 @@ imageHandle.prototype = {
 			that.setCanvasSize(image.width, image.height);
 
 			ctx.drawImage(image,0, 0,  width, height);
-			rotateCtx.drawImage(image,0, 0,  width, height);
+			offScreenCtx.drawImage(image, 0, 0, width, height);
 		}
-
-		watermarkCtx.font = 'bold 30px Arial';
-		watermarkCtx.lineWidth = '1';
-		watermarkCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-		watermarkCtx.textBaseline = 'middle';
-		watermarkCtx.fillText("== lilian.com ==", 20, 50);
 	},
 	setCanvasSize(w, h) {
 			width = w;
@@ -96,8 +85,8 @@ imageHandle.prototype = {
 			dom.height = height;
 			this.imageWidth = width;
 			this.imageHeight = height;
-			rotateCanvas.width = width;
-			rotateCanvas.height = height;
+			offScreenCanvas.width = width;
+			offScreenCanvas.height = height;
 	},
 	setBoxSize(w) {
 		document.getElementsByClassName('main')[0].style.width = w + 2 + 'px';
@@ -105,24 +94,36 @@ imageHandle.prototype = {
 	},
 	// 缩放效果
 	drawImageByScale() {
+		let that = this;
 		this.imageWidth = width * this.scale;
 		this.imageHeight = height * this.scale;
 
-		this.dx = width / 2 - this.imageWidth / 2;
-		this.dy = height / 2 - this.imageHeight / 2;
 		ctx.save();
 		this.clearCanvas();
-		ctx.drawImage(image, 0, 0, width, height, this.dx, this.dy, this.imageWidth, this.imageHeight);
-		rotateCtx.drawImage(image, 0, 0, width, height, this.dx, this.dy, this.imageWidth, this.imageHeight);
-		// 绘制水印
-		ctx.drawImage(watermarkCanvas, width - watermarkCanvas.width, height - watermarkCanvas.height);
+		if (angle !== 0) {
+			
+			this.dx = height / 2 - this.imageHeight / 2;
+			this.dy = width / 2 - this.imageWidth / 2;
+			if (angle === 180 || angle === 0) {
+				ctx.drawImage(offScreenCanvas, 0, 0, width, height, that.dx, that.dy, that.imageWidth, that.imageHeight);
+			} else {
+				ctx.drawImage(offScreenCanvas, 0, 0, height, width, that.dx, that.dy, that.imageHeight, that.imageWidth);
+			}
+
+		} else {
+
+			this.dx = width / 2 - this.imageWidth / 2;
+			this.dy = height / 2 - this.imageHeight / 2;
+			ctx.drawImage(image, 0, 0, width, height, this.dx, this.dy, this.imageWidth, this.imageHeight);	
+		}
+
 		this.saveImg();
 		ctx.restore();
 	},
 	clearCanvas() {
 		// let r = width > height ? width+2 : height+2;
 		ctx.clearRect(0, 0, width+2, height+2);
-		ctx.clearRect(0, 0, height+2, width+2);
+		ctx.clearRect(0, 0, height+2, width+2);		
 	},
 	// coordinateTrans坐标转换，从window坐标转为canvas坐标
 	coordinateTrans(x, y) {
@@ -149,11 +150,24 @@ imageHandle.prototype = {
 				that.dy += diffY;
 				that.startX = posEnd.x;
 				that.startY = posEnd.y;
+				// if (diffX > 30){
+				// 	debugger
+				// }
 				if (diffX !== 0 && diffY !== 0) {	
 					ctx.save();				
 					that.clearCanvas();
-					ctx.drawImage(image, 0, 0, width, height, that.dx, that.dy,  that.imageWidth, that.imageHeight);
-					rotateCtx.drawImage(image, 0, 0, width, height, that.dx, that.dy,  that.imageWidth, that.imageHeight);
+					if (angle !== 0) {
+
+						if (angle === 180 || angle === 0) {
+							// console.log(offScreenImage.src)
+							ctx.drawImage(offScreenCanvas, 0, 0, width, height, that.dx, that.dy, that.imageWidth, that.imageHeight);
+						} else {
+							ctx.drawImage(offScreenCanvas, 0, 0, height, width, that.dx, that.dy, that.imageHeight, that.imageWidth);
+						}
+
+					} else {
+						ctx.drawImage(image, 0, 0, width, height, that.dx, that.dy, that.imageWidth, that.imageHeight);
+					}
 					that.saveImg();
 					ctx.restore();	
 				}
@@ -222,9 +236,6 @@ imageHandle.prototype = {
 		downloadImgDom.href = dom.toDataURL('image/png');
 	},
 	initRotate() {
-		rotateCtx.drawImage(image, 0, 0, width, height);
-		rotateCanvas.width = width;
-		rotateCanvas.height = height;
 		dom.width = width;
 		dom.height = height;
 	},
@@ -234,9 +245,13 @@ imageHandle.prototype = {
 		// 图片旋转
 		// console.log('旋转');
 		this.clearCanvas();
-		rotateCtx.clearRect(0, 0, width+2, height+2);
 
 		let movex = 0, movey = 0;
+		var tempDx = that.dx;
+		var tempDy = that.dy;
+		that.dx = tempDy;
+		that.dy = tempDx;
+		that.changeOffScreenCanvas();
 		switch (angle) {
 			case 90:
 				that.changeWidthAndHeight();
@@ -260,28 +275,30 @@ imageHandle.prototype = {
 		// angle = 180;
 		// movex = width;
 		// movey = height;
-		console.log(angle);
-		rotateCtx.setTransform(Math.cos(angle * Math.PI/180), Math.sin(angle*Math.PI/180), - Math.sin(angle*Math.PI/180), Math.cos(angle * Math.PI/180) , movex, movey);
+		// console.log(angle);
 
-		rotateCtx.drawImage(image, 0, 0, width, height, this.dx, this.dy, this.imageWidth, this.imageHeight);
-		console.log(this.dx, this.dy)
+		offScreenCtx.setTransform(Math.cos(angle * Math.PI/180), Math.sin(angle*Math.PI/180), - Math.sin(angle*Math.PI/180), Math.cos(angle * Math.PI/180) , movex, movey);
+		offScreenCtx.drawImage(image, 0, 0, width, height);
+		offScreenImage.src = offScreenCanvas.toDataURL('image/png');
+		// console.log(offScreenImage.src)
+
 		if (angle === 180 || angle === 0) {
-			ctx.drawImage(rotateCanvas, 0, 0, width, height, 0, 0, width, height);
+			ctx.drawImage(offScreenCanvas, 0, 0, width, height, that.dx, that.dy, that.imageWidth, that.imageHeight);
 		} else {
-			ctx.drawImage(rotateCanvas, 0, 0, height, width, 0, 0, height, width);
+			ctx.drawImage(offScreenCanvas, 0, 0, height, width, that.dx, that.dy, that.imageHeight, that.imageWidth);
 		}
 		this.saveImg();
 	},
 	changeWidthAndHeight() {
-		var tempWidth = rotateCanvas.width;
-		rotateCanvas.width = rotateCanvas.height;
-		rotateCanvas.height = tempWidth;
-
 		var tempWidth = dom.width;
 		dom.width = dom.height;
 		dom.height = tempWidth;
-
-		this.setBoxSize(tempWidth);
+	},
+	changeOffScreenCanvas() {
+		var offScreenWidth = offScreenCanvas.width;
+		offScreenCanvas.width = offScreenCanvas.height;
+		offScreenCanvas.height = offScreenWidth;
+		this.setBoxSize(offScreenCanvas.width);
 	},
 	setStyle(obj) {
 		obj.style.display = 'block';
