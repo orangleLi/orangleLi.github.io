@@ -31,7 +31,7 @@ multipleEntry
 
   * post接口跨域配置
 
-  * url转base64配置
+  * url转base64封装
 
   * localstorage.js rem.js封装
 
