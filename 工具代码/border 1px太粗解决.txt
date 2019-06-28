@@ -1,0 +1,144 @@
+
+实现这样的效果
+-------------------------
+法一：
+@media only screen and (-webkit-min-device-pixel-ratio: 2){
+  .lineBorderAfter:after {
+     -webkit-transform: scaleY(0.5);
+     transform: scaleY(0.5);
+   }
+  .lineBorderbefore:before {
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+}
+
+.lineBorderAfter:after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  top: auto;
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  display: block;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+.lineBorderbefore:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: auto;
+  right: auto;
+  top: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  display: block;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+.lineBorderRight:before{
+  content: '';
+  position: absolute;
+  left: auto;
+  bottom: auto;
+  right: 0;
+  top: auto;
+  width: 1px;
+  height: 100%;
+  background-color: #ccc;
+  display: block;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+
+法二：
+position: relative
+  &:after
+    display: block
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    border-top: 1px solid $color
+    content: ' '
+	
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-1px
+    &::after
+      -webkit-transform: scaleY(0.7)
+      transform: scaleY(0.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-1px
+    &::after
+      -webkit-transform: scaleY(0.5)
+      transform: scaleY(0.5)
+
+
+
+
+实现这样的效果
+
+--------------到底了到底了--------------
+
+
+
+
+<div class="footer display_flex align-items_flex-start">
+	<div class="flex"></div>
+	<span class="footerSpan">到底了到底了</span>
+	<div class="flex"></div>
+</div>
+
+.footer {
+    margin: 0.49rem 0.24rem 0.5rem 0.24rem;
+    height: 0.2rem;
+    line-height: 0.2rem;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.align-items_flex-start {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+.display_flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.footer .flex {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 1px;
+    background: rgb(229, 229, 229);
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.footer .footerSpan {
+    font-size: 0.2rem;
+    color: rgb(170, 170, 170);
+    margin: 0 0.19rem;
+}

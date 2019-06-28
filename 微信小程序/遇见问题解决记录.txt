@@ -1,0 +1,47 @@
+问题：<textarea></textarea>  默认长度140 ，maxlength = -1 字数无限制
+
+问题：ios 当弹框中有<textarea> placeholder滚动是会随背景滚动
+	解决：<textarea adjust-position fixed class=""></textarea>   
+
+电话号码解析失败
+
+//解密流程是这样：
+
+      // 1. wx.login 获取code；
+
+      // 2. 把code传给后台，请求微信接口拿session_key;
+
+      // 3. wx.getUserInfo获取加密数据，加密数据传给后台，使用第二步拿到的session_key来解密。
+
+      // 之前我们也遇到这问题了，按已上流程调整就再也没有出过无法解密的错误，
+
+      // 一般来说解密出问题，是因为第三步拿的解密数据和第二步的session_key不对应导致；
+
+      // 最近微信小程序的热点接口改动比较频繁，有些老逻辑就不太适用了	
+	  
+问题：发布一篇文字，内容无法换行的问题
+
+	文本处理
+	let handleWords = function (words) {
+	  words = words.split('');
+	  for (let i = 0; i < words.length; i++) {
+		if (words[i] === " ") {
+		  words[i] = "&ensp;"
+		}
+	  }
+	  return words.join('');
+	}
+	
+	<text decode="{{true}}">{{activityCon.ActivityContent}}</text>
+	
+
+问题： button::after{border:0} 原生按钮去掉边框
+
+
+问题：emoji表情存储问题
+
+	emojiTrans.js文件， 经过encodeFun方式处理之后进行存储，拿到的数据decode之后进行页面展示
+	
+	const emojiBase = require('../../utils/emojiTrans.js');
+	emojiBase.encodeFn(commentContent)
+	emojiBase.decode(commentContent)

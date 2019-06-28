@@ -1,0 +1,23 @@
+问题：<textarea></textarea>  默认长度140 ，maxlength = -1 字数无限制
+
+问题：ios 当弹框中有<textarea> placeholder滚动是会随背景滚动
+	解决：<textarea adjust-position fixed class=""></textarea>   
+
+	  
+问题：发布一篇文字，内容无法换行的问题
+
+	文本处理
+	let handleWords = function (words) {
+	  words = words.split('');
+	  for (let i = 0; i < words.length; i++) {
+		if (words[i] === " ") {
+		  words[i] = "&ensp;"
+		}
+	  }
+	  return words.join('');
+	}
+	
+	<text decode="{{true}}">{{activityCon.ActivityContent}}</text>
+	
+
+问题： button::after{border:0} 原生按钮去掉边框

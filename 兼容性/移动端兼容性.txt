@@ -1,0 +1,38 @@
+https://www.jianshu.com/p/b5c103a9bed0
+
+
+  font-family: PingFangSC-Regular, sans-serif; 不设置字体的话ios字体 emm....  一言难尽
+
+ios 页面禁止放大缩小
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+
+
+    this.prohibitZooming();
+	
+    // ios 10 兼容，禁止页面缩放
+    prohibitZooming: function () {
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('dblclick', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+          event.preventDefault();
+        }
+      });
+      var lastTouchEnd = 0;
+      document.addEventListener('touchend', function (event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+    },
+	
+	
+ios 手机号码会处理为可拨打，并并变色
+
+  <meta name="format-detection" content="telephone=no" />
