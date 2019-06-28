@@ -17,5 +17,3 @@ export function getParam (search) {
   search.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => q[k] = v); // eslint-disable-line
   return q;
 }
-
-export {adImg};
