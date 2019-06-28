@@ -1,6 +1,6 @@
 # orangleLi.github.io
 
-这是一个图片处理的小项目
+这是一个PC端图片处理的小项目
 https://orangleli.github.io/imageHandle/index.html
 
 使用 JavaScript + Canvas 完成  
