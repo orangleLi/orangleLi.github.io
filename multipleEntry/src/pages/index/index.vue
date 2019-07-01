@@ -1,7 +1,7 @@
 <template>
   <div class="setHeight">
-    <!--<index-comp></index-comp>-->
-    <carousel :slides="slides" :invTime="invTime"></carousel>
+    <index-comp></index-comp>
+    <!--<carousel :slides="slides" :invTime="invTime"></carousel>-->
     <!--<router-view></router-view>-->
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
           href: 'detail/forecast'
         }
       ]
-    }
+    };
   },
   created () {
     // this.$router.push({

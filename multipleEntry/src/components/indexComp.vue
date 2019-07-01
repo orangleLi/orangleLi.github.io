@@ -6,8 +6,6 @@
       <span>内容</span>
     </div>
     <footer-span></footer-span>
-    <loading ref="loading"></loading>
-    <!--<wx-modal ref="wxModal"></wx-modal>-->
   </div>
 </template>
 
@@ -30,9 +28,18 @@ export default {
   },
   mounted () {
     // let that = this;
-    this.$refs.loading.showLoading({
+    // this.$refs.loading.showLoading({
+    //   title: '正在加载...'
+    // });
+    // loading modal html使用Vue.extend挂在到了dom上，时间挂在Vue.prototype上，可以直接使用，不用定义组件
+    this.$message.showLoading({
       title: '正在加载...'
     });
+    // this.$message.showModal({
+    //   title: '提示',
+    //   content: '获取成功',
+    //   showCancel: false
+    // });
   },
   methods: {
     getImg (path) {
