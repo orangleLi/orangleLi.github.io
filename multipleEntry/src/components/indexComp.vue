@@ -1,5 +1,5 @@
 <template>
-  <div class="index-container" @touchstart="onTouchStart()" @touchend="onTouchEnd()">
+  <div class="index-container">
     <div class="content">
       <rotation-chart :imagesArr="imagesArr" :len="len"
       ></rotation-chart>

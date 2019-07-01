@@ -21,3 +21,9 @@
 	
 
 问题： button::after{border:0} 原生按钮去掉边框
+
+
+问题： 输入框进行输入时，键盘弹出遮挡输入框的问题
+
+cursor-spacing：指定光标与键盘的距离，单位px或rpx，默认为px。取 输入框 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离
+<input cursor-spacing = '150'></input>  <textarea cursor-spacing = '150'></textarea>
