@@ -13,3 +13,21 @@ Data对象参数
  	t为秒数
  时间戳：getTime()
  	返回从1970年1月1日0点0分0秒0毫秒
+	
+	
+
+--------------倒计时时间格式化
+function format_time(timeStamp) {
+    let day = Math.floor(timeStamp / (24 * 3600 * 1000));
+    let leave1 = timeStamp % (24 * 3600 * 1000);
+    let hours = Math.floor(leave1 / (3600 * 1000));
+    let leave2 = leave1 % (3600 * 1000);
+    let minutes = Math.floor(leave2 / (60 * 1000));
+    let leave3 = leave2 % (60 * 1000);
+    let seconds = Math.floor(leave3 / 1000);
+    if (day) return day + "天" + hours + "小时" + minutes + "分";
+    if (hours) return hours + "小时" + minutes + "分" + seconds + "秒";
+    if (minutes) return minutes + "分" + seconds + "秒";
+    if (seconds) return seconds + "秒";
+    return "时间到！";
+}
