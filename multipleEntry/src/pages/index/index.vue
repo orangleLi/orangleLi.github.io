@@ -1,7 +1,7 @@
 <template>
   <div class="setHeight">
-    <index-comp></index-comp>
-    <!--<carousel :slides="slides" :invTime="invTime"></carousel>-->
+    <!--<index-comp></index-comp>-->
+    <carousel :slides="slides" :inv="invTime"></carousel>
     <!--<router-view></router-view>-->
   </div>
 </template>

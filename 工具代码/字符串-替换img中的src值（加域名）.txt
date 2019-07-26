@@ -1,0 +1,7 @@
+	richData ->  	<p><img src="/Uploads/image/20190722/6369940703337613485837788.png" title="image.png" alt="image.png"/></p>
+  setRichInfoImageDomain(richData, domain) {
+    let res = richData.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match,capture) {
+      return '<img src="' + domain + capture + '" alt="" />';
+    });
+    return res;
+  },

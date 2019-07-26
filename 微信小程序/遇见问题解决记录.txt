@@ -45,3 +45,45 @@
 	const emojiBase = require('../../utils/emojiTrans.js');
 	emojiBase.encodeFn(commentContent)
 	emojiBase.decode(commentContent)
+	
+	
+	
+问题： ios时间差8个小时
+	时区问题
+	
+	wx.getSystemInfo({
+      success(res) {
+        // console.log(res.model);
+        // console.log("状态栏的高度 " + res.statusBarHeight)
+        var temp = res.model.replace(/iPhone X/g, '')
+        if (temp != res.model) {
+          that.globalData.isIpx = true
+        }
+        that.globalData.statusBarHeight = res.statusBarHeight
+        that.globalData.facility = res.model; // 可以用来判断是iphone 还是安卓
+        that.globalData.phoneAppVersion = res.system
+        console.log(that.globalData.facility)
+      }
+    });
+	
+	const isPhone = () => {
+		return app.globalData.facility.indexOf('iPhone') !== -1; // false 安卓  true iphone
+	}
+	
+	if (isPhone()) {
+		date = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+	}
+	
+	
+遮罩层弹框滚动穿透问题  问题来源-> 一应生活小程序 -> 优品活动详情页面 -> 单个商品详情弹出框
+<view>
+	<view style="overflow: {{showOneGoodsDetailModal?'hidden':'auto'}};">
+		主题内容显示
+	</view>
+</view>
+<view>遮罩层及弹框</view>
+
+Page{
+  overflow:hidden;
+  height: 100%;
+}
