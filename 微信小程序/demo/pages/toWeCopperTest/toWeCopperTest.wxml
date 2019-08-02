@@ -1,0 +1,6 @@
+<!--pages/toWeCopperTest/toWeCopperTest.wxml-->
+<view class="container">
+  <view class='showImg' bindtap='uploadImg'>
+    <image src='{{src}}'></image>
+  </view>
+</view>

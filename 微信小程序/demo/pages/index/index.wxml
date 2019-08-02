@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container">
+<button class='reset' bindtap='resetImg'>重置</button>
+  <button class='confirmBtn' bindtap='confirm'>使用</button>
+  <image-cropper id="image-cropper" limit_move="{{true}}" disable_rotate="{{true}}" width="{{width}}" height="{{height}}" imgSrc="{{src}}" bindload="cropperload" bindimageload="loadimage"></image-cropper>
+</view>

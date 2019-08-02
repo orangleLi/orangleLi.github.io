@@ -1,0 +1,10 @@
+/* pages/mall/mall.wxss */
+.showImg{
+  width: 200px;
+  height: 200px;
+  border: 1px solid #f3f3f3;
+}
+image{
+  width: 200px;
+  height: 200px;
+}

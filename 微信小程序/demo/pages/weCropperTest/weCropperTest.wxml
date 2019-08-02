@@ -1,0 +1,21 @@
+<import src="../we-cropper/we-cropper.wxml"/>
+
+<view class="cropper-wrapper">
+    <template
+    disable-scroll="true"
+    bindtouchstart="touchStart"
+    bindtouchmove="touchMove"
+    bindtouchend="touchEnd" is="we-cropper" data="{{...cropperOpt}}"/>
+    <view class="cropper-buttons">
+        <!-- <view
+                class="upload"
+                bindtap="uploadTap">
+            上传图片
+        </view> -->
+        <view
+                class="getCropperImage"
+                bindtap="getCropperImage">
+            生成图片
+        </view>
+    </view>
+</view>

@@ -1,0 +1,12 @@
+<!--pages/pictureCompression/pictureCompression.wxml-->
+<view>
+  <button bindtap="chooseImage">点击添加图片</button>
+</view>
+
+<view style="display: flex;justify-content: center;flex-direction: column">
+  <image width="50" mode="widthFix" wx:for="{{imageList}}" wx:key="unique" src="{{item}}" data-index="{{index}}" bindtap="save"></image>
+</view>
+
+
+ 
+<canvas canvas-id='attendCanvasId' class='myCanvas' style='width:{{cWidth}}px;height:{{cHeight}}px;position: absolute;top: -9999px;left: -9999px;'></canvas>

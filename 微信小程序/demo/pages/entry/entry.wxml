@@ -1,0 +1,25 @@
+<view class="item size30 color51" bindtap="toLoaction">
+  获取地址 百度地址 插件demo >>
+</view>
+
+<view class="item size30 color51" bindtap="toSlidingSwitch">
+  左右滑动，卡片式切换 swiper >>
+</view>
+
+<view class="item size30 color51" bindtap="toaddShoppingCarAnimate">
+  加入购物车 小球飞入动画，列表弹出隐藏动画 >>
+</view>
+
+<view class="item size30 color51" bindtap="toMall">
+  image-copprer 插件demo >>
+</view>
+
+<view class="item size30 color51" bindtap="toWeCropper">
+  we-copprer 插件demo >>
+</view>
+
+<view class="item size30 color51" bindtap="toPictureCompression">
+  图片压缩demo >>
+</view>
+
+
