@@ -48,6 +48,60 @@ function randomColor() {
 	col[num] = 0;
 	return "rgb(" + col[0] + "," + col[1] + "," + col[2] + ")";
 }
+/**
+  * [function 判断是否为函数]
+  * @param  {[type]} source [description]
+  * @return {[type]}        [description]
+  */
+function isFunction(source) {
+	return '[object Function]' === Object.prototype.toString.call(source);
+};
+ /**
+  * [isIE 判断是不是ie]
+  * @return {Boolean} [如果是ie返回版本号，不是则返回false]
+  */
+function isIE() {
+	var myNav = navigator.userAgent.toLowerCase();
+	return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+};
+
+ /**
+  * [function 对象浅复制]
+  * @param  {[type]} dst [description]
+  * @param  {[type]} obj [description]
+  * @return {[type]}     [description]
+  */
+function extendFun(dst, obj) {
+	for (var i in obj) {
+		if (obj.hasOwnProperty(i)) {
+			dst[i] = obj[i];
+		}
+	}
+};
+
+ /**
+  * [function 获取一个随机的5位字符串]
+  * @param  {[type]} prefix [description]
+  * @return {[type]}        [description]
+  */
+ function getName(prefix) {
+     return prefix + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+ };
+
+ /**
+  * [function 在页面中注入js脚本]
+  * @param  {[type]} url     [description]
+  * @param  {[type]} charset [description]
+  * @return {[type]}         [description]
+  */
+ function createScript(url, charset) {
+     var script = document.createElement('script');
+     script.setAttribute('type', 'text/javascript');
+     charset && script.setAttribute('charset', charset);
+     script.setAttribute('src', url);
+     script.async = true;
+     return script;
+ };
 function dis(x1, y1, x2, y2) {
 	// 求两点之间的距离
 	return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
