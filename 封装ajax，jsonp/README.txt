@@ -1,8 +1,8 @@
-封装ajax测试地址：
+封装ajax演示地址：
 https://orangleli.github.io/%E5%B0%81%E8%A3%85ajax%EF%BC%8Cjsonp/%E5%B0%81%E8%A3%85ajax.html
 
 
-封装jsonp测试地址：
+封装jsonp演示地址：
 https://orangleli.github.io/%E5%B0%81%E8%A3%85ajax%EF%BC%8Cjsonp/%E5%B0%81%E8%A3%85jsonp.html
 
 
