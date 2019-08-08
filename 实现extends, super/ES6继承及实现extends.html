@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承</title>
+</head>
+<body>
+	<script>
+		// class Person {
+		// 	constructor(name, age) {
+		// 		this.name = name;
+		// 		this.age = age;
+		// 	}
+		// 	eat() {
+		// 		console.log(`${this.name} 在吃饭...`)
+		// 	}
+		// }
+
+
+		// class Student extends Person {
+		// 	constructor(name, age, score) {
+		// 		super(name, age);
+		// 		this.score = score;
+		// 	}
+		// 	study() {
+		// 		console.log(`考了 ${this.score}分`);
+		// 	}
+		// }
+
+		// class Teacher extends Person {
+		// 	constructor(name, age, salary) {
+		// 		super(name, age);
+		// 		this.salary = salary;
+		// 	}
+		// 	payOff() {
+		// 		console.log(`工资 ${this.salary}元`)
+		// 	}
+		// }
+
+		// let stu1 = new Student('zs', 18, 90);
+		// stu1.eat();
+		// stu1.study();
+		// console.log(Student.prototype.__proto__ === Person.prototype)
+
+		// let t1 = new Teacher('ww', 23, 10000);
+		// t1.eat();
+		// t1.payOff();
+
+
+		// 实现extends及super
+		function myExtends(Child, Parent) {
+			Child.prototype.__proto__ = Parent.prototype;
+			Child.prototype.constructor = Child;
+			Object.setPrototypeOf(Child, Parent);
+		}
+		/*
+		** Parent 父类
+		** obj 子类this对象
+		** args 属性参数
+		*/
+		function mySuper(Parent, obj, ...args) {
+			Parent.apply(obj, args);
+		}
+
+
+		function Person(name, age) {
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.eat = function(){
+				console.log('eat...');
+		}
+		Person.prototype.sing = function(){
+				console.log('sing...');
+		}
+
+		function Student(name, age, score) {
+			mySuper(Person, this, name, age);
+			this.score = score;
+		}
+
+		Student.prototype.intro = function(){
+				console.log(`我是${this.name}, ${this.age}岁, 考了${this.score}分`);
+		}
+
+		myExtends(Student, Person);
+
+
+		let c = new Student('zs', 18, 90);
+		c.eat();
+		c.sing();
+		c.intro();
+
+		console.log('------------');
+		
+		function Teacher(name, age, salary) {
+			mySuper(Person, this, name, age);
+			this.salary = salary;
+		}
+		Teacher.prototype.payOff = function() {
+			console.log(`工资 ${this.salary}元`)
+		}
+		myExtends(Teacher, Person);
+		let t1 = new Teacher('ww', 23, 10000);
+		t1.eat();
+		t1.sing();
+		t1.payOff();
+
+	</script>
+</body>
+</html>
