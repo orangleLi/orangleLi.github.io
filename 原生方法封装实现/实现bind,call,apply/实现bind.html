@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现bind</title>
+<body>
+	<script>
+		function fn(x, y) {
+			console.log(this);
+			return x + y;
+		}
+
+		var o = {
+			name: 'zs'
+		};
+
+		var f = fn.bind(o, 1, 2);
+		console.log(f());
+
+		Function.prototype.myBind = function(context, ...args){
+			let fn = Symbol();
+			context[fn] = this;
+			let res = context[fn](...args);
+			delete context[fn];
+			return function() {
+				return res;
+			}
+		}
+		var f1 = fn.myBind(o, 2, 2);
+		console.log(f1());
+	</script>
+</body>
+</html>

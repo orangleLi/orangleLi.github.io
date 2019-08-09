@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现json.stringfiy和JSON.parse</title>
+</head>
+<body>
+	<script>
+		function stringify(obj) {
+			let type = typeof obj;
+			if (obj === null) return null + '';
+		    if (type !== "object") {
+		    	if (!obj) {
+		    		return obj
+		    	} else if (/string|undefined|function/.test(type)) {
+		            obj = '"' + obj + '"';
+		        }
+		        return String(obj);
+		    } else {
+		        let json = []
+		        let arr = Array.isArray(obj)
+		        for (let k in obj) {
+		            let v = obj[k];
+		            let type = typeof v;
+		            if (type === 'symbol' || type === 'function') continue;
+		            if (/string|undefined|function/.test(type)) {
+		                v = '"' + v + '"';
+		            } else if (type === "object") {
+		                v = stringify(v);
+		            }
+		            json.push((arr ? "" : '"' + k + '":') + String(v));
+		        }
+		        return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}")
+		    }
+		}
+		let jsonObj = {
+			ActivityList: [
+				{
+					ActivityName: '纸巾促销团购',
+					Price: 121.00,
+					Imgs:[
+		                "https://int.ening.cn/Uploads/AppPhotos/baaabc90-abf1-49d2-b2f1-9762b84845fe.jpg"
+		            ]
+				},
+				{
+					ActivityName: '西瓜促销',
+					Price: 16.00,
+					Imgs:[
+		                "https://int.ening.cn/Uploads/AppPhotos/baaabc90-abf1-49d2-b2f1-9762b84845fe.jpg"
+		            ]
+				}
+			],
+			UserHeadImgList: [
+				{
+					WxHeaderImg: "https://int.ening.cn/Uploads/AppPhotos/baaabc90-abf1-49d2-b2f1-9762b84845fe.jpg"
+				},
+				{
+					WxHeaderImg: "https://int.ening.cn/Uploads/AppPhotos/baaabc90-abf1-49d2-b2f1-9762b84845fe.jpg"
+				}
+			],
+			CommunityName: '坂田国际中心',
+			UsersCount: 4698
+		}
+		let k = {
+			name: 'zs',
+			age: 20,
+			score: [90, 120, 119]
+		}
+		let s = {
+			name: 'zs',
+			test: Symbol(),
+			fun: function(){console.log('this is function');}
+		}
+		console.log(JSON.stringify(s))
+		console.log(stringify(s));
+
+		function parse(jsonStr) {
+			return (new Function('return ' + jsonStr))();
+		}
+
+		console.log(parse('{ "age": 20, "name": "jack" }'))
+	</script>
+</body>
+</html>
