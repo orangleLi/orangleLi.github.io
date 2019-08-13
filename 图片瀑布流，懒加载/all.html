@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流，懒加载</title>
+	<style type="text/css">
+		.main{
+			width: 800px;
+			height: 100%;
+			margin: 0 auto;
+			position: relative;
+		}
+		.box{
+			float: left;
+			padding: 10px;
+			border-radius: 10px;
+			box-shadow: 0 0 40px #eee;
+			position: absolute;
+			box-sizing: content-box;
+		}
+		.box img{
+		    opacity: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="main"></div>
+	<script>
+		function Main() {
+			this.imgArr = ['./images/1.png', './images/3.jpg', './images/2.jpg', './images/p.jpg', './images/4.jpg', './images/a.jpg', './images/c.png', './images/im.jpg', './images/l.png'];
+			this.mainDom = document.getElementsByClassName('main')[0];
+			this.imgWidth = 220;
+			this.eleImg = [];
+			this.eleBox = [];
+			this.bgHeight = 0;
+			this.baseNum = 50;
+			this.num = 0;
+		}
+
+		Main.prototype = {
+			init: function() {
+				let that = this;
+				that.insertImg();
+				window.onload = function() {
+					that.setPosition();
+					window.addEventListener('scroll', function() {
+						if (that.getScrollTop() + that.getWindowHeight() >= that.getScrollHeight()) {
+							that.insertImg();
+						}
+						that.setPosition();
+					});
+				};
+			},
+			insertImg: function() {
+				for (let i = 0; i < this.baseNum; i++) {
+				    let index = parseInt(Math.random()* this.imgArr.length);
+				    let dom = document.createElement('div');
+
+				    let domStr = `<img width=${this.imgWidth} data-src="${this.imgArr[index]}" src="${this.imgArr[index]}" alt="">`;
+				    dom.className = 'box';
+				    dom.innerHTML = domStr;
+				    this.mainDom.appendChild(dom);
+				}
+				this.eleBox = document.getElementsByClassName('box');
+				this.eleImg = document.getElementsByTagName('img');
+			},
+			setPosition() {
+				let imgArr = this.imgArr;
+				let perRowImgNum = parseInt(this.mainDom.offsetWidth / this.imgWidth);
+				let offsetHeight = 0, offsetTop = 0;
+				for (let i = 0; i < this.eleBox.length; i++) {
+					if (i >= perRowImgNum) {
+						offsetHeight = document.getElementsByClassName('box')[i-perRowImgNum].childNodes[0].offsetHeight;
+						offsetTop = document.getElementsByClassName('box')[i-perRowImgNum].offsetTop;
+					}
+					
+					let top = i < perRowImgNum ? 0 : offsetHeight + 40 + offsetTop;
+					let left = (i % perRowImgNum) * this.imgWidth + (i % perRowImgNum + 1) * 30;
+
+					this.eleBox[i].style.top = top + 'px';
+					this.eleBox[i].style.left = left + 'px';
+
+					if (this.eleBox[i].getBoundingClientRect().top < document.documentElement.clientHeight && !this.eleImg[i].isLoad) {  //判断图片
+				        this.eleImg[i].isLoad = true;
+				        if (this.eleImg[i].dataset) {  
+				      		this.eleImg[i].src = this.eleImg[i].dataset.src  
+				     	}else{
+				      		this.eleImg[i].src = this.eleImg[i].getAttribute("data-src");
+				      	}
+				      	this.eleImg[i].style.cssText = "transition: opacity 2s; opacity: 1;"    //使opacity变化在4秒内完成
+				    }
+
+				}
+			},
+
+			// 滚动条距离顶部距离
+			getScrollTop: function (){
+			　　var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+			　　if(document.body){
+			　　　　bodyScrollTop = document.body.scrollTop;
+			　　}
+			　　if(document.documentElement){
+			　　　　documentScrollTop = document.documentElement.scrollTop;
+			　　}
+			　　scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+			　　return scrollTop;
+			},
+			//文档的总高度
+			getScrollHeight: function (){
+			　　var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+			　　if(document.body){
+			　　　　bodyScrollHeight = document.body.scrollHeight;
+			　　}
+			　　if(document.documentElement){
+			　　　　documentScrollHeight = document.documentElement.scrollHeight;
+			　　}
+			　　scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+			　　return scrollHeight;
+			},			 
+			//浏览器视口的高度			 
+			getWindowHeight: function (){
+			　　var windowHeight = 0;
+				// BackCompat：标准兼容模式关闭。
+				// CSS1Compat：标准兼容模式开启。
+			　　if(document.compatMode == "CSS1Compat"){
+			　　　　windowHeight = document.documentElement.clientHeight;
+			　　}else{
+			　　　　windowHeight = document.body.clientHeight;
+			　　}
+			　　return windowHeight;
+			},
+		}
+
+		new Main().init();	
+	
+	</script>
+</body>
+</html>
