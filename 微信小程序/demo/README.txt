@@ -6,7 +6,7 @@
 
 2. swiper实现左右滑动卡片式切换效果
 
-3. 加入购物车  小球飞入动画，列表弹出隐藏动画原生css3实现
+3. 加入购物车  小球飞入动画原生css3实现，列表弹出隐藏动画wx.createAnimation
 
 4. image-copper we-copper 的 demo
 
