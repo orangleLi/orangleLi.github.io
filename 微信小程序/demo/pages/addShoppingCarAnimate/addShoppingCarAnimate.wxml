@@ -93,8 +93,8 @@
         <view bindtap="confirmSelect" class="allPrice item themeBg size34">确定选择</view>
       </view>
     </view>
-  </view>
-  <view animation="{{ani}}" class="animat" style="{{style}}">
+  </view> 
+  <view class="animat" style="{{style}}">
     <image class="icon" src="/resources/images/icon_add01.png"></image>
   </view>
  

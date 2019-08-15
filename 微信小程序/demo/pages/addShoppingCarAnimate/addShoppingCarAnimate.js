@@ -31,8 +31,8 @@ Page({
         "ImageId": "1",
         "ImageUrl": "",
         "SaleCount": 1,
-        "ProductName": "原瓶进口 智利茵普瑞精选佳美娜干红葡萄酒 单瓶装1",
-        "ProductTitle": "原瓶进口 智利茵普瑞精选佳美娜干红葡萄酒1",
+        "ProductName": "商品1",
+        "ProductTitle": "商品1",
         "Tag": null,
         "ProductId": "1",
         "isSelect": false
@@ -45,8 +45,8 @@ Page({
         "ImageId": "1",
         "ImageUrl": "",
         "SaleCount": 1,
-        "ProductName": "原瓶进口 智利茵普瑞精选佳美娜干红葡萄酒 单瓶装2",
-        "ProductTitle": "原瓶进口 智利茵普瑞精选佳美娜干红葡萄酒2",
+        "ProductName": "商品2",
+        "ProductTitle": "商品2",
         "Tag": null,
         "ProductId": "1",
         "isSelect": false
@@ -59,12 +59,12 @@ Page({
         "ImageId": "1",
         "ImageUrl": "",
         "SaleCount": 1,
-        "ProductName": "原瓶进口 智利茵普瑞精选佳美娜干红葡萄酒 单瓶装3",
-        "ProductTitle": "原瓶进口 智利茵普瑞精选佳美娜干红葡萄酒3",
+        "ProductName": "商品3",
+        "ProductTitle": "商品3",
         "Tag": null,
         "ProductId": "1",
         "isSelect": false
-      },
+      }
     ],
     nowSelectData: []
   },
@@ -73,59 +73,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.querySearchBarSize();
     this.quertShoppingCarSize();
-  },
-
-  deleteGoods(e) {
-    let that = this;
-    let skuId = e.currentTarget.dataset.id;
-    // 删除
-    let resData = that.deleteDataById(skuId);
-    that.setData({
-      nowSelectData: resData
-    });
-    if (resData.length === 0) {
-      that.setData({
-        shoppingCarIsShow: false
-      })
-    }
-  },
-  deleteDataById(skuId) {
-    let that = this;
-    let nowSelectData = that.data.nowSelectData;
-    let index = -1;
-    for (let i = 0; i < nowSelectData.length; i++) {
-      if (skuId === nowSelectData[i].skuId) {
-        index = i;
-        break;
-      }
-    }
-    let nowShowData = that.data.nowShowData;
-    for (let i = 0; i < nowShowData.length; i++) {
-      if (skuId === nowShowData[i].skuId) {
-        let tag = 'nowShowData[' + i + '].isSelect';
-        that.setData({
-          [tag]: false
-        })
-        break;
-      }
-    }
-    // 
-    nowSelectData.splice(index, 1);
-    return nowSelectData;
   },
 
   /**
    * 加入购物车
    */
-  selectGoods(e) {
+  setDataAddShoppingCar(e) {
     let that = this;
-    that.queryPos(e);
-  },
-  setDataaddShoppingCar(e) {
-    let that = this;
-    let skuId = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
     let data = that.data.nowShowData[index];
     data.isSelect = true;
@@ -141,25 +96,15 @@ Page({
   },
 
   // 加入购物车动画 start
-  queryPos(e) {
+  selectGoods(e) {
     let that = this;
-    let pixelRatio = app.globalData.pixelRatio;
-    let size = this.data.iconSize / pixelRatio / 2;
-    this.quertElementSize('index-nav', function (rect) {
-      that.setData({
-        style: `left: ${e.detail.x - size - 20}px; top: ${e.detail.y + rect.top - size - that.data.searchBarHeight - 20}px;opacity:0;`
-      })
-      let timer = setTimeout(function () {
-        that.setData({
-          style: `left:${e.detail.x - size - 20}px; top: ${e.detail.y + rect.top - size - that.data.searchBarHeight - 20}px;opacity:1;`
-        })
-        console.log(that.data.style)
-        console.log(that.data.shoppingCarSize.left, that.data.shoppingCarSize.top)
-        that.playAnimation(e, that.data.shoppingCarSize.left, that.data.shoppingCarSize.top);
-      }, 5);
-
-    });
-
+    let top = e.detail.y - 40;
+    let left = e.detail.x - 40;
+    that.setData({
+      style: `top: ${top}px;left: ${left}px;`
+    })
+    clearTimeout(that.aniTimer);
+    that.playAnimation(e, left, top);
   },
 
   /**
@@ -167,22 +112,16 @@ Page({
    */
   playAnimation(e, left, top) {
     let that = this;
-    setTimeout(function () {
+    this.aniTimer = setTimeout(function () {
       that.setData({
-        style: `transition: all 0.5s cubic-bezier(.11,-.13,.55,.11) 0s;
-      left: ${left}px; top: ${top}px; opacity:0;`
-      });
-    }, 5);
-    that.setDataaddShoppingCar(e);
-  },
-  querySearchBarSize() {
-    let that = this;
-    this.quertElementSize('searchBar', function (rect) {
-      that.setData({
-        searchBarHeight: rect.height
+        style: `--startLeft: ${left}px;--startTop: ${top}px;--endLeft: ${that.data.shoppingCarSize.left}px;--endTop: ${that.data.shoppingCarSize.top}px;animation: runTop .3s cubic-bezier(.66,.1,1,.41), runLeft .3s linear;`
       })
-    });
+    }, 5);
+    that.setDataAddShoppingCar(e);
   },
+  /**
+   * 获取左下角购物车图标top, left值
+   */
   quertShoppingCarSize() {
     let that = this;
     this.quertElementSize('shoppingCar', function (rect) {
@@ -199,11 +138,9 @@ Page({
     }).exec()
   },
 
-
   /**
    * 购物车列表弹起
    */
-
   transShoppingCar() {
     let that = this;
     if (this.data.nowSelectData.length === 0) {
@@ -244,7 +181,7 @@ Page({
   fadeIn: function () {
     this.animation.translateY(0).opacity(1).step()
     this.setData({
-      animationData: this.animation.export()//动画实例的export方法导出动画数据传递给组件的animation属性
+      animationData: this.animation.export()
     })
   },
   fadeDown: function () {
@@ -254,6 +191,44 @@ Page({
     })
   }, 
 
+  deleteGoods(e) {
+    let that = this;
+    let skuId = e.currentTarget.dataset.id;
+    // 删除
+    let resData = that.deleteDataById(skuId);
+    that.setData({
+      nowSelectData: resData
+    });
+    if (resData.length === 0) {
+      that.setData({
+        shoppingCarIsShow: false
+      })
+    }
+  },
+  deleteDataById(skuId) {
+    let that = this;
+    let nowSelectData = that.data.nowSelectData;
+    let index = -1;
+    for (let i = 0; i < nowSelectData.length; i++) {
+      if (skuId === nowSelectData[i].skuId) {
+        index = i;
+        break;
+      }
+    }
+    let nowShowData = that.data.nowShowData;
+    for (let i = 0; i < nowShowData.length; i++) {
+      if (skuId === nowShowData[i].skuId) {
+        let tag = 'nowShowData[' + i + '].isSelect';
+        that.setData({
+          [tag]: false
+        })
+        break;
+      }
+    }
+    // 
+    nowSelectData.splice(index, 1);
+    return nowSelectData;
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
