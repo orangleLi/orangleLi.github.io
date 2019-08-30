@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>地图下钻</title>
+	<style>
+		.mapCls{
+			width: 100%;
+			height: 1000px;
+			background-image: url(./bg.png);
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+		}
+	</style>
+</head>
+<script src="./resources/jquery.min.js"></script>
+<script src="./resources/echarts.js"></script>
+<script src="./resources/china.js"></script>
+<script src="./resources/geoNameDictionary.js"></script>
+<body>
+	<div id="chart" class="mapCls"></div>
+</body>
+<script src="./index.js"></script>
+<script>
+//地图点击下钻
+// tag 0 全国 1 省 2 市
+
+
+$("#refreshBack").click(function () {
+    clickOrDblclick();
+});
+// myChart.on('dblclick', function (params) {
+//     clickLock = false;
+//     clearTimeout(timer);
+//     tag = 0;
+//     optionMap.geo.map = 'china';
+//     requstInforData = { "District": "All","ProvinceText":"广东省","CityText":"深圳市"};
+//     setData(requstInforData,'all');
+//     clickLock = true;
+// });
+function clickOrDblclick(){
+    if(lastProvinceOrCityName.indexOf('直辖市')!==-1){
+        $("#titleShow").html(lastProvinceOrCityName);
+        tag--;
+        lastProvinceOrCityName = ''
+        optionMap.geo.map = 'china';
+
+        requstInforData = { "District": "All","ProvinceText":"广东省","CityText":"深圳市"};
+        setData(requstInforData,'all');
+    }
+    else if(tag === 1){//返回到全部
+        $("#titleShow").html('全国');
+        tag--;
+        optionMap.geo.map = 'china';
+        requstInforData = { "District": "All","ProvinceText":"广东省","CityText":"深圳市"};
+        setData(requstInforData,'all');
+    }
+    else if(tag === 2) { //返回到省
+
+        $("#titleShow").html(lastProvinceOrCityName);
+        tag--;
+        var provinceEngName = provinceNameChineseToEng(lastProvinceOrCityName);
+        $.get('../js/geoProvince/' + provinceEngName + '.json', function (mapJson) {
+            optionMap.geo.map = provinceEngName;
+            $.each(optionMap.series, function (index) {
+                optionMap.series[index].data=''
+            });
+            echarts.registerMap(provinceEngName, mapJson);
+            provinceOrCityName = lastProvinceOrCityName;
+            requstInforData = { "District": "Province","ProvinceText":lastProvinceOrCityName,"CityText":"深圳市"};
+            setData(requstInforData,'province');
+        });
+    }
+    else if(tag === 0){
+        $("#titleShow").html('全国');
+        window.location.reload();
+    }
+}
+function checkString(str) {//验证是否为null或undefined，并对其进行转换
+    if(str==null||str==undefined){
+        str='无';
+    }
+
+    return str;
+}
+</script>
+</html>

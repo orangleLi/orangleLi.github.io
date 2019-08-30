@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现apply</title>
+<body>
+	<script>
+		console.log(Math.max(3, 8, 1));
+		var arr = [3, 8, 1];
+		console.log(Math.max.apply(Math, arr));  // 不需要改变this指向，第一个参数可以传递null，或者Math
+
+		Function.prototype.myApply = function(context, args) {
+			let fn = Symbol();
+			context[fn] = this;
+			let res = context[fn](...args);
+			delete context[fn];
+			return res;
+		}
+		console.log(Math.max.myApply(Math, arr));  // 不需要改变this指向，第一个参数可以传递null，或者Math
+	</script>
+</body>
+</html>

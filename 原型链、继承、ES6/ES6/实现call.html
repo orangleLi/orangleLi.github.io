@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现call</title>
+</head>
+<body>
+	<script>
+		console.log(Object.prototype.toString.call(function(){})) // [object Function]
+		console.log(Object.prototype.toString.call(1)) // [object Function]
+		console.log(Object.prototype.toString.call('')) // [object Function]
+		console.log(Object.prototype.toString.call(true)) // [object Function]
+		console.log(Object.prototype.toString.call({})) // [object Function]
+
+		console.log('-------------------')
+
+		// 伪数组
+		var obj = {
+			0: 10,
+			1: 20,
+			2: 30,
+			3: 40,
+			length: 4
+		}
+		Array.prototype.push.call(obj, 50);
+		console.log(obj);
+
+		// 实现call
+		Function.prototype.myCall = function(context, ...args) {
+			context = context || window;
+			let fn = Symbol();
+			context[fn] = this;
+			let res = context[fn](...args);
+			delete context[fn];
+			return res;
+		}
+		Array.prototype.push.myCall(obj, 80);
+		console.log(obj);
+	</script>
+</body>
+</html>

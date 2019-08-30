@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bind()、call()</title>
+</head>
+<body>
+	<button id="btn">click me</button>
+	<script>
+		function fn(x, y) {
+			console.log(this);
+			console.log(x + y)
+		}
+
+		var o = {
+			name: 'zs'
+		};
+
+		// -----------------bind()应用bind() 改变函数的this，并且返回一个新的函数（不调用函数）
+		var f = fn.bind(o, 1, 2); // 第一个参数为this要指向的对象，第二个参数为函数的参数
+		f();
+
+		// -----------------call()应用：call() 改变函数的this，直接调用函数
+		fn.call(o, 2, 3);
+
+		// 伪数组
+		var obj = {
+			0: 10,
+			1: 20,
+			2: 30,
+			3: 40,
+			length: 4
+		}
+
+		// obj['4'] = 50;
+		// obj.length++;
+		// console.dir(obj);
+
+		// Array.prototype.push.call(obj, 50);
+		// console.dir(obj);
+		Array.prototype.splice.call(obj, 0, 3);
+		console.dir(obj);
+
+
+
+		// -----------------apply() 应用 第一个参数改变this指向，第二个参数为一个数组，将数组的内容展开传给对象
+		console.log(Math.max(3, 8, 1));
+		var arr = [3, 8, 1];
+		console.log(Math.max.apply(Math, arr));  // 不需要改变this指向，第一个参数可以传递null，或者Math
+
+		console.log(arr);
+		console.log.apply(console, arr);
+
+
+		// -----------------bind()应用
+		var test = {
+			name: 'zs',
+			fun: function() {
+				setTimeout(function() {
+					console.log(this);
+					console.log(this.name);
+				}.bind(this), 1000); // 不适用bind改变this指向的话，定时器的this是指向window的，访问不到name
+			}
+		}
+		test.fun();
+
+		document.getElementById('btn').onclick = function() {
+			console.log(this);
+			console.log(this.name);
+		}.bind(test);
+		
+		{
+			'use strict';
+			console.log(this)
+		}
+	</script>
+</body>
+</html>

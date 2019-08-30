@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组合继承</title>
+</head>
+<body>
+	<script>
+		// 组合继承： 借用构造函数 + 原型继承
+		function Person(name, age, sex) {
+			this.name = name;
+			this.age = age;
+			this.sex = sex;
+		}
+
+		Person.prototype.sayHi = function() {
+			console.log('Hi');
+		}
+
+		// 子类型
+		function Student(name, age, sex, score) {
+			// 改变this指向，使得Person中的this指向Student
+			Person.call(this, name, age, sex);
+			this.score = score;
+		}
+		// Student.prototype = Person.prototype; // 此处赋值为浅拷贝，栈中存储相同的内存地址，改变Student.prototype，Person.prototype的值也会改变,Student.prototype.exam，Teacher也能访问到exam方法
+		Student.prototype = new Person();
+		Student.prototype.constructor = Student;
+		Student.prototype.exam = function() {
+			console.log('exam');
+		}
+
+		var s1 = new Student('zs', 19, '男', 90);
+		console.dir(s1);
+		s1.exam();
+		console.log(Person.prototype)
+
+
+		// 子类型
+		function Teacher(name, age, sex, salary) {
+			Person.call(this, name, age, sex);
+			this.salary = salary;
+		}
+
+		Teacher.prototype = new Person();
+		Teacher.prototype.constructor = Teacher;
+
+		var t1 = new Teacher('ls', 30, '男', 10000);
+		console.dir(t1);
+
+		// 一般用组合继承
+
+	</script>
+</body>
+</html>

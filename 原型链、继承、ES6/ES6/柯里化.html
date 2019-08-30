@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>柯里化</title>
+</head>
+<body>
+	<script>
+
+		function currying(fn) {
+			var allArgs = [];
+			return function next() {
+				let args = [...arguments];
+				if (args.length === 0) {
+					return fn.apply(null, allArgs)
+				} else {
+					allArgs = allArgs.concat(args);
+					return next;
+				}
+			}
+		}
+
+		var add = currying(function(){
+			let sum = 0;
+			for (let i = 0; i < arguments.length; i++) {
+				sum += arguments[i];
+			}
+			return sum;
+		})
+
+		let res = add(2, 3)(4)(5, 6)();
+		console.log(res);
+	</script>
+</body>
+</html>

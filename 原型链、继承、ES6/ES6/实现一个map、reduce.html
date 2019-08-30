@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现一个map、reduce</title>
+</head>
+<body>
+	<script>
+		// map 让数组通过某种计算产生一个新数组
+		var arr = [1, 3, 5, 7 ,9];
+		console.dir(arr.map((item) => {
+			return item * 2;
+		}));
+		Array.prototype._newMap = function(fun) {
+			if (this) {
+				let resArr = [];
+				this.forEach( function(item, index) {
+					let res = fun(item);
+					resArr.push(res);
+				});
+				return resArr;
+			} else {
+				return this;
+			}
+		}
+		console.dir(arr._newMap((item) => {
+			return item * 2;
+		}));
+		console.log(['1', '2', '3']._newMap(parseInt))
+
+		// reduce 让数组中的前项和后项做某种计算，并累计最终值
+		console.log(arr.reduce((prev, cur, index, arr) => {
+			return prev + cur;
+		}));
+
+		Array.prototype._newReduce = function(fun) {
+			let that = this;
+			if (that) {
+				let tempRes = that[0];
+				let len = that.length;
+				for (let i = 1; i < len; i++) {
+					tempRes = (fun(tempRes, that[i], i, that))
+				}
+				return tempRes;
+			} else {
+				return that;
+			}
+		}
+		console.log(arr._newReduce((prev, cur, index, arr) => {
+			return prev + cur;
+		}));
+
+		// every (检测数组中的每一项是否符合条件)  与 的关系
+
+		arr = [1, 2, 3, 4, -1];
+		console.log(arr.every((item,index)=> {
+		    return item > 0;
+		}));
+		Array.prototype._newEvery = function(fun) {
+			let that = this;
+			if (that) {
+				let len = that.length;
+				for (let i = 0; i < len; i++) {
+					if (!fun(that[i], i)) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return Boolean(that);
+			}
+		}
+		console.log(arr._newEvery((item,index)=> {
+		    return item > 0;
+		}));
+
+		// some (检测数组是否有某些项目符合条件)  或 的关系
+		console.log(arr.some((item,index)=> {
+		    return item > 0;
+		}));
+		Array.prototype._newSome = function(fun) {
+			let that = this;
+			if (that) {
+				let len = that.length;
+				for (let i = 0; i < len; i++) {
+					if (fun(that[i], i)) {
+						return true;
+					}
+				}
+				return false;
+			} else {
+				return Boolean(that);
+			}
+		}
+		console.log(arr._newSome((item,index)=> {
+		    return item > 0;
+		}));
+
+		{
+			function test() {
+				for (var i = 0; i< 10; i++){
+					setTimeout((i) => {
+						console.log(i);
+				    }, 1000, i)
+				}
+			}
+		}
+	</script>
+</body>
+</html>

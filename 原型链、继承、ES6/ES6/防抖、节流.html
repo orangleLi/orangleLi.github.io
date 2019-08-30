@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>防抖</title>
+</head>
+<body>
+	<span>请输入：</span>
+	<input id="inputId" oninput="bindInput()" value="">
+	<script>
+		function bindInput(e) {
+			let val = document.getElementById('inputId').value;
+			debounce(handle, 500, val);
+		}
+		function handle(val) {
+			console.log(val)
+		}
+
+		function debounce(handle, wait, val) {
+			clearTimeout(handle.timeroutId);
+			handle.timeroutId = setTimeout(function(){
+				handle.call(null, val);
+			}, wait)
+		}
+	</script>
+
+
+	<br><br><br>
+	<button id='btn' onclick="clickFun()">点我节流</button>
+	<script>
+		// 每一个时间段内触发一次函数
+		let prev = Date.now();
+		let timer = null;
+		function clickFun() {
+			let btnDom = document.getElementById('btn');
+			throttle(handle, 1000, btnDom.innerHTML);
+		}
+		function handle(val) {
+			console.log(val)
+		}
+		// 时间戳版
+		function throttle(handle, delay, val) {
+            var now = Date.now();
+            if (now - prev >= delay) {
+                handle.call(null, val);
+                prev = Date.now();
+            }
+		}
+		// 定时器版 （此方式有缺点，第一次点击有定时器，delay毫秒之后才会开始执行）
+		// function throttle(handle, delay, val) {
+  //           if (!timer) {
+  //               timer = setTimeout(function(){
+  //               	timer = null;
+		// 			handle.call(null, val);
+		// 		}, delay)
+  //           }
+		// }
+	</script>
+</body>
+</html>

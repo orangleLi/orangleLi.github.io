@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现一个new</title>
+</head>
+<body>
+	<script>
+		// function _new() {
+		// 	var obj = {};  //创建一个新的对象
+		// 	// 第一个参数是构造函数
+		// 	let [constructor, ...args] = [...arguments];
+		// 	obj.__proto__ = constructor.prototype;  //把obj的__proto__指向fn的prototype,实现继承
+		// 	let result = constructor.apply(obj, args);  //改变this的指向
+		// 	// 若构造函数中返回this或返回值是基本类型（number、string、boolean、null、undefined）的值，则返回新实例对象
+		// 	// 若返回值是引用类型的值，则实际返回值为这个引用类型。
+		// 	if (result && (typeof (result) === 'object' || typeof (result) === 'function')){
+		// 		return result;
+		// 	}
+		// 	return obj;
+		// }
+		function _new() {
+			let [constructor, ...args] = [...arguments];
+			let obj = Object.create(constructor.prototype);
+			let result = constructor.apply(obj, args);
+			if (result && (typeof result === 'object') || typeof result === 'function') {
+				return result;
+			}
+			return obj;
+		}
+
+		function Person(name) {
+			this.name = name;
+		}
+		Person.prototype.Hi = function() {
+			console.log('Hi ' + this.name);
+		}
+
+		var p = _new(Person, 'zs');
+		p.Hi();
+
+
+		function _instanceof(obj, O) {
+			var o1 = O.prototype;
+			var o2 = obj.__proto__;
+			while(true) {
+				if (o2 === null) return false;
+				else if (o2 === o1) return true;
+				else o2 = o2.__proto__;
+				 
+			}
+		}
+		console.log(typeof p);
+		console.log(p instanceof Person);
+		console.log(_instanceof(p, Person));
+	</script>
+</body>
+</html>

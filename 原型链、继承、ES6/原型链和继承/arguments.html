@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>arguments</title>
+</head>
+<body>
+	<script>
+		function max() {
+			// 当函数的参数个数不固定的时候
+			// 在函数内部，可以通过arguments获取到实际传过来的参数
+			var m = arguments[0];
+			for (let i = 1; i < arguments.length; i++) {
+				if (arguments[i] > m) {
+					m = arguments[i];
+				}
+			}
+			return m;
+		}
+		console.log(max(2, 4, 2, 6, 1));
+
+
+		// sort排序
+		var arr = [2, 5, 3, 9, 1, 8];
+		// arr.sort(function(a, b) {
+		// 	return a - b;
+		// });
+		// console.log(arr);
+
+		Array.prototype.mySort = function(fn) {
+			for (var i = 0; i < this.length - 1; i++) {
+				var isSort = true;
+				for (var j = 0; j < this.length - i - 1; j++) {
+					if (fn(this[j], this[j + 1]) > 0) {
+						isSort = false;
+						var temp = this[j];
+						this[j] = this[j + 1];
+						this[j + 1] = temp;
+					}
+				}
+				if (isSort) {
+					break;
+				}
+			}
+		}
+		arr.mySort(function(a, b) {
+			return b - a;
+		})
+		console.log(arr);
+
+
+
+		// 返回一个1-10之间的随机数，要求多次调用每次返回的值都一样
+		function getRandom() {
+			var val = parseInt(Math.random() * 10) + 1;
+			return function () {
+				return val;
+			}
+		}
+
+		var f = getRandom();
+		console.log(f());
+		console.log(f());
+		console.log(f());
+
+
+		// 求两数之和
+		function getFun(n) {
+			return function(m) {
+				return n + m;
+			}
+		}
+
+		var fn100 = getFun(100);
+		console.log(fn100(1));
+		console.log(fn100(2));
+
+		var fn1000 = getFun(1000);
+		console.log(fn1000(1));
+		console.log(fn1000(2));
+		
+	</script>
+</body>
+</html>

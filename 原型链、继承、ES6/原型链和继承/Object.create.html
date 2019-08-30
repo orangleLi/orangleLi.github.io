@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div style="width:100px;height: 100px;border:10px;padding:10px;box-sizing: border-box;"></div>
+</body>
+<script>
+	'use strict';
+	(function(){
+		console.log(this); // undefined
+	})();
+
+	(() => {
+		console.log(this) // Window
+	})()
+	// 非严格模式下都是Window
+
+
+	// let arr = [1, 2, 3];
+	// let arr1 = Object.create(arr);
+	// console.log(arr1)
+	// console.log(arr1.__proto__ === arr) // true
+	// console.log(arr.constructor === Array) // true // true
+	// console.log(arr1.constructor === Array) // true
+	// let o = Object.create(Object);
+	// console.log(o)
+	// let o1 = Object.create(Object.prototype);
+	// console.log(o1)
+	// let j1 = {};
+	// console.log(j1)
+	// console.log(o1.__proto__ === Object.prototype) // true
+	// console.log(j1.__proto__ === Object.prototype) // true
+
+	// 总结：
+	// let a = Object.create(B);   浅拷贝
+	// a.__proto__ === B  -> true
+
+</script>
+</html>
