@@ -151,6 +151,15 @@ draw.getDownloadFiles([data.headImg]).then((res) => {
 | bgColor | canvas背景颜色            | 可填小数  |   #fff   |
 
 
+
+![demo1](https://orangleli.github.io/imagesResources/demo1.png)
+![demo1Tip](https://orangleli.github.io/imagesResources/demo1-tip.png)
+
+
+##### 左右图对比，图2黑色的地方，绘制圆角的原理是用背景色在图片的四个角分别绘制，遮挡图片的角
+
+
+
 <br>
 <br>
 
