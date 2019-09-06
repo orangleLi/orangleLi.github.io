@@ -24,6 +24,8 @@ https://github.com/orangleLi/orangleLi.github.io/tree/master/%E5%BE%AE%E4%BF%A1%
 
 ![demo2](https://orangleli.github.io/imagesResources/demo2.png)
 
+##### 注： 此处的小程序码使用的时uni-app的小程序码
+
 <br/>
 <br/>
 
