@@ -7,7 +7,6 @@
 
 3. draw.XXX 可以调用API中的方法，支持链式调用
 
-### draw.nowHeight:  此属性可以获得当前canvas已经绘制的总高度
 
 > 
 
@@ -256,3 +255,5 @@ draw
   });
       
 ```
+
+### draw.nowHeight:  此属性可以获得当前canvas已经绘制的总高度
