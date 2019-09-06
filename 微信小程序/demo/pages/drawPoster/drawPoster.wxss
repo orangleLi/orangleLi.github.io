@@ -3,7 +3,9 @@
 Page{
   background-color: #fff;
   overflow-y: scroll;
-  height: 100%;
+}
+canvas{
+  width: 100%;
 }
 .mask{
   background-color: rgba(0, 0, 0, 0.5);
@@ -34,7 +36,9 @@ Page{
   border-top: 1rpx solid #eee;
 }
 .endImg{
-  width: 520rpx;
+  max-width: 520rpx;
+  height: 487px;
+  box-sizing: border-box;
   margin: 0 auto;
   border-radius: 16rpx;
   border: 2rpx solid #eee;

@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    WxNewActicityId: '',
     shareActivityInfo: { 
       "ActivityContent": "炎陵黄桃，桃醉天下！来自湖南省炎陵县海拔300-1200米山区的炎陵黄桃，是生态营养安全的绿色食品水果，为国家地理标志商标保护产品。炎陵黄桃品质优异，以靓、脆、香、甜享誉市场，享有“天上仙桃，炎陵黄桃”的美誉。桃形周正、着色均匀、果面亮泽、甜度适中、酥脆可口、香气浓郁实乃居家自食、中秋送礼之佳选！",
       "ActivityImgUrl": "https://orangleli.github.io/imagesResources/1.jpg",
@@ -18,21 +17,14 @@ Page({
       "logo": "https://avatars0.githubusercontent.com/u/34326830?s=400&u=2e69fbfaf577e896d414788c869e265e0d449a1b&v=4",
       "qrCode": "https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/gh_33446d7f7a26_430.jpg"
     },
-    showQRShareModal: '',
-    WxNewActicityQRCode: null,
-    pageParams: null,
-    width: app.globalData.windowWidth * 2, // canvas 大小
+    width: app.globalData.windowWidth, // canvas 大小
     // width: 375, // canvas 大小
     height: app.globalData.windowHeight,
     imageWidth: 0, // 活动配图 大小
     imageHeight: 0,
     pixelRatio: app.globalData.pixelRatio,
-    QRCodeHeight: 168 / app.globalData.pixelRatio,
     endImg: null,
-    showQRCodeShare: true,
     isFinished: false,
-    _36Bottom: 0,
-    _45Bottom: 0,
     bgTrue: false
   },
 
@@ -70,6 +62,14 @@ Page({
     })
 
   },
+  getPx(rpx) {
+    var winWidth = wx.getSystemInfoSync().windowWidth;
+    return rpx / (750 / winWidth);
+  },
+  getRpx(px) {
+    var winWidth = wx.getSystemInfoSync().windowWidth;
+    return px * (750 / winWidth);
+  },
   drawShareImage(draw) {
     let pixelRatio = this.data.pixelRatio;
     let that = this;
@@ -105,16 +105,17 @@ Page({
     }
 
     draw.drawCricleImg(50, 50, 35, logo)
-      .drawText(WxName, 134, 80, 24, '#333333')
-      .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 110, 20, '#aaaaaa')
-      .drawMultiLineText(ActivityName, 50, 180, that.data.width - 100, 42, 0, '#333333')
-      .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 10, that.data.width - 100, 26, 3, '#666666')
-      .drawFilletImg(ActivityImg, x, y, imageWidth, imageHeight, 50, draw.nowHeight + 30, that.data.width - 100, drawHeight, 10)
-      .drawText('长按扫码', that.data.width - 330, draw.nowHeight + 84, 24, '#333333')
-      .drawText('参加更多有趣活动', that.data.width - 425, draw.nowHeight + 21, 24, '#333333')
-      .drawImage(data.qrCode, that.data.width - 168 - 50, draw.nowHeight - 130, 168, 168)
-      .drawFinally(function (ctx) {
-        let canvasHeight = draw.nowHeight + 50;
+      .drawText(WxName, 134, 56, 24, '#333333')
+      .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 90, 20, '#aaaaaa')
+      .drawMultiLineText(ActivityName, 50, 160, 650, 42, 0, '#333333')
+      .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 20, 650, 26, 3, '#666666')
+      .drawFilletImg(ActivityImg, x, y, this.getRpx(imageWidth), this.getRpx(imageHeight), 50, draw.nowHeight + 30, 650, drawHeight, 10)
+      .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', false, 'right')
+      .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', false, 'right')
+      .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
+      .drawFinally(function (ctx, nowHeight) {
+        console.log(nowHeight)
+        let canvasHeight = nowHeight + 50;
         that.setData({
           height: canvasHeight,
           isFinished: true
