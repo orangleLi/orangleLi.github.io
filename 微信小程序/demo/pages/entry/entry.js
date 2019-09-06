@@ -43,6 +43,23 @@ Page({
     })
   },
 
+  toSlide() {
+    wx.navigateTo({
+      url: '../slide/slide',
+    })
+  },
+
+  toDrawPoster() {
+    wx.navigateTo({
+      url: '../drawPoster/drawPoster',
+    })
+  },
+  toDrawPosterTest() {
+    wx.navigateTo({
+      url: '../drawPosterTest/drawPosterTest',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

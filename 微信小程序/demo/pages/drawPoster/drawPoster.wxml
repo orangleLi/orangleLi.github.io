@@ -1,0 +1,9 @@
+<view class="mask"></view>
+<view class="main" style="transform: translateY(-{{height > 1800 ? 5:14}}%);">
+  <canvas style="width:{{width}}px;height:{{height}}px;" class="shareCanvas offScreen" canvas-id="shareImg"></canvas>
+  <canvas style="width:{{width}}px;height:{{height}}px;" class="shareCanvas offScreen" canvas-id="bgImg"></canvas>
+  <image data-h="{{height}}" id="showImg" class="endImg" style="" src='{{endImg}}' mode='widthFix' bindtap="saveImg"></image>
+  <image class="bgRect" src="/resources/images/rect.png"></image>
+  <image id="saveImg" class="saveBtn" src="/resources/images/saveImg.png" bindtap="saveImg"></image>
+</view>
+<image class="closeShare" src="/resources/images/closeShare.png" bindtap="closeShareModal"></image>

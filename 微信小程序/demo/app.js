@@ -15,12 +15,13 @@ App({
     let that = this;
     wx.getSystemInfo({
       success(res) {
-        // console.log(res.model);
-        // console.log("状态栏的高度 " + res.statusBarHeight)
+        console.log(res)
         var temp = res.model.replace(/iPhone X/g, '')
         if (temp != res.model) {
           that.globalData.isIpx = true
         }
+        that.globalData.windowWidth = res.windowWidth;
+        that.globalData.windowHeight = res.windowHeight;
         that.globalData.pixelRatio = res.pixelRatio
         that.globalData.statusBarHeight = res.statusBarHeight
         that.globalData.facility = res.model;
@@ -54,5 +55,9 @@ App({
   globalData: {
     userInfo: null,
     pixelRatio: 0,
+    windowWidth: 0,
+    windowHeight: 0,
+    pixelRatio: null,
+    statusBarHeight: 0
   }
 })

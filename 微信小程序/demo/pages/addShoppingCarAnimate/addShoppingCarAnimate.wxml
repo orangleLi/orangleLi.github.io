@@ -73,7 +73,7 @@
           <view class="list" wx:for="{{nowSelectData}}" wx:key="unique">
             <view class="name">{{item.ProductName}}</view>
             <view class="numOpera">
-              <image bindtap="deleteGoods" data-id="{{item.skuId}}" class="icon" src="/resources/images/icon_del2.png"></image>
+              <image bindtap="deleteGoods" data-id="{{item.skuId}}" class="icon" src="/resources/images/vote_icon_del.png"></image>
             </view>
           </view>
         </view>
@@ -94,6 +94,7 @@
       </view>
     </view>
   </view> 
+
   <view class="animat" style="{{style}}">
     <image class="icon" src="/resources/images/icon_add01.png"></image>
   </view>

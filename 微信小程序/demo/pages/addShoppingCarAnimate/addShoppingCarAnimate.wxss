@@ -426,6 +426,6 @@ Page{
   }
   100%{
     left: var(--endLeft);
-          opacity: 0;
+    opacity: 0;
   }
 }

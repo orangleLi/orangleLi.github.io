@@ -9,7 +9,10 @@
     "pages/index/index",
     "pages/addShoppingCarAnimate/addShoppingCarAnimate",
     "pages/slidingSwitch/slidingSwitch",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/slide/slide",
+    "pages/drawPoster/drawPoster",
+    "pages/drawPosterTest/drawPosterTest"
   ],
   "window": {
     "backgroundTextStyle": "light",

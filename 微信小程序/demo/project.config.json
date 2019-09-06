@@ -39,12 +39,47 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
 					"name": "addShoppingCarAnimate",
 					"pathName": "pages/addShoppingCarAnimate/addShoppingCarAnimate",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pictureCompression",
+					"pathName": "pages/pictureCompression/pictureCompression",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "slide",
+					"pathName": "pages/slide/slide",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "drawPoster",
+					"pathName": "pages/drawPoster/drawPoster",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "drawPosterTest",
+					"pathName": "pages/drawPosterTest/drawPosterTest",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "drawPoster",
+					"pathName": "pages/drawPoster/drawPoster",
 					"scene": null
 				}
 			]

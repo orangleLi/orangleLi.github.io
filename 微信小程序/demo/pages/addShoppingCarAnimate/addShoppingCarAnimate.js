@@ -117,6 +117,7 @@ Page({
         style: `--startLeft: ${left}px;--startTop: ${top}px;--endLeft: ${that.data.shoppingCarSize.left}px;--endTop: ${that.data.shoppingCarSize.top}px;animation: runTop .3s cubic-bezier(.66,.1,1,.41), runLeft .3s linear;`
       })
     }, 5);
+
     that.setDataAddShoppingCar(e);
   },
   /**
