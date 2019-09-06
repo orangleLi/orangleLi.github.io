@@ -8,7 +8,6 @@
 3. draw.XXX 可以调用API中的方法，支持链式调用
 
 
-> 
 
 插件地址： 
 https://github.com/orangleLi/orangleLi.github.io/blob/master/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/demo/utils/canvasDraw.js
@@ -30,8 +29,18 @@ https://github.com/orangleLi/orangleLi.github.io/tree/master/%E5%BE%AE%E4%BF%A1%
 <br/>
 
 # API
+
+<br>
+
+##### `注： 以下所有数字类型参数的单位都是rpx`
+
+<br>
+
 > ## getImagesInfo(imgArr)
 由于canvas不能处理网络图片，所以要先拿到图片的临时路径
+
+
+<br>
 
 ### 参数
 imgArr ： 图片数组
