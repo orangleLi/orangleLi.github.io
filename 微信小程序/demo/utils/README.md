@@ -257,22 +257,24 @@ callback  绘制完成之后执行的回调方法
 
 ```
 draw
-  .drawCricleImg(50, 50, 35, logo)
-  .drawText(WxName, 134, 80, 24, '#333333')
-  .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 110, 20, '#aaaaaa')
-  .drawMultiLineText(ActivityName, 50, 180, that.data.width - 100, 42, 0, '#333333')
-  .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 10, that.data.width - 100, 26, 3, '#666666')
-  .drawFilletImg(ActivityImg, x, y, imageWidth, imageHeight, 50, draw.nowHeight + 30, that.data.width - 100, drawHeight, 10)
-  .drawText('长按扫码', that.data.width - 330, draw.nowHeight + 84, 24, '#333333')
-  .drawText('参加更多有趣活动', that.data.width - 425, draw.nowHeight + 21, 24, '#333333')
-  .drawImage(data.qrCode, that.data.width - 168 - 50, draw.nowHeight - 130, 168, 168)
-  .drawFinally(function (ctx) {
-    let canvasHeight = draw.nowHeight + 50;
-    that.setData({
-      height: canvasHeight,
-      isFinished: true
-    })
-  });
+ .drawCricleImg(50, 50, 35, logo)
+ .drawText(WxName, 134, 56, 24, '#333333')
+ .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 90, 20, '#aaaaaa')
+ .drawMultiLineText(ActivityName, 50, 160, 650, 42, 0, '#333333')
+ .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 20, 650, 26, 3, '#666666')
+ .drawFilletImg(ActivityImg, x, y, this.getRpx(imageWidth), this.getRpx(imageHeight), 50, draw.nowHeight + 30, 650, drawHeight, 10)
+ .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', false, 'right')
+ .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', false, 'right')
+ .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
+ .drawFinally(function (ctx, nowHeight) {
+   console.log(nowHeight)
+   let canvasHeight = nowHeight + 50;
+   that.setData({
+     height: canvasHeight,
+     isFinished: true
+   })
+   that.drawEndImg();
+ });
       
 ```
 
