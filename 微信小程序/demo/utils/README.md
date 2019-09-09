@@ -258,6 +258,19 @@ draw.getDownloadFiles([data.headImg]).then((res) => {
 
 callback  绘制完成之后执行的回调方法
 
+<br>
+<br>
+
+> ## drawCode: function(base64Str) 
+base64图片转临时图片
+
+## 参数
+base64Str base64字符串
+
+ 返回的值为一个临时图片路径，可直接传入drawImage方法中进行绘制 
+  
+<br>
+<br>
 
 ### 使用示例
 
