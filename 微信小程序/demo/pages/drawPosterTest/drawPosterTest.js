@@ -49,100 +49,17 @@ Page({
       .drawText('2019.09.06', 650 + 50, draw.nowHeight + 30, 32, 'rgba(34,34,34,.64)', 'right')
       .drawCricleImg(650, draw.nowHeight + 10, 25, logo)
       .drawFinally(function (ctx, nowHeight) {
-        let canvasHeight = that.getPx(nowHeight + 30);
+        let canvasHeight = draw.getPx(nowHeight + 30);
         that.setData({
           height: canvasHeight
         })
-        that.drawEndImg();
+        draw.drawEndImg(750, canvasHeight, function(res) {
+          wx.hideLoading();
+          that.setData({
+            endImg: res.tempFilePath,
+            isFinished: true
+          })
+        });
       });
   },
-  drawEndImg() {
-    let that = this;
-    wx.showLoading({
-      title: '正在生成图片...',
-    })
-    let destHeight = 750 / that.data.width * that.data.height;
-    this.setData({
-      destHeight: destHeight
-    })
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: that.data.width,
-      height: that.data.height,
-      destWidth: 750,
-      destHeight: destHeight,
-      canvasId: 'poster',
-      success(res) {
-        wx.hideLoading();
-        that.setData({
-          endImg: res.tempFilePath,
-          isFinished: true
-        })
-      },
-      fail: function (err) {
-        console.log(err);
-      }
-    }, that)
-  },
-
-  getPx(rpx) {
-    // var winWidth = wx.getSystemInfoSync().windowWidth;
-    var winWidth = this.data.width;
-    return rpx / (750 / winWidth);
-  },
-  getRpx(px) {
-    // var winWidth = wx.getSystemInfoSync().windowWidth;
-    var winWidth = this.data.width;
-    return px * (750 / winWidth);
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
