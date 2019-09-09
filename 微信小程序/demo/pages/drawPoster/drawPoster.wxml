@@ -1,5 +1,7 @@
 <canvas style="width: {{width}}px;height:{{height}}px;" class="shareCanvas offScreen" canvas-id="shareImg"></canvas>
 <canvas style="width: {{width}}px;height:{{height}}px;" class="shareCanvas offScreen" canvas-id="bgImg"></canvas>
+<image style="width: 100%;" src='{{endImg}}' mode='widthFix'></image>
+
 <view class="mask"></view>
 <view class="main" style="transform: translateY(-{{height > 1800 ? 5:16}}%);">
   <image data-h="{{height}}" id="showImg" class="endImg" style="" src='{{endImg}}' mode='widthFix' bindtap="saveImg"></image>

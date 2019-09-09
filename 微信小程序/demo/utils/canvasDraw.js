@@ -317,15 +317,15 @@ canvasDraw.prototype = {
   },
 
   /**
-   * base64图片画到canvas
+   * base64图片转临时图片
    */
-  drawCode: function(wxNewActicityQRCode) {
+  drawCode: function (base64Str) {
     let that = this;
     const fsm = wx.getFileSystemManager();
     const FILE_BASE_NAME = 'tmp_base64src';
 
     return new Promise((resolve, reject) => {
-      const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(wxNewActicityQRCode) || [];
+      const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(base64Str) || [];
       if (!format) {
         reject(new Error('ERROR_PARSE_BASE64'));
       }
