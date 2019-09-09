@@ -150,12 +150,12 @@ draw.getDownloadFiles([data.headImg]).then((res) => {
 | img    | 图片临时路径              | string |   无   |
 | sx     | 源图片上取值的x坐标       | 可填小数 |   无   |
 | sy     | 源图片上取值的y坐标        | 可填小数 |   无   |
-| swidth | 源图片上取的宽度          | 可填小数  |   无   |
-| sheight | 源图片上取的高度         | 可填小数  |   无   |
+| swidth | 源图片上取的宽度('650px' || '650rpx')          | string  |   无   |
+| sheight | 源图片上取的高度('650px' || '650rpx')         | string  |   无   |
 | x      | 绘制到canvas上的x坐标      | 可填小数  |   无   |
 | y      | 绘制到canvas上的y坐标     | 可填小数  |   无   |
-| width  | 绘制到canvas上的宽度      | 可填小数  |   无   |
-| height | 绘制到canvas上的高度      | 可填小数  |   无   |
+| width  | 绘制到canvas上的宽度('650px' || '650rpx')      | string  |   无   |
+| height | 绘制到canvas上的高度('650px' || '650rpx')      | string  |   无   |
 | r      | 圆角半径                  | 可填小数  |   无   |
 | bgColor | canvas背景颜色            | 可填小数  |   #fff   |
 
@@ -183,8 +183,8 @@ draw.getDownloadFiles([data.headImg]).then((res) => {
 | img    | 图片临时路径              | string |   无   |
 | x      | 绘制到canvas上的x坐标      | 可填小数  |   无   |
 | y      | 绘制到canvas上的y坐标     | 可填小数  |   无   |
-| width  | 绘制到canvas上的宽度      | 可填小数  |   无   |
-| height | 绘制到canvas上的高度      | 可填小数  |   无   |
+| width  | 绘制到canvas上的宽度('650px' || '650rpx')      | string  |   无   |
+| height | 绘制到canvas上的高度('650px' || '650rpx')      | string  |   无   |
 | r      | 圆角半径                  | 可填小数  |   无   |
 | bgColor | canvas背景颜色            | 可填小数  |   #fff   |
 
