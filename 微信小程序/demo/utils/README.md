@@ -286,16 +286,16 @@ draw.drawCricleImg(50, 50, 35, logo)
     .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', 'right')
     .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
     .drawFinally(function (ctx, nowHeight) {
-    let canvasHeight = draw.getPx(nowHeight + 30);
-    that.setData({
-      height: canvasHeight
-    })
-    draw.canvasToPosterImg(750, canvasHeight, function(res){
-      that.setData({
-        endImg: res.tempFilePath,
-        isFinished: true
-      })
-    });
+        let canvasHeight = draw.getPx(nowHeight + 30);
+        that.setData({
+          height: canvasHeight
+        })
+        draw.canvasToPosterImg(750, canvasHeight, function(res){
+          that.setData({
+            endImg: res.tempFilePath,
+            isFinished: true
+          })
+        });
     });
       
 ```
