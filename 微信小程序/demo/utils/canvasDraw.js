@@ -317,7 +317,7 @@ canvasDraw.prototype = {
   },
 
   /**
-   * base64图片画到canvas
+   * base64图片转临时图片
    */
   drawCode: function(wxNewActicityQRCode) {
     let that = this;
