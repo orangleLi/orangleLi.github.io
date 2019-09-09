@@ -90,12 +90,12 @@ canvasDraw.prototype = {
    * img, 
    * sx, rpx
    * sy, rpx
-   * swidth, rpx
-   * sheight, rpx
+   * swidth, rpx || px
+   * sheight, rpx || px
    * x, rpx
    * y, rpx
-   * width, rpx
-   * height  rpx
+   * width, rpx || px
+   * height  rpx || px
    * 同于drawImage的参数
    * r 圆角半径
    * bgColor canvas背景颜色
@@ -122,8 +122,8 @@ canvasDraw.prototype = {
    * img, 
    * x, rpx
    * y, rpx
-   * width, rpx
-   * height rpx
+   * width, rpx || px
+   * height rpx || px
    *  同于drawImage的参数
    * r 圆角半径 rpx
    * bgColor canvas背景颜色
@@ -155,13 +155,13 @@ canvasDraw.prototype = {
     width = this.getPx(width);
     height = this.getPx(height);
 
-    // if (!x && !y) {
+    if (!x && !y) {
       this.ctx.drawImage(img, sx, sy, swidth, sheight);
       this.nowHeight = this.getRpx(sy + sheight);
-    // } else {
-    //   this.ctx.drawImage(img, sx, sy, swidth, sheight, x, y, width, height);
-    //   this.nowHeight = this.getRpx(y + sheight);
-    // }
+    } else {
+      this.ctx.drawImage(img, sx, sy, swidth, sheight, x, y, width, height);
+      this.nowHeight = this.getRpx(y + sheight);
+    }
     return this;
   },
   /**

@@ -77,19 +77,14 @@ Page({
     let ActivityContent = data.ActivityContent;
     let ActivityImg = data.ActivityImgUrl;
 
-    let drawHeight = 0;
-    let x = 0, y = 0;
-    let imageWidth = that.data.imageWidth;
-    let imageHeight = that.data.imageHeight;
-
-    drawHeight = (650 / imageWidth) * imageHeight;
+    let drawHeight = (650 / that.data.imageWidth) * that.data.imageHeight;
 
     draw.drawCricleImg(50, 50, 35, logo)
       .drawText(WxName, 134, 56, 24, '#333333')
       .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 90, 20, '#aaaaaa')
       .drawMultiLineText(ActivityName, 50, 160, 650, 42, 0, '#333333')
       .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 20, 650, 26, 3, '#666666')
-      .drawFilletImg(ActivityImg, x, y, imageWidth + 'rpx', imageHeight + 'rpx', 50, draw.nowHeight + 30, 650, drawHeight, 10)
+      .drawFilletImg(ActivityImg, 0, 0, that.data.imageWidth + 'rpx', that.data.imageHeight + 'rpx', 50, draw.nowHeight + 30, 650, drawHeight, 10)
       .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', 'right')
       .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', 'right')
       .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
