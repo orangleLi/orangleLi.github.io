@@ -7,6 +7,13 @@
 
 3. draw.XXX 可以调用API中的方法，支持链式调用
 
+### 注：为保证绘制出来的图片清晰，宽度和高度分别进行了2倍放大
+```
+data: {
+    width: app.globalData.windowWidth * 2, // canvas 大小    
+    height: app.globalData.windowHeight * 2,
+  },
+```
 
 
 插件地址： 
