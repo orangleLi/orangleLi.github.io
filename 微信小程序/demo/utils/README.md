@@ -276,26 +276,28 @@ base64Str base64字符串
 
 
 ```
-draw
- .drawCricleImg(50, 50, 35, logo)
- .drawText(WxName, 134, 56, 24, '#333333')
- .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 90, 20, '#aaaaaa')
- .drawMultiLineText(ActivityName, 50, 160, 650, 42, 0, '#333333')
- .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 20, 650, 26, 3, '#666666')
- .drawFilletImg(ActivityImg, x, y, this.getRpx(imageWidth), this.getRpx(imageHeight), 50, draw.nowHeight + 30, 650, drawHeight, 10)
- .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', false, 'right')
- .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', false, 'right')
- .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
- .drawFinally(function (ctx, nowHeight) {
-   console.log(nowHeight)
-   let canvasHeight = nowHeight + 50;
-   that.setData({
-     height: canvasHeight,
-     isFinished: true
-   })
-   that.drawEndImg();
- });
+draw.drawCricleImg(50, 50, 35, logo)
+    .drawText(WxName, 134, 56, 24, '#333333')
+    .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 90, 20, '#aaaaaa')
+    .drawMultiLineText(ActivityName, 50, 160, 650, 42, 0, '#333333')
+    .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 20, 650, 26, 3, '#666666')
+    .drawFilletImg(ActivityImg, 0, 0, that.data.imageWidth + 'rpx', that.data.imageHeight + 'rpx', 50, draw.nowHeight + 30, 650, drawHeight, 10)
+    .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', 'right')
+    .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', 'right')
+    .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
+    .drawFinally(function (ctx, nowHeight) {
+    let canvasHeight = draw.getPx(nowHeight + 30);
+    that.setData({
+      height: canvasHeight
+    })
+    draw.canvasToPosterImg(750, canvasHeight, function(res){
+      that.setData({
+        endImg: res.tempFilePath,
+        isFinished: true
+      })
+    });
+    });
       
 ```
 
-### draw.nowHeight:  此属性可以获得当前canvas已经绘制的总高度
+### draw.nowHeight:  此属性可以获得当前canvas已经绘制的总高度 单位为rpx
