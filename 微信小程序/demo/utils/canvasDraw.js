@@ -149,11 +149,11 @@ canvasDraw.prototype = {
     return this;
   },
   getPx(rpx) {
-    var winWidth = wx.getSystemInfoSync().windowWidth;
+    var winWidth = wx.getSystemInfoSync().windowWidth * 2;
     return rpx / (750 / winWidth);
   },
   getRpx(px) {
-    var winWidth = wx.getSystemInfoSync().windowWidth;
+    var winWidth = wx.getSystemInfoSync().windowWidth * 2;
     return px * (750 / winWidth);
   },
   /**
@@ -163,17 +163,13 @@ canvasDraw.prototype = {
    * str 绘制的文本
    * x, y 坐标 单位均为rpx
    */
-  drawText(str, x, y, fontSize = 24, color = '#000', bold, align = 'left') {
+  drawText(str, x, y, fontSize = 24, color = '#000', align = 'left') {
     x = this.getPx(x);
     y = this.getPx(y + fontSize);
     fontSize = this.getPx(fontSize);
     
     this.ctx.save();
-    if (bold) {
-      this.ctx.font = `normal bold ${fontSize}px sans-serif`;
-    } else {
-      this.ctx.setFontSize(fontSize)
-    }
+    this.ctx.setFontSize(fontSize)
     this.ctx.setTextAlign(align);
     this.ctx.setFillStyle(color)
     this.ctx.fillText(str, x, y);
@@ -192,8 +188,7 @@ canvasDraw.prototype = {
    * suffixStr 多于内容的占位符 默认...
    * 单位均为rpx
    */
-  drawMultiLineText: function (str, x, y, width, fontSize, maxRow, color = '#000', bold, align = 'left', suffixStr = '...') {
-    let p =fontSize
+  drawMultiLineText: function (str, x, y, width, fontSize, maxRow, color = '#000', align = 'left', suffixStr = '...') {
     x = this.getPx(x);
     y = this.getPx(y + fontSize);
     width = this.getPx(width);
@@ -205,11 +200,7 @@ canvasDraw.prototype = {
     var lastSubStrIndex = 0; //每次开始截取的字符串的索引
 
     this.ctx.save()//保存当前的绘图上下文。
-    if (bold) {
-      this.ctx.font = `normal bold ${fontSize}px sans-serif`;
-    } else {
-      this.ctx.setFontSize(fontSize)
-    }
+    this.ctx.setFontSize(fontSize)
     this.ctx.setFillStyle(color);
     this.ctx.setTextAlign(align);
     for (let i = 0; i < str.length; i++) {
@@ -251,7 +242,9 @@ canvasDraw.prototype = {
   drawFinally(callback) {
     let that = this;
     that.ctx.draw(true, function () {
-      callback && callback(that.ctx, that.nowHeight);
+      setTimeout(function() {
+        callback && callback(that.ctx, that.nowHeight);
+      }, 500)
     }, that);
   },
   roundRect: function (x, y, w, h, r, c) {
@@ -286,6 +279,36 @@ canvasDraw.prototype = {
     this.ctx.lineTo(x + w, y + h - r);
     this.ctx.fill();
   },
+
+  /**
+   * base64图片画到canvas
+   */
+  drawCode: function(wxNewActicityQRCode) {
+    let that = this;
+    const fsm = wx.getFileSystemManager();
+    const FILE_BASE_NAME = 'tmp_base64src';
+
+    return new Promise((resolve, reject) => {
+      const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(wxNewActicityQRCode) || [];
+      if (!format) {
+        reject(new Error('ERROR_PARSE_BASE64'));
+      }
+      const filePath = `${wx.env.USER_DATA_PATH}/${FILE_BASE_NAME}.${format}`;
+      const buffer = wx.base64ToArrayBuffer(bodyData);
+      fsm.writeFile({
+        filePath,
+        data: buffer,
+        encoding: 'binary',
+        success() {
+          resolve(filePath);
+        },
+        fail() {
+          reject(new Error('ERROR_WRITE_BASE64'));
+        },
+      });
+    });
+  }
+
 }
 
 module.exports = {
