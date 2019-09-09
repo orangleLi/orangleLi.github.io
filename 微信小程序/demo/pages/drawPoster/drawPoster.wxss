@@ -36,9 +36,7 @@ canvas{
   border-top: 1rpx solid #eee;
 }
 .endImg{
-  max-width: 520rpx;
-  height: 487px;
-  box-sizing: border-box;
+  width: 520rpx;
   margin: 0 auto;
   border-radius: 16rpx;
   border: 2rpx solid #eee;
@@ -63,11 +61,17 @@ canvas{
   position: absolute;
   bottom: 0;
 }
+.openSettingBtn{
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+}
 .closeShare{
   width: 64rpx;
   height: 64rpx;
   position: fixed;
-  bottom: 6%;
+  bottom: 9%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3010;

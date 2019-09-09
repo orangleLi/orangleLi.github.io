@@ -1,3 +1,3 @@
-<!--pages/drawPosterTest.wxmloffScreen-->
-<canvas class="posterCanvas" style="height: {{height}}px;" canvas-id="poster"></canvas>
-<!-- <image class="poster" src="{{endImg}}"></image> -->
+<!--pages/drawPosterTest.wxml offScreen-->
+<canvas class="posterCanvas offScreen" style="width: {{width}}px;height:{{height}}px;" canvas-id="poster"></canvas>
+<image class="poster" src="{{endImg}}" mode='widthFix'></image>

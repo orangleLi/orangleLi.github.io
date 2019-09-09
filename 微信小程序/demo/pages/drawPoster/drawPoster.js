@@ -17,15 +17,17 @@ Page({
       "logo": "https://avatars0.githubusercontent.com/u/34326830?s=400&u=2e69fbfaf577e896d414788c869e265e0d449a1b&v=4",
       "qrCode": "https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/gh_33446d7f7a26_430.jpg"
     },
-    width: app.globalData.windowWidth, // canvas 大小
-    // width: 375, // canvas 大小
-    height: app.globalData.windowHeight,
+    width: app.globalData.windowWidth * 2, // canvas 大小
+    height: app.globalData.windowHeight * 2,
     imageWidth: 0, // 活动配图 大小
     imageHeight: 0,
     pixelRatio: app.globalData.pixelRatio,
     endImg: null,
     isFinished: false,
-    bgTrue: false
+    bgTrue: false,
+    rWidth: 0,
+    rHeight: 0,
+    toAuthorize: false
   },
 
   /**
@@ -43,11 +45,6 @@ Page({
     let data = that.data.shareActivityInfo;
     if (!data) return;
 
-    that.setData({
-      height: 1000,
-      isFinished: true
-    })
-    // const ctx = wx.createCanvasContext('shareImg', that);
     let draw = new drawD.canvasDraw('shareImg', that);
     draw.getImagesInfo([data.logo, data.ActivityImgUrl, data.qrCode]).then((res) => {
       data.logo = res[0].path;
@@ -59,16 +56,10 @@ Page({
         shareActivityInfo: data
       });
       that.drawShareImage(draw);
+    }).catch((err) => {
+      console.log(err);
     })
 
-  },
-  getPx(rpx) {
-    var winWidth = wx.getSystemInfoSync().windowWidth;
-    return rpx / (750 / winWidth);
-  },
-  getRpx(px) {
-    var winWidth = wx.getSystemInfoSync().windowWidth;
-    return px * (750 / winWidth);
   },
   drawShareImage(draw) {
     let pixelRatio = this.data.pixelRatio;
@@ -90,63 +81,30 @@ Page({
     let x = 0, y = 0;
     let imageWidth = that.data.imageWidth;
     let imageHeight = that.data.imageHeight;
-    if (ActivityImg !== '') {
-      if (imageHeight >= 650) {
-        // 大于650时，按照宽度取一个正方形
-        y = that.transPx((imageHeight - 650) / 2);
-        imageHeight = 650 > imageHeight ? imageHeight : 650;
-        drawHeight = imageHeight;
 
-      } else {
-        let pix = 650 / imageWidth;
-        drawHeight = pix * imageHeight;
-      } 
-
-    }
+    drawHeight = (650 / imageWidth) * imageHeight;
 
     draw.drawCricleImg(50, 50, 35, logo)
       .drawText(WxName, 134, 56, 24, '#333333')
       .drawText(ActivityIssueTime + ' ' + CommunityName, 134, 90, 20, '#aaaaaa')
       .drawMultiLineText(ActivityName, 50, 160, 650, 42, 0, '#333333')
       .drawMultiLineText(ActivityContent.replace(/&ensp;/g, ' '), 50, draw.nowHeight + 20, 650, 26, 3, '#666666')
-      .drawFilletImg(ActivityImg, x, y, this.getRpx(imageWidth), this.getRpx(imageHeight), 50, draw.nowHeight + 30, 650, drawHeight, 10)
-      .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', false, 'right')
-      .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', false, 'right')
+      .drawFilletImg(ActivityImg, x, y, imageWidth + 'rpx', imageHeight + 'rpx', 50, draw.nowHeight + 30, 650, drawHeight, 10)
+      .drawText('长按扫码', 650 - 168 - 20 + 50, draw.nowHeight + 74, 24, '#333333', 'right')
+      .drawText('参加更多有趣活动', 650 - 168 - 20 + 50, draw.nowHeight, 24, '#333333', 'right')
       .drawImage(data.qrCode, 650 - 168 + 50, draw.nowHeight - 140, 168, 168)
       .drawFinally(function (ctx, nowHeight) {
-        console.log(nowHeight)
-        let canvasHeight = nowHeight + 50;
+        let canvasHeight = draw.getPx(nowHeight + 30);
         that.setData({
-          height: canvasHeight,
-          isFinished: true
+          height: canvasHeight
         })
-        that.drawEndImg();
-      });
-  },
-  drawEndImg() {
-    let that = this;
-    wx.showLoading({
-      title: '正在生成图片...',
-    })
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: that.data.width,
-      height: that.data.height,
-      destWidth: that.data.width,
-      destHeight: that.data.height,
-      canvasId: 'shareImg',
-      success(res) {
-        wx.hideLoading();
-        that.setData({
-          endImg: res.tempFilePath,
-          isFinished: true
+        draw.canvasToPosterImg(750, canvasHeight, function(res){
+          that.setData({
+            endImg: res.tempFilePath,
+            isFinished: true
+          })
         });
-      },
-      fail: function (err) {
-        console.log(err);
-      }
-    }, that)
+      });
   },
   /**
    * 保存图片到相册
@@ -168,11 +126,22 @@ Page({
         },
         fail: function (err) {
           console.log(err)
+          if (err.errMsg == "saveImageToPhotosAlbum:fail auth deny" || err.errMsg === "saveImageToPhotosAlbum:fail:auth denied") {
+            console.log("打开设置窗口");
+            that.setData({
+              toAuthorize: true
+            })
+          }
         }
       })
     } else {
       that.changeBgToWhite();
     }
+  },
+  toAuthorizeClick() {
+    this.setData({
+      toAuthorize: false
+    })
   },
   changeBgToWhite() {
     let that = this;
@@ -181,14 +150,13 @@ Page({
     bgCtx.fillRect(0, 0, that.data.width, that.data.height);
     bgCtx.drawImage(that.data.endImg, 0, 0, that.data.width, that.data.height);
     bgCtx.draw(true, function () {
-      let destHeight = 750 / that.data.width * that.data.height;
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
         width: that.data.width,
         height: that.data.height,
         destWidth: 750,
-        destHeight: destHeight,
+        destHeight: that.data.destHeight,
         canvasId: 'bgImg',
         success(result) {
           // 已经是白色背景色了
@@ -207,6 +175,12 @@ Page({
             },
             fail: function (err) {
               console.log(err)
+              if (err.errMsg == "saveImageToPhotosAlbum:fail auth deny" || err.errMsg === "saveImageToPhotosAlbum:fail:auth denied") {
+                console.log("打开设置窗口");
+                that.setData({
+                  toAuthorize: true
+                })
+              }
             }
           })
         },

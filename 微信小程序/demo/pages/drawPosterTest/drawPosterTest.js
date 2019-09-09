@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    width: wx.getSystemInfoSync().windowWidth,
-    height: 1024,
+    width: wx.getSystemInfoSync().windowWidth * 2,
+    height: wx.getSystemInfoSync().windowHeight * 2,
     imageWidth: 0,
     imageHeight: 0
   },
@@ -32,24 +32,69 @@ Page({
     })
   },
   drawShareImage(draw, themeImg, logo){
-    let that = this;
-    let hei = that.data.imageHeight / (that.data.imageWidth / (that.data.width - 60))
+    let that = this; let drawHeight = 0;
+    let x = 0, y = 0;
+    let imageWidth = that.data.imageWidth;
+    let imageHeight = that.data.imageHeight;
+
+    drawHeight = (650 / imageWidth) * imageHeight;
 
     let part = '你身体里的每一个原子都来自一颗爆炸了的恒星。形成你左手的原子可能和形成你右手的来自不同的恒星。这是我所知的关于物理的最有诗意的事情：你们都是星尘。'
 
     draw
-      .drawFilletFillImg(themeImg, 30, 30, that.data.width - 60, hei, 10)
-      .drawMultiLineText(part, 30, draw.nowHeight + 30, that.data.width - 60, 14, 0, '#000', false)
-      .drawMultiLineText(part, 30, draw.nowHeight + 40, that.data.width - 60, 14, 1, '#000', false)
-      .drawText('——《这里是出处》', that.data.width - 30, draw.nowHeight + 60, 14, '#000', true, 'right')
-      .drawText('2019.09.06', that.data.width - 30, draw.nowHeight + 30, 16, 'rgba(34,34,34,.64)', true, 'right')
-      .drawCricleImg(that.data.width - 80, draw.nowHeight + 10, 25, logo)
-      .drawFinally(function (ctx) {
-        let canvasHeight = draw.nowHeight + 30;
+      .drawFilletFillImg(themeImg, 50, 50, 650, drawHeight, 10)
+      .drawMultiLineText(part, 50, draw.nowHeight + 30, 650, 30, 0, '#000')
+      .drawMultiLineText(part, 50, draw.nowHeight + 40, 650, 30, 1, '#000')
+      .drawText('——《这里是出处》', 650 + 50, draw.nowHeight + 60, 30, '#000', 'right')
+      .drawText('2019.09.06', 650 + 50, draw.nowHeight + 30, 32, 'rgba(34,34,34,.64)', 'right')
+      .drawCricleImg(650, draw.nowHeight + 10, 25, logo)
+      .drawFinally(function (ctx, nowHeight) {
+        let canvasHeight = that.getPx(nowHeight + 30);
         that.setData({
           height: canvasHeight
         })
+        that.drawEndImg();
       });
+  },
+  drawEndImg() {
+    let that = this;
+    wx.showLoading({
+      title: '正在生成图片...',
+    })
+    let destHeight = 750 / that.data.width * that.data.height;
+    this.setData({
+      destHeight: destHeight
+    })
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: that.data.width,
+      height: that.data.height,
+      destWidth: 750,
+      destHeight: destHeight,
+      canvasId: 'poster',
+      success(res) {
+        wx.hideLoading();
+        that.setData({
+          endImg: res.tempFilePath,
+          isFinished: true
+        })
+      },
+      fail: function (err) {
+        console.log(err);
+      }
+    }, that)
+  },
+
+  getPx(rpx) {
+    // var winWidth = wx.getSystemInfoSync().windowWidth;
+    var winWidth = this.data.width;
+    return rpx / (750 / winWidth);
+  },
+  getRpx(px) {
+    // var winWidth = wx.getSystemInfoSync().windowWidth;
+    var winWidth = this.data.width;
+    return px * (750 / winWidth);
   },
 
   /**

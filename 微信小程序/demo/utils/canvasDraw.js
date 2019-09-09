@@ -1,6 +1,7 @@
 function canvasDraw(id, obj) {
   this.ctx = wx.createCanvasContext(id, obj);
   this.nowHeight;
+  this.winWidth = wx.getSystemInfoSync().windowWidth * 2;
 }
 
 canvasDraw.prototype = {
@@ -46,6 +47,13 @@ canvasDraw.prototype = {
       })
     })
   },
+
+  getPx(rpx) {
+    return rpx / (750 / this.winWidth);
+  },
+  getRpx(px) {
+    return px * (750 / this.winWidth);
+  },
   /**
    * 绘制圆形图片
    * x rpx
@@ -70,6 +78,13 @@ canvasDraw.prototype = {
     this.nowHeight = this.getRpx(y + w);
     return this;
   },
+  judgeRpxOrPx(num) {
+    if ((num + '').indexOf('rpx') === -1) {
+      return this.getPx(parseInt(num));
+    } else {
+      return parseInt(num);
+    }
+  },
   /**
    * 绘制圆角图片
    * img, 
@@ -88,12 +103,12 @@ canvasDraw.prototype = {
   drawFilletImg(img, sx, sy, swidth, sheight, x, y, width, height, r, bgColor = '#fff') {
     sx = this.getPx(sx);
     sx = this.getPx(sx);
-    swidth = this.getPx(swidth);
-    sheight = this.getPx(sheight);
+    swidth = this.judgeRpxOrPx(swidth);
+    sheight = this.judgeRpxOrPx(sheight);
     x = this.getPx(x);
     y = this.getPx(y);
-    width = this.getPx(width);
-    height = this.getPx(height);
+    width = this.judgeRpxOrPx(width);
+    height = this.judgeRpxOrPx(height);
     r = this.getPx(r);
 
     this.ctx.drawImage(img, sx, sy, swidth, sheight, x, y, width, height);
@@ -116,7 +131,8 @@ canvasDraw.prototype = {
   drawFilletFillImg(img, x, y, width, height, r, bgColor = '#fff') {
     x = this.getPx(x);
     y = this.getPx(y);
-    width = this.getPx(width);
+    width = this.judgeRpxOrPx(width);
+    height = this.judgeRpxOrPx(height);
     r = this.getPx(r);
     r = this.getPx(r);
 
@@ -147,14 +163,6 @@ canvasDraw.prototype = {
     //   this.nowHeight = this.getRpx(y + sheight);
     // }
     return this;
-  },
-  getPx(rpx) {
-    var winWidth = wx.getSystemInfoSync().windowWidth * 2;
-    return rpx / (750 / winWidth);
-  },
-  getRpx(px) {
-    var winWidth = wx.getSystemInfoSync().windowWidth * 2;
-    return px * (750 / winWidth);
   },
   /**
    * 绘制单行文本
@@ -246,6 +254,34 @@ canvasDraw.prototype = {
         callback && callback(that.ctx, that.nowHeight);
       }, 500)
     }, that);
+  },
+  /**
+   * destWidth 导出的图片目标宽度
+   * canvasHeight canvas高度 （单位px）
+   */
+  canvasToPosterImg(destWidth, canvasHeight, callback) {
+    let that = this;
+    wx.showLoading({
+      title: '正在生成图片...',
+    })
+    let destHeight = destWidth / that.winWidth * canvasHeight;
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: that.winWidth,
+      height: canvasHeight,
+      destWidth: destWidth,
+      destHeight: destHeight,
+      canvasId: 'shareImg',
+      success(res) {
+        wx.hideLoading();
+        callback && callback(res);
+      },
+      fail: function (err) {
+        console.log(err);
+        callback && callback(err);
+      }
+    }, that)
   },
   roundRect: function (x, y, w, h, r, c) {
     // 开始绘制
