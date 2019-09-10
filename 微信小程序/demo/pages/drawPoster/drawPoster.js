@@ -140,6 +140,7 @@ Page({
   },
   changeBgToWhite() {
     let that = this;
+    let destHeight = 750 / that.data.width * that.data.height;
     const bgCtx = wx.createCanvasContext('bgImg', that);
     bgCtx.fillStyle = "#FFFFFF";
     bgCtx.fillRect(0, 0, that.data.width, that.data.height);
@@ -151,7 +152,7 @@ Page({
         width: that.data.width,
         height: that.data.height,
         destWidth: 750,
-        destHeight: that.data.destHeight,
+        destHeight: destHeight,
         canvasId: 'bgImg',
         success(result) {
           // 已经是白色背景色了
