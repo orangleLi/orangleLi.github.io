@@ -50,9 +50,9 @@
 			}
 			this.swiperSpotDom.innerHTML = spotLi;
 
-			if (this.autoplay) {
-				this.timer = setInterval(this.nextSlider.bind(this, this.aniTIme), this.intervalTime);
-			}
+			// if (this.autoplay) {
+			// 	this.timer = setInterval(this.nextSlider.bind(this, this.aniTIme), this.intervalTime);
+			// }
 
 			// 上一张，下一张，小圆点绑定点击事件
 			this.eventBind()
@@ -131,13 +131,6 @@
 				}
 			}
 		},
-		jump(index) {
-			let that = this;
-			that.nowIndex = index;
-			that.setActiveSpot();
-			that.mainDom.style.transition = `left .8s`
-			that.mainDom.style.left = `${-(that.nowIndex+1) * that.moveWidth}px`;
-		},
 		eventBind() {
 			let that = this;
 			// 上一张事件绑定
@@ -177,7 +170,10 @@
 			　　if (target.tagName.toLowerCase() === "li") {
 			　　　　 var ret = this.querySelectorAll("li");
 			　　　　 let index = Array.prototype.indexOf.call(ret, target);
-					that.jump(index);
+					that.nowIndex = index;
+					that.setActiveSpot();
+					that.mainDom.style.transition = `left .8s`
+					that.mainDom.style.left = `${-(that.nowIndex+1) * that.moveWidth}px`;
 			　　}
 			})
 

@@ -3,11 +3,11 @@
 	* obj: 
 	* imgArr 图片数组
 	* imgWidth 图片宽度
-	* gap 图片之间间隔
 	* aniTime 动画切换时间
 	* intervalTime 停留的时间
 	* scale 图片缩放
 	* autoplay 是否自动播放
+	* gap 图片之间间隔
 	*/
 	function Swiper(obj) {
 		this.imgArr = obj.imgArr || [];
@@ -17,7 +17,7 @@
 		this.containerWidth = this.imgWidth*3 + this.gap*4;
 		this.aniTime = obj.aniTime || 500;
 		this.intervalTime = this.aniTime + obj.intervalTime || 2000;
-		this.activeIndex = 3;
+		this.nowIndex = 3;
 		this.imgDoms = document.getElementsByClassName('swiper-slide');
 		this.mainDom = document.getElementsByClassName('swiper-main')[0];
 		this.listDoms = document.getElementsByClassName('swiper-list')[0];
@@ -40,7 +40,7 @@
 				this.mainDom.style.left = `${-2 * this.imgWidth}px`;
 				this.mainDom.style.width = `${(this.imgArr.length+2) * this.imgWidth}px`;
 			} else {
-				this.activeIndex = 0;
+				this.nowIndex = 0;
 				resImgArr = [...this.imgArr];
 			}
 			let str = '';
@@ -67,7 +67,7 @@
 						this.imgDoms[i].style.left = `${i * (this.imgWidth + this.gap) - this.gap}px`;
 					}
 				}
-				if (i === this.activeIndex) {
+				if (i === this.nowIndex) {
 					this.imgDoms[i].style.transform = 'scale(1)';
 				} else {
 					this.imgDoms[i].style.transform = `scale(${this.scale})`;
@@ -76,22 +76,21 @@
 		},
 		prevSlider: function(aniTime) {
 			if (this.imgArr.length ===2) {
-				this.activeIndex = this.activeIndex ? 0 : 1;
+				this.nowIndex = this.nowIndex ? 0 : 1;
 				this.setScale()
 			} else if (this.imgArr.length ===1) {
 				return;
 			} else {
-				this.activeIndex--;
+				this.nowIndex--;
 				this.mainDom.style.transition = `left ${aniTime/1000}s`
 				this.mainDom.style.left = `${parseInt(this.mainDom.style.left)+(this.gap + this.imgWidth)}px`;
-				if (this.activeIndex === 1) {
-					this.activeIndex = 1;
+				if (this.nowIndex === 1) {
 					this.setScale()
 					setTimeout(function() {
-						this.activeIndex = (this.imgArr.length+1);
+						this.nowIndex = (this.imgArr.length+1);
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
-						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.activeIndex].style.left) - (this.gap*2 + this.imgWidth))}px`;
+						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - (this.gap*2 + this.imgWidth))}px`;
 					}.bind(this), aniTime)
 				} else {
 					this.setScale()
@@ -100,26 +99,26 @@
 		},
 		nextSlider: function(aniTime) {
 			if (this.imgArr.length ===2) {
-				this.activeIndex = this.activeIndex ? 0 : 1;
+				this.nowIndex = this.nowIndex ? 0 : 1;
 				this.setScale()
 			} else if (this.imgArr.length ===1) {
 				return;
 			} else {
-				if (this.activeIndex >=2) {	
+				if (this.nowIndex >=2) {	
 					this.mainDom.style.transition = `left ${aniTime/1000}s`
 					this.mainDom.style.left = `${parseInt(this.mainDom.style.left)-(this.gap + this.imgWidth)}px`;
 				}
-				if (this.activeIndex === (this.imgArr.length+1)) {
-					this.activeIndex = (this.imgArr.length+2);
+				if (this.nowIndex === (this.imgArr.length+1)) {
+					this.nowIndex = (this.imgArr.length+2);
 					this.setScale()
 					setTimeout(function() {
-						this.activeIndex = 2;
+						this.nowIndex = 2;
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
 						this.mainDom.style.left = `${-this.imgWidth + this.gap}px`;
 					}.bind(this), aniTime)
 				} else {
-					this.activeIndex++;
+					this.nowIndex++;
 					this.setScale()
 				}
 			}
