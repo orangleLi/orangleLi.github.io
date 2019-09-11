@@ -28,38 +28,38 @@ export default {
       confirmColor: '#ff6a0b',
       cancelCallback: null,
       confirmCallback: null
-    };
+    }
   },
   methods: {
     showModal (obj) {
-      let that = this;
-      that.isShow = true;
+      let that = this
+      that.isShow = true
       if (obj) {
-        that.title = obj.title;
-        that.content = obj.content;
-        that.showCancel = obj.showCancel === undefined || obj.showCancel === true;
-        that.cancelText = obj.cancelText || that.cancelText;
-        that.cancelColor = obj.cancelColor || that.cancelColor;
-        that.confirmText = obj.confirmText || that.confirmText;
-        that.confirmColor = obj.confirmColor || that.confirmColor;
+        that.title = obj.title
+        that.content = obj.content
+        that.showCancel = obj.showCancel === undefined || obj.showCancel === true
+        that.cancelText = obj.cancelText || that.cancelText
+        that.cancelColor = obj.cancelColor || that.cancelColor
+        that.confirmText = obj.confirmText || that.confirmText
+        that.confirmColor = obj.confirmColor || that.confirmColor
         if (that.showCancel) {
-          that.cancelCallback = obj.cancelClick;
+          that.cancelCallback = obj.cancelClick
         }
-        that.confirmCallback = obj.confirmClick;
+        that.confirmCallback = obj.confirmClick
       }
     },
     cancelClick (callback) {
-      let that = this;
-      that.isShow = false;
-      that.cancelCallback && that.cancelCallback();
+      let that = this
+      that.isShow = false
+      that.cancelCallback && that.cancelCallback()
     },
     confirmClick (callback) {
-      let that = this;
-      that.isShow = false;
-      that.confirmCallback && that.confirmCallback();
+      let that = this
+      that.isShow = false
+      that.confirmCallback && that.confirmCallback()
     }
   }
-};
+}
 </script>
 
 <style scoped>

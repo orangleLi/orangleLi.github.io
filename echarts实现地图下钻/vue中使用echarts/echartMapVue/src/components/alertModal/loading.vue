@@ -17,53 +17,53 @@ export default {
       title: '加载中...',
       duration: 1500,
       timer: null
-    };
+    }
   },
   methods: {
     showLoading (obj) {
-      let that = this;
-      that.iconImg = that.loadingImg;
-      that.isShow = true;
+      let that = this
+      that.iconImg = that.loadingImg
+      that.isShow = true
       if (obj) {
-        that.title = obj.title;
+        that.title = obj.title
       }
-      that.duration = -1;
+      that.duration = -1
     },
     hideLoading () {
-      let that = this;
-      this.isShow = false;
+      let that = this
+      this.isShow = false
       if (that.timer) {
-        clearInterval(that.timer);
-        that.timer = null;
+        clearInterval(that.timer)
+        that.timer = null
       }
     },
     showToast (obj) {
-      let that = this;
-      that.isShow = true;
+      let that = this
+      that.isShow = true
       if (obj) {
-        that.title = obj.title || that.title;
+        that.title = obj.title || that.title
         if (obj.icon === '') {
-          that.iconImg = that.loadingImg;
+          that.iconImg = that.loadingImg
         } else if (obj.icon === 'success') {
-          that.iconImg = that.successImg;
+          that.iconImg = that.successImg
         } else if (obj.icon === 'none') {
-          that.iconImg = '';
+          that.iconImg = ''
         }
-        that.duration = obj.duration || that.duration;
+        that.duration = obj.duration || that.duration
       }
-      that.delayHide();
+      that.delayHide()
     },
     hideToast () {
-      this.isShow = false;
+      this.isShow = false
     },
     delayHide () {
-      let that = this;
+      let that = this
       if (that.duration >= 0) {
-        that.timer = window.setInterval(that.hideLoading, that.duration);
+        that.timer = window.setInterval(that.hideLoading, that.duration)
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

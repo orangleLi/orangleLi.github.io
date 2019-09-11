@@ -289,6 +289,7 @@ let data = [
   {name: '武汉', value: 273},
   {name: '大庆', value: 279}
 ]
+
 function MapDrillDown (echartDom, obj) {
   this.chartDom = echarts.init(echartDom)
   this.optionMap = null
@@ -368,7 +369,7 @@ MapDrillDown.prototype = {
       },
       series: [
         {
-          name: '正常',
+          name: '',
           type: 'scatter',
           coordinateSystem: 'geo',
           opacity: 1,
