@@ -53,7 +53,7 @@ Page({
         that.setData({
           height: canvasHeight
         })
-        draw.drawEndImg(750, canvasHeight, function(res) {
+        draw.canvasToPosterImg('poster', 750, canvasHeight, function(res) {
           wx.hideLoading();
           that.setData({
             endImg: res.tempFilePath,

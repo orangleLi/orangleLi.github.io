@@ -177,9 +177,11 @@ canvasDraw.prototype = {
     fontSize = this.getPx(fontSize);
     
     this.ctx.save();
-    this.ctx.setFontSize(fontSize)
+    // this.ctx.setFontSize(fontSize)
+    this.ctx.font = `${fontSize}px sans-serif`
     this.ctx.setTextAlign(align);
-    this.ctx.setFillStyle(color)
+    // this.ctx.setFillStyle(color)
+    this.ctx.fillStyle = color;
     this.ctx.fillText(str, x, y);
     this.ctx.restore();
     this.nowHeight = this.getRpx(y + fontSize);
@@ -208,8 +210,10 @@ canvasDraw.prototype = {
     var lastSubStrIndex = 0; //每次开始截取的字符串的索引
 
     this.ctx.save()//保存当前的绘图上下文。
-    this.ctx.setFontSize(fontSize)
-    this.ctx.setFillStyle(color);
+    // this.ctx.setFontSize(fontSize)
+    this.ctx.font = `${fontSize}px sans-serif`
+    // this.ctx.setFillStyle(color);
+    this.ctx.fillStyle = color;
     this.ctx.setTextAlign(align);
     for (let i = 0; i < str.length; i++) {
       
@@ -259,7 +263,7 @@ canvasDraw.prototype = {
    * destWidth 导出的图片目标宽度
    * canvasHeight canvas高度 （单位px）
    */
-  canvasToPosterImg(destWidth, canvasHeight, callback) {
+  canvasToPosterImg(canvasId, destWidth, canvasHeight, callback) {
     let that = this;
     wx.showLoading({
       title: '正在生成图片...',
@@ -272,7 +276,7 @@ canvasDraw.prototype = {
       height: canvasHeight,
       destWidth: destWidth,
       destHeight: destHeight,
-      canvasId: 'shareImg',
+      canvasId: canvasId,
       success(res) {
         wx.hideLoading();
         callback && callback(res);
@@ -286,7 +290,8 @@ canvasDraw.prototype = {
   roundRect: function (x, y, w, h, r, c) {
     // 开始绘制
     this.ctx.beginPath();
-    this.ctx.setFillStyle(c);
+    // this.ctx.setFillStyle(c);
+    this.ctx.fillStyle = c;
     // 左上角
     this.ctx.moveTo(x + r, y);
     this.ctx.arcTo(x, y, x, y + r, r);

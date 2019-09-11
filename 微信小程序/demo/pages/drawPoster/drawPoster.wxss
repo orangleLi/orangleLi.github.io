@@ -28,6 +28,7 @@ canvas{
   z-index: 2002;
   display: flex;
   justify-content: center;
+  -webkit-overflow-scrolling: touch;
 }
 .base-wrapper{
   position: relative;
@@ -66,102 +67,4 @@ canvas{
   border-radius: 0;
   border: none;
   background-color: transparent;
-}
-.closeShare{
-  width: 64rpx;
-  height: 64rpx;
-  position: fixed;
-  bottom: 9%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3010;
-}
-.userinfo {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.logo{
-  width: 100%;
-}
-/* .logo image{
-  width: 168rpx;
-  margin-left: 120rpx;
-} */
-.getPhoneNumberBtn{
-  width: 570rpx;
-  height: 90rpx;
-  background-color: rgb(255, 92, 30);
-  border-radius: 45rpx;
-  margin-left: 90rpx;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-.getPhoneNumberBtn-text{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90rpx;
-  line-height: 90rpx;
-   position: relative;
-  z-index: 1;
-}
-.getPhoneNumberBtn-text .icon_wechat{
-  display: block;
-  width: 40rpx;
-  margin-right: 19rpx;
-}
-.getPhoneNumberBtn-text text{
-  font-size: 36rpx;
-  color: #fff;
-}
-.getPhoneNumberBtn button.getPhoneNumber{
-  width: 570rpx;
-  height: 90rpx;
-  line-height:90rpx;
-  padding-left:0;
-  padding-right:0;
-  color:rgba(255, 255, 255,1);
-  background-color:#DEDEDE;
-  border: none;
-  border-radius:0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  opacity: 0;
-}
-.getPhoneNumber-tips{
-  margin-top: 28rpx;
-}
-.getPhoneNumber-tips>text{
-  display: block;
-  font-size: 24rpx;
-  color: rgb(170, 170, 170);
-   text-align: center;
-}
-
-/* .shareCanvas{
-  border: 1rpx solid #eee;
-  margin: 0 auto;
-  box-shadow: 0 0 20rpx rgba(0,0,0,.12);
-  border-radius: 15rpx;
-} */
-
-.shareCanvas{
-  border-top: 1rpx solid #eee;
 }

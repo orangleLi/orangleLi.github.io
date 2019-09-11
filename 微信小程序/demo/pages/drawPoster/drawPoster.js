@@ -25,8 +25,6 @@ Page({
     endImg: null,
     isFinished: false,
     bgTrue: false,
-    rWidth: 0,
-    rHeight: 0,
     toAuthorize: false
   },
 
@@ -93,7 +91,7 @@ Page({
         that.setData({
           height: canvasHeight
         })
-        draw.canvasToPosterImg(750, canvasHeight, function(res){
+        draw.canvasToPosterImg('shareImg', 750, canvasHeight, function(res){
           that.setData({
             endImg: res.tempFilePath,
             isFinished: true
