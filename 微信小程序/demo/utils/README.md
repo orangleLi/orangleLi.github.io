@@ -198,6 +198,32 @@ draw.getDownloadFiles([data.headImg]).then((res) => {
 <br>
 <br>
 
+
+> ## drawFilletFillRect(x, y, width, height, r, isGrd, drawColor, bgColor = '#fff') 
+绘制圆角矩形 是否渐变
+
+
+### 参数
+
+|参数   |     说明                     | 类型   |    默认值  |
+| ----   | ------------------------ |:------:| -------: |
+| x      | 绘制到canvas上的x坐标      | 可填小数  |   无   |
+| y      | 绘制到canvas上的y坐标     | 可填小数  |   无   |
+| width  | 绘制到canvas上的宽度('650px' 或 '650rpx')      | string  |   无   |
+| height | 绘制到canvas上的高度('650px' 或 '650rpx')      | string  |   无   |
+| r      | 圆角半径                  | 可填小数  |   无   |
+| isGrd | 是否渐变            | Boolean  |   false   |
+| drawColor | 绘制矩形的颜色            | 数组  |   无  |
+| bgColor | canvas背景颜色            | 可填小数  |   #fff   |
+
+<br>
+<br>
+
+
+
+
+
+
 > ## drawImage(img, sx, sy, swidth, sheight, x, y, width, height) 
 同原本的drawImage用法相同
 
