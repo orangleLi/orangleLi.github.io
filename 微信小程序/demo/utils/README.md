@@ -216,6 +216,15 @@ draw.getDownloadFiles([data.headImg]).then((res) => {
 | drawColor | 绘制矩形的颜色            | 数组  |   无  |
 | bgColor | canvas背景颜色            | 可填小数  |   #fff   |
 
+
+默认左右渐变const grd = ctx.createLinearGradient(0, 0, width, 0)
+<br>
+可自行修改源码
+<br>
+渐变用法参考https://www.w3school.com.cn/tags/canvas_createlineargradient.asp
+<br>
+或搜索关键字createLinearGradient()
+
 <br>
 <br>
 
