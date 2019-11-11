@@ -11,17 +11,17 @@
 	*/
 	function Swiper(obj) {
 		this.imgArr = obj.imgArr || [];
-		this.scale = obj.scale || 0.8;
-		this.gap = obj.gap;
+		this.scale = obj.scale || 0.8; // 图片缩放值
+		this.gap = obj.gap; // 图片未缩放状态下图片之间的间隔
 
 		// 移动端
 		if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
-		   this.containerWidth = document.body.clientWidth;
+		   this.containerWidth = document.body.clientWidth; // 轮播图盒子宽度
 		}else{
 			// PC端
-		   this.containerWidth = 600;
+		   this.containerWidth = 600; // 轮播图盒子宽度
 		}
-		this.imgWidth = obj.imgWidth;
+		this.imgWidth = obj.imgWidth; // 图片宽度
 		this.aniTime = obj.aniTime || 500;
 		this.intervalTime = this.aniTime + obj.intervalTime || 2000;
 		this.nowIndex = 3;
@@ -36,7 +36,7 @@
 		this.timer; // 自动播放的定时器
 		this.prev = Date.now();
 
-		this.lide = (this.containerWidth - this.imgWidth - (this.gap * 2)) / 2;
+		this.diffLen = (this.containerWidth - this.imgWidth - (this.gap * 2)) / 2;
 	}
  
 	Swiper.prototype = {
@@ -46,7 +46,7 @@
 			let resImgArr;
 			if (this.imgArr.length >2) {
 				resImgArr = [this.imgArr[this.imgArr.length-2], this.imgArr[this.imgArr.length-1], ...this.imgArr, this.imgArr[0], this.imgArr[1]];
-				this.mainDom.style.left = `${-(2 * this.imgWidth + this.gap - this.lide)}px`;
+				this.mainDom.style.left = `${-(2 * this.imgWidth + this.gap - this.diffLen)}px`;
 				this.mainDom.style.width = `${(this.imgArr.length+2) * (this.imgWidth + (this.gap / 2))}px`;
 			} else {
 				this.nowIndex = 0;
@@ -95,7 +95,7 @@
 						this.nowIndex = (this.imgArr.length+1);
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
-						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - this.imgWidth)}px`;
+						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - this.diffLen)}px`;
 					}.bind(this), aniTime)
 				} else {
 					this.setScale()
@@ -121,7 +121,7 @@
 						this.nowIndex = 2;
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
-						this.mainDom.style.left = `${-(this.imgWidth - this.lide)}px`;
+						this.mainDom.style.left = `${-(this.imgWidth - this.diffLen)}px`;
 					}.bind(this), aniTime)
 				} else {
 					this.nowIndex++;
