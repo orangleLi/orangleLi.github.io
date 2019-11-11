@@ -25,9 +25,9 @@
 		this.aniTime = obj.aniTime || 500;
 		this.intervalTime = this.aniTime + obj.intervalTime || 2000;
 		this.nowIndex = 3;
-		this.imgDoms = document.getElementsByClassName('swiper-slide');
-		this.mainDom = document.getElementsByClassName('swiper-main')[0];
-		this.listDoms = document.getElementsByClassName('swiper-list')[0];
+		this.imgDoms = document.getElementsByClassName('swiper-slide' + obj.clsSuffix);
+		this.mainDom = document.getElementsByClassName('swiper-main' + obj.clsSuffix)[0];
+		this.listDoms = document.getElementsByClassName('swiper-list' + obj.clsSuffix)[0];
 		this.activeDom = this.imgDoms[0];
 		this.autoplay = obj.autoplay;
 
@@ -37,6 +37,7 @@
 		this.prev = Date.now();
 
 		this.diffLen = (this.containerWidth - this.imgWidth - (this.gap * 2)) / 2;
+  		this.clsSuffix = obj.clsSuffix
 	}
  
 	Swiper.prototype = {
@@ -54,7 +55,7 @@
 			}
 			let str = '';
 			resImgArr.forEach((item, index) => {
-				str += `<a href="${resImgArr[index].url}"><img class="swiper-slide" style="width: ${this.imgWidth}px;" src="${resImgArr[index].imgPath}" /></a>`;
+				str += `<a href="${resImgArr[index].url}"><img class="swiper-slide${this.clsSuffix}" style="width: ${this.imgWidth}px;" src="${resImgArr[index].imgPath}" /></a>`;
 			});
 			this.mainDom.innerHTML = str;
 			this.setScale();
@@ -63,19 +64,47 @@
 			}
 		},
 		setScale: function() {
-			for (let i = 0; i < this.imgDoms.length; i++) {
-				if (this.imgArr.length ===2) {
-					this.imgDoms[0].style.left = `${(this.containerWidth/4) - (this.imgWidth/2)}px`;
-					this.imgDoms[1].style.left = `${(this.containerWidth/4)*3 - (this.imgWidth/2)}px`;
-				} else if (this.imgArr.length ===1) {
-					this.imgDoms[i].style.left = `${(this.containerWidth/2) - (this.imgWidth/2)}px`;
-				} else {
-					this.imgDoms[i].style.left = `${(i - 1) * (this.imgWidth + this.gap)}px`;
+			// 堆叠式
+			if (this.gap < 0) {
+
+				for (let i = 0; i < this.imgDoms.length; i++) {
+					if (this.imgArr.length ===2) {
+						this.imgDoms[0].style.left = `${(this.containerWidth/4) - (this.imgWidth/2)}px`;
+						this.imgDoms[1].style.left = `${(this.containerWidth/4)*3 - (this.imgWidth/2)}px`;
+					} else if (this.imgArr.length ===1) {
+						this.imgDoms[i].style.left = `${(this.containerWidth/2) - (this.imgWidth/2)}px`;
+					} else {
+						this.imgDoms[i].style.left = `${(i - 1) * (this.imgWidth + this.gap)}px`;
+					}
+
+
+					if (i === this.nowIndex) {
+						this.imgDoms[i].style.transform = 'scale(1)';
+						this.imgDoms[i].style.zIndex = '1001';
+					} else if (i < this.nowIndex) {
+						this.imgDoms[i].style.transform = `scale(${1 - ((this.nowIndex - i) * 0.2)})`;
+						this.imgDoms[i].style.zIndex = 1000 - ((this.nowIndex - i));
+					} else if (i > this.nowIndex) {
+						this.imgDoms[i].style.transform = `scale(${1 - ((i - this.nowIndex) * 0.2)})`;
+						this.imgDoms[i].style.zIndex = 1000 - (i - this.nowIndex);
+					}
 				}
-				if (i === this.nowIndex) {
-					this.imgDoms[i].style.transform = 'scale(1)';
-				} else {
-					this.imgDoms[i].style.transform = `scale(${this.scale})`;
+			} else {
+			// 卡片式
+				for (let i = 0; i < this.imgDoms.length; i++) {
+					if (this.imgArr.length ===2) {
+						this.imgDoms[0].style.left = `${(this.containerWidth/4) - (this.imgWidth/2)}px`;
+						this.imgDoms[1].style.left = `${(this.containerWidth/4)*3 - (this.imgWidth/2)}px`;
+					} else if (this.imgArr.length ===1) {
+						this.imgDoms[i].style.left = `${(this.containerWidth/2) - (this.imgWidth/2)}px`;
+					} else {
+						this.imgDoms[i].style.left = `${(i - 1) * (this.imgWidth + this.gap)}px`;
+					}
+					if (i === this.nowIndex) {
+						this.imgDoms[i].style.transform = 'scale(1)';
+					} else {
+						this.imgDoms[i].style.transform = `scale(${this.scale})`;
+					}
 				}
 			}
 		},
@@ -95,7 +124,7 @@
 						this.nowIndex = (this.imgArr.length+1);
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
-						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - this.diffLen)}px`;
+						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - this.diffLen - this.gap)}px`;
 					}.bind(this), aniTime)
 				} else {
 					this.setScale()
@@ -132,24 +161,24 @@
 		eventBind: function() {	
 			let that = this;
 
-			document.getElementById('next').onmouseover = function () {
+			document.getElementById('next' + this.clsSuffix).onmouseover = function () {
 				clearInterval(that.timer);
 			}
-			document.getElementById('next').onmouseout = function () {
+			document.getElementById('next' + this.clsSuffix).onmouseout = function () {
 				that.timer = setInterval(that.nextSlider.bind(that, that.aniTime), that.intervalTime);
 			}
-			document.getElementById('next').onclick = function () {
+			document.getElementById('next' + this.clsSuffix).onclick = function () {
 				that.throttle(that.nextSlider, 300, 300);
 			}
 
 
-			document.getElementById('prev').onmouseover = function () {
+			document.getElementById('prev' + this.clsSuffix).onmouseover = function () {
 				clearInterval(that.timer);
 			}
-			document.getElementById('prev').onmouseout = function () {
+			document.getElementById('prev' + this.clsSuffix).onmouseout = function () {
 				that.timer = setInterval(that.nextSlider.bind(that, that.aniTime), that.intervalTime);
 			}
-			document.getElementById('prev').onclick = function() {
+			document.getElementById('prev' + this.clsSuffix).onclick = function() {
 				that.throttle(that.prevSlider, 300, 300);
 			}
 

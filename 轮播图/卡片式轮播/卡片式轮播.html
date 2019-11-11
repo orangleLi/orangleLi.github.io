@@ -8,8 +8,6 @@
 			height: 200px;
 			position: relative;
 			overflow: hidden;
-			top: 100px;
-    		left: 100px;
     		border: 1px solid #eee;
     		padding: 30px 0;
 		}
@@ -26,30 +24,32 @@
 			display: inline-block;
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
-
-		.leftBtn{
+		.btn{
 			position: absolute;
-			left: 0px;
 			top: 50%;
 			transform: translateY(-50%);
 			width: 30px;
     		height: 30px;
+    		z-index: 1002;
+		}
+		.leftBtn{
+			left: 0px;
 		}
 		.rightBtn{
-			position: absolute;
 			right: 0px;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 30px;
-    		height: 30px;
 		}
 	</style>
 </head>
 <body>
-	<div class="swiper-list">	
-		<div class="swiper-main"></div>
-		<img id="prev" class="leftBtn" src="../left.png" alt="">
-		<img id="next" class="rightBtn" src="../right.png" alt="">
+	<div class="swiper-list-card swiper-list">	
+		<div class="swiper-main-card swiper-main"></div>
+		<img id="prev-card" class="btn leftBtn" src="../left.png" alt="">
+		<img id="next-card" class="btn rightBtn" src="../right.png" alt="">
+	</div>
+	<div class="swiper-list-stack swiper-list">	
+		<div class="swiper-main-stack swiper-main"></div>
+		<img id="prev-stack" class="btn leftBtn" src="../left.png" alt="">
+		<img id="next-stack" class="btn rightBtn" src="../right.png" alt="">
 	</div>
 </body>
 <script src="./slider_card.js"></script>
@@ -81,12 +81,25 @@
 	// let imgArr = ['i.jpg'];
 	new Swiper({
 		imgArr: imgArr, 
-		imgWidth: 200, 
+		imgWidth: 320, 
 		aniTime: 1000, 
 		intervalTime: 1500, 
 		scale: 0.8, 
-		autoplay: true,
-		gap: 0
+		autoplay: false,
+		gap: 0,
+      	clsSuffix: '-card'
+	}).init();
+
+
+	new Swiper({
+		imgArr: imgArr, 
+		imgWidth: 320, 
+		aniTime: 1000, 
+		intervalTime: 1500, 
+		scale: 0.8, 
+		autoplay: false,
+		gap: -200,
+      	clsSuffix: '-stack'
 	}).init();
 </script>
 </html>
