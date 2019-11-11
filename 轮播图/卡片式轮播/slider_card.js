@@ -11,10 +11,17 @@
 	*/
 	function Swiper(obj) {
 		this.imgArr = obj.imgArr || [];
-		this.imgWidth = obj.imgWidth || 200;
 		this.scale = obj.scale || 0.8;
-		this.gap = obj.gap || 20;
-		this.containerWidth = this.imgWidth*3 + this.gap*4;
+		this.gap = obj.gap;
+
+		// 移动端
+		if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+		   this.containerWidth = document.body.clientWidth;
+		}else{
+			// PC端
+		   this.containerWidth = 600;
+		}
+		this.imgWidth = obj.imgWidth;
 		this.aniTime = obj.aniTime || 500;
 		this.intervalTime = this.aniTime + obj.intervalTime || 2000;
 		this.nowIndex = 3;
@@ -28,17 +35,19 @@
 
 		this.timer; // 自动播放的定时器
 		this.prev = Date.now();
-	}
 
+		this.lide = (this.containerWidth - this.imgWidth - (this.gap * 2)) / 2;
+	}
+ 
 	Swiper.prototype = {
 		init: function() {
 			this.eventBind();
 
 			let resImgArr;
 			if (this.imgArr.length >2) {
-				resImgArr = [this.imgArr[this.imgArr.length-2], this.imgArr[imgArr.length-1], ...this.imgArr, this.imgArr[0], this.imgArr[1]];
-				this.mainDom.style.left = `${-2 * this.imgWidth}px`;
-				this.mainDom.style.width = `${(this.imgArr.length+2) * this.imgWidth}px`;
+				resImgArr = [this.imgArr[this.imgArr.length-2], this.imgArr[this.imgArr.length-1], ...this.imgArr, this.imgArr[0], this.imgArr[1]];
+				this.mainDom.style.left = `${-(2 * this.imgWidth + this.gap - this.lide)}px`;
+				this.mainDom.style.width = `${(this.imgArr.length+2) * (this.imgWidth + (this.gap / 2))}px`;
 			} else {
 				this.nowIndex = 0;
 				resImgArr = [...this.imgArr];
@@ -61,11 +70,7 @@
 				} else if (this.imgArr.length ===1) {
 					this.imgDoms[i].style.left = `${(this.containerWidth/2) - (this.imgWidth/2)}px`;
 				} else {
-					if (i === 0) {
-						this.imgDoms[i].style.left = `0px`;
-					} else {
-						this.imgDoms[i].style.left = `${i * (this.imgWidth + this.gap) - this.gap}px`;
-					}
+					this.imgDoms[i].style.left = `${(i - 1) * (this.imgWidth + this.gap)}px`;
 				}
 				if (i === this.nowIndex) {
 					this.imgDoms[i].style.transform = 'scale(1)';
@@ -90,7 +95,7 @@
 						this.nowIndex = (this.imgArr.length+1);
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
-						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - (this.gap*2 + this.imgWidth))}px`;
+						this.mainDom.style.left = `${-(parseInt(this.imgDoms[this.nowIndex].style.left) - this.imgWidth)}px`;
 					}.bind(this), aniTime)
 				} else {
 					this.setScale()
@@ -107,6 +112,7 @@
 				if (this.nowIndex >=2) {	
 					this.mainDom.style.transition = `left ${aniTime/1000}s`
 					this.mainDom.style.left = `${parseInt(this.mainDom.style.left)-(this.gap + this.imgWidth)}px`;
+					// this.mainDom.style.left = `${this.gap + this.imgWidth}px`;
 				}
 				if (this.nowIndex === (this.imgArr.length+1)) {
 					this.nowIndex = (this.imgArr.length+2);
@@ -115,7 +121,7 @@
 						this.nowIndex = 2;
 						this.setScale()
 						this.mainDom.style.transitionProperty = 'none';
-						this.mainDom.style.left = `${-this.imgWidth + this.gap}px`;
+						this.mainDom.style.left = `${-(this.imgWidth - this.lide)}px`;
 					}.bind(this), aniTime)
 				} else {
 					this.nowIndex++;
