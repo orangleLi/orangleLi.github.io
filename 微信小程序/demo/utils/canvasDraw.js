@@ -134,7 +134,6 @@ canvasDraw.prototype = {
     width = this.judgeRpxOrPx(width);
     height = this.judgeRpxOrPx(height);
     r = this.getPx(r);
-    r = this.getPx(r);
 
     this.ctx.drawImage(img, x, y, width, height);
     this.roundRect(x, y, width, height, r || 0, bgColor);
@@ -142,6 +141,38 @@ canvasDraw.prototype = {
     this.nowHeight = this.getRpx(y + height);
     return this;
   },
+  /**
+   * 绘制圆角矩形
+   * img, 
+   * x, rpx
+   * y, rpx
+   * width, rpx || px
+   * height rpx || px
+   *  同于drawImage的参数
+   * r 圆角半径 rpx
+   * isGrd 是否渐变
+   * bgColor canvas背景颜色
+   */
+  drawFilletFillRect(x, y, width, height, r, isGrd, drawColor, bgColor = '#fff') {
+      x = this.getPx(x);
+      y = this.getPx(y);
+      width = this.getPx(width);
+      height = this.getPx(height);
+      r = this.getPx(r);
+      if (isGrd) {					
+        const grd = this.ctx.createLinearGradient(0, 0, width, 0)				
+        grd.addColorStop(0, drawColor[0])
+        grd.addColorStop(1, drawColor[1])				
+        // grd.addColorStop(0, 'red')
+        // grd.addColorStop(1, 'green')
+        this.ctx.setFillStyle(grd);//将渐变色渲染入正方形
+      } else {
+        this.ctx.setFillStyle(drawColor[0]);
+      }
+        this.ctx.fillRect(x, y, width, height)
+
+        this.roundRect(ctx, x, y, width, height, r || 0, bgColor);
+    },	
   /**
    * 普通绘制图片 和原本的drawImage用法相同  单位均为rpx
    */
