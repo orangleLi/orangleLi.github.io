@@ -208,10 +208,8 @@ canvasDraw.prototype = {
     fontSize = this.getPx(fontSize);
     
     this.ctx.save();
-    // this.ctx.setFontSize(fontSize)
-    this.ctx.font = `${fontSize}px sans-serif`
+    this.ctx.setFontSize(fontSize)
     this.ctx.setTextAlign(align);
-    // this.ctx.setFillStyle(color)
     this.ctx.fillStyle = color;
     this.ctx.fillText(str, x, y);
     this.ctx.restore();
@@ -241,9 +239,7 @@ canvasDraw.prototype = {
     var lastSubStrIndex = 0; //每次开始截取的字符串的索引
 
     this.ctx.save()//保存当前的绘图上下文。
-    // this.ctx.setFontSize(fontSize)
-    this.ctx.font = `${fontSize}px sans-serif`
-    // this.ctx.setFillStyle(color);
+    this.ctx.setFontSize(fontSize)
     this.ctx.fillStyle = color;
     this.ctx.setTextAlign(align);
     for (let i = 0; i < str.length; i++) {
