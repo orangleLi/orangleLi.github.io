@@ -13,7 +13,7 @@ canvasDraw.prototype = {
     })
     return Promise.all(promiseArr);
   },
-  imagesInfo: function(src) {
+  imagesInfo: function (src) {
     return new Promise((resolve, reject) => {
       wx.getImageInfo({
         src: src,
@@ -68,7 +68,7 @@ canvasDraw.prototype = {
     let centerY = (y + r).toFixed(2);
 
     let w = r * 2;
-    
+
     this.ctx.save()//保存当前的绘图上下文。
     this.ctx.beginPath()//开始创建一个路径
     this.ctx.arc(centerX, centerY, r, 0, 2 * Math.PI, false)//画一个圆形裁剪区域
@@ -154,25 +154,25 @@ canvasDraw.prototype = {
    * bgColor canvas背景颜色
    */
   drawFilletFillRect(x, y, width, height, r, isGrd, drawColor, bgColor = '#fff') {
-      x = this.getPx(x);
-      y = this.getPx(y);
-      width = this.getPx(width);
-      height = this.getPx(height);
-      r = this.getPx(r);
-      if (isGrd) {					
-        const grd = this.ctx.createLinearGradient(0, 0, width, 0)				
-        grd.addColorStop(0, drawColor[0])
-        grd.addColorStop(1, drawColor[1])				
-        // grd.addColorStop(0, 'red')
-        // grd.addColorStop(1, 'green')
-        this.ctx.setFillStyle(grd);//将渐变色渲染入正方形
-      } else {
-        this.ctx.setFillStyle(drawColor[0]);
-      }
-        this.ctx.fillRect(x, y, width, height)
+    x = this.getPx(x);
+    y = this.getPx(y);
+    width = this.getPx(width);
+    height = this.getPx(height);
+    r = this.getPx(r);
+    if (isGrd) {
+      const grd = this.ctx.createLinearGradient(0, 0, width, 0)
+      grd.addColorStop(0, drawColor[0])
+      grd.addColorStop(1, drawColor[1])
+      // grd.addColorStop(0, 'red')
+      // grd.addColorStop(1, 'green')
+      this.ctx.setFillStyle(grd);//将渐变色渲染入正方形
+    } else {
+      this.ctx.setFillStyle(drawColor[0]);
+    }
+    this.ctx.fillRect(x, y, width, height)
 
-        this.roundRect(ctx, x, y, width, height, r || 0, bgColor);
-    },	
+    this.roundRect(ctx, x, y, width, height, r || 0, bgColor);
+  },
   /**
    * 普通绘制图片 和原本的drawImage用法相同  单位均为rpx
    */
@@ -206,7 +206,7 @@ canvasDraw.prototype = {
     x = this.getPx(x);
     y = this.getPx(y + fontSize);
     fontSize = this.getPx(fontSize);
-    
+
     this.ctx.save();
     this.ctx.setFontSize(fontSize)
     this.ctx.setTextAlign(align);
@@ -225,7 +225,7 @@ canvasDraw.prototype = {
    * maxRow 最多绘制几行
    * color 颜色
    * suffixStr 多于内容的占位符 默认...
-   * 单位均为rpx
+   * 单位均为rpx 
    */
   drawMultiLineText: function (str, x, y, width, fontSize, maxRow, color = '#000', align = 'left', suffixStr = '...') {
     x = this.getPx(x);
@@ -243,7 +243,7 @@ canvasDraw.prototype = {
     this.ctx.fillStyle = color;
     this.ctx.setTextAlign(align);
     for (let i = 0; i < str.length; i++) {
-      
+
       lineWidth += this.ctx.measureText(str[i]).width;
       if (Math.round(lineWidth) >= width) {
         tag = true;
@@ -254,6 +254,7 @@ canvasDraw.prototype = {
         this.ctx.fillText(newtr, x, y); //绘制截取部分
         if (row === maxRow) {
           this.ctx.restore()//恢复之前保存的绘图上下文
+          y += (fontSize + 5);
           this.nowHeight = this.getRpx(y);
           return this;
         }
@@ -281,7 +282,7 @@ canvasDraw.prototype = {
   drawFinally(callback) {
     let that = this;
     that.ctx.draw(true, function () {
-      setTimeout(function() {
+      setTimeout(function () {
         callback && callback(that.ctx, that.nowHeight);
       }, 500)
     }, that);
