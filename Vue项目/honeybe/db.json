@@ -1,0 +1,148 @@
+{
+  "products":
+  [
+    {
+      "title":"New Zealand, with its reputation as the land of long white clouds, is also the last piece of pure land in the world. The sun is abundant, the vegetation is abundant, and there is endless vitality, so the original wild honeycomb honey is also popular with the bees that everyone likes.",
+      "img": "OrganicWildCombHoney.png",
+      "icon":[
+        {
+          "content": "Honey",
+          "src": "./static/images/Honey.png"
+        },
+        {
+          "content": "Pollen",
+          "src": "./static/images/Pollen.png"
+        },
+        {
+          "content": "Propolis",
+          "src": "./static/images/Propolis.png"
+        },
+        {
+          "content": "Vitamin",
+          "src": "./static/images/Vitamin.png"
+        }
+      ],
+      "href": "#",
+      "dialogShowInfo": [
+        {
+          "title": "../static/images/OrganicWildCombHoney.png",
+          "weight": "340g",
+          "img":[
+            {
+              "src":"./static/images/product1.png"
+            },
+            {
+              "src":"./static/images/product2.png"
+            },
+            {
+              "src":"./static/images/product3.png"
+            }
+          ],
+          "content":[
+            {
+              "paragraph": "Honeybe’s wild honeycomb is collected from organic honey farms in Northland Newzealand."
+            },
+            {
+              "paragraph": "The honeybees chase the flowering seasons to produce unique honeycomb."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title":"Made in New Zealand antibacterial Manuka Honey and egg white Soap. Manuka Honey has antibacterial and anti-inflammatory properties, it has long been used as a natural therapeutic agent.",
+      "img":  "NaturalHoneyHandmadeSoap.png" ,
+      "icon":[
+        {
+          "content": "Honey",
+          "src":  "./static/images/Honey.png"
+        },
+        {
+          "content": "Egg white",
+          "src":  "./static/images/Eggwhite.png"
+        }
+      ],
+      "href": "#",
+      "dialogShowInfo": [
+        {
+          "title":  "../static/images/NaturalHoneyHandmadeSoap.png" ,
+          "weight": "90g",
+          "img":[
+            {
+              "src": "./static/images/product4.png"
+            },
+            {
+              "src": "./static/images/product5.png"
+            },
+            {
+              "src": "./static/images/product6.png"
+            }
+          ],
+          "content":[
+            {
+              "paragraph": "Egg white can shrink pores, make skin cleaner and tighter, increase the vitality and elasticity of the skin, make the skin fresh and smooth."
+            },
+            {
+              "paragraph": "Combined together, Manuka Honey and egg white have the perfect ingredient for a gentle moisturising antiseptic soap. "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footer":[
+    {
+      "title": "If you would like to ask more, tell us what’s good or what we could do better, please get in touch - we’d love to hear from you",
+      "icon":[
+        {
+          "src": "./static/images/NZMade.png",
+          "content": "NZ Made"
+        },
+        {
+          "src": "./static/images/Facebook.png",
+          "content": "Facebook"
+        },
+        {
+          "src": "./static/images/Instagram.png",
+          "content": "Instagram"
+        },
+        {
+          "src": "./static/images/Emailus.png",
+          "content": "Email us"
+        }
+      ],
+      "href": "#"
+    }
+  ],
+  "aboutUsInfo":[
+    {
+      "title":  "./static/images/Aboutus.png" ,
+      "content": [
+        {
+          "paragraph": "New Zealand advocate natural, protect natural and cherish wild animals. New Zealand is blessed with protected local native bush, forests and beaches. It harvests unique Manuka Honey, organic fruits &amp; vegetables and herb plants. HoneyBe incepted in “City of Sails” – Auckland. HoneyBe scientist and artisan formulate and handcraft natural products with these local precious ingredients."
+        },
+        {
+          "paragraph": "HoneyBe source certified organic wild honey combe, manuka honey and other natural ingredients directly from local farms, open country and local suppliers. Our mission is to provide better quality with better ingredients to you and your family. HoneyBe produce natural super foods and skin care products formulated with bee products. HoneyBe expect these natural healing ingredients can benefit people’s general wellbeing, energy &amp; vitality support and health &amp; beauty."
+        },
+        {
+          "paragraph": "HoneyBe care of you and your family."
+        }
+      ],
+      "logo":"./static/images/logo.png" ,
+      "footer":[
+        {
+          "src": "./static/images/icon_BioGro.png",
+          "content":"BioGro No.450"
+        },
+        {
+          "src": "./static/images/icon_naturalHoney.png",
+          "content":"Natural Honey"
+        },
+        {
+          "src":"./static/images/icon_NZMade.png",
+          "content":"NZ Made"
+        }
+      ]
+    }
+  ]
+}
