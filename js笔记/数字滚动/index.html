@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数字滚动</title>
+	<script src="https://cdn.bootcss.com/sass.js/0.11.0/sass.js"></script>
+	<style>
+		.item{
+			font-size: 80px;
+			font-weight: bold;
+			height: 100px;
+			line-height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="item" id="numScroll">0</div>
+
+</body>
+<script src="./numScroll.js"></script>
+<script>
+	setTimeout(function() {
+	    console.log(this); // window
+	})
+	new NumScroll('numScroll', 1285, 0).init();
+</script>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS切角</title>
+	<style>
+		.h-arrange{
+			display: flex;
+			margin: 50px;
+		}
+		.bg{
+		  width: 120px;
+		  height: 80px;
+		  background: #58a;
+		}
+
+	    .cover{
+	    	position: relative;
+	    }
+	    .cover::before {
+	    	content: '';
+	    	width: 0;
+	    	height: 0;
+	    	position: absolute;
+	    	right: 0;
+	    	bottom: 0;
+	    	border: 5px solid #fff;
+	    	border-top-color: transparent;
+	    	border-left-color: transparent;
+	    }
+	    .cover::after{
+	    	content: '';
+	    	width: 0;
+	    	height: 0;
+	    	position: absolute;
+	    	left: 0;
+	    	top: 0;
+	    	border: 5px solid #fff;
+	    	border-bottom-color: transparent;
+	    	border-right-color: transparent;
+	    }
+		.missAngle{
+		  	margin-left: 30px;
+			background: linear-gradient(-45deg, transparent 10px, #58a 0);
+		}
+		.rect{
+		  margin-left: 30px;
+		  background: linear-gradient(135deg, transparent 10px, #58a 0) top left,
+		          linear-gradient(-135deg, transparent 10px, #58a 0) top right,
+		          linear-gradient(-45deg, transparent 10px, #58a 0) bottom right,
+		          linear-gradient(45deg, transparent 10px, #58a 0) bottom left;
+		  background-size: 50% 50%;
+		  background-repeat: no-repeat;
+		  /* Internet Explorer 9 及更早版本 IE 浏览器不支持渐变。 */
+		}
+		.cricle{
+		  margin-left: 30px;
+		  background: radial-gradient(circle at top left, transparent 10px, #58a 0) top left,
+		          radial-gradient(circle at top right, transparent 10px, #58a 0) top right,
+		          radial-gradient(circle at bottom right, transparent 10px, #58a 0) bottom right,
+		          radial-gradient(circle at bottom left, transparent 10px, #58a 0) bottom left;
+		  background-size: 50% 50%;
+		  background-repeat: no-repeat;
+		}
+		.clip5{
+		  	margin-left: 30px;
+	        /*clip-path: inset(25% 0 25% 0 round 0 25% 0 25%);*/
+	        -webkit-clip-path: inset(0 round 0 25%); /* 可以简写 */
+	        clip-path: inset(0 round 0 25%); /* 可以简写 */
+	        /* inset(<top> <right> <bottom> <left> round <top-radius> <right-radius> <bottom-radius> <left-radius>) */
+	        /* inset使用四个值（对应“上 右 下 左”的顺序）来设置圆角半径。 */
+	    }
+		.rect-clip{
+		  margin-left: 30px;
+		  background-image: url(./im.jpg);
+		  background-size: 100% 100%;
+		  background-repeat: no-repeat;
+		  clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 
+		    100% calc(100% - 15px), calc(100% - 15px) 100%,
+		    15px 100%, 0 calc(100% - 15px), 0 15px)
+		}
+
+	    
+	    .line-box{
+	    	margin-left: 30px;	    	
+			width: 100px;
+			height: 60px;
+	    }
+	    .line{
+	    	width: 100%;
+	    	height: 100%;
+	    	background: #26b91a;
+	    }
+	    .line1{
+	    	-webkit-clip-path: polygon(80% 0, 40% 40%, 80% 80%);
+			clip-path: polygon(80% 0, 40% 40%, 80% 80%);
+			animation: a 2s 1s infinite;
+	    }
+	    .line2{
+	    	-webkit-clip-path: polygon(10% 10%, 60% 40%, 50% 90%);
+			clip-path: polygon(10% 10%, 60% 40%, 50% 90%);
+			animation: b 2s 1s infinite;
+	    }
+	    .line3{
+			-webkit-clip-path: polygon(20% 20%, 30% 20%, 30% 50%, 20% 50%);
+			clip-path: polygon(20% 20%, 30% 20%, 30% 50%, 20% 50%);
+			animation: c 2s 1s infinite;
+	    }
+	    @keyframes a{
+	    	90% {
+	    		background: #1f351f;
+	    	}
+	    	100% {
+	    		-webkit-clip-path: polygon(50% 40%, 25% 100%, 75% 100%);
+	    		clip-path: polygon(50% 40%, 25% 100%, 75% 100%);
+	    	}
+	    }
+	    @keyframes b{
+	    	90% {
+	    		background: #1f351f;
+	    	}
+	    	100% {
+	    		-webkit-clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+	    		clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+	    	}
+	    }
+	    @keyframes c{
+	    	90% {
+	    		background: #1f351f;
+	    	}
+	    	100% {
+	    		-webkit-clip-path: polygon(40% 0, 60% 0, 60% 100%, 40% 100%);
+	    		clip-path: polygon(40% 0, 60% 0, 60% 100%, 40% 100%);
+	    	}
+	    }
+	    .box{
+		    width: 100px;
+		    height: 100px;
+		    background: linear-gradient(black, black) left top,
+		                linear-gradient(black, black) left top,
+		                linear-gradient(black, black) right top,
+		                linear-gradient(black, black) right top,
+		                linear-gradient(black, black) right bottom,
+		                linear-gradient(black, black) right bottom,
+		                linear-gradient(black, black) left bottom,
+		                linear-gradient(black, black) left bottom;
+		    background-repeat: no-repeat;
+		    background-size: 4px 20px, 20px 4px; /* 有多个图像 */
+		}
+		.box1 {
+		    width: 300px;
+		    height: 300px;
+		    background: linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb),
+			            linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb) 50px 50px,
+			            linear-gradient(135deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb) 50px 0,
+			            linear-gradient(135deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb) 100px 50px;
+		    background-size: 100px 100px;
+		    background-color: #fff;
+		}
+		.out-rect {
+			margin-top: 30px;
+			position: relative;
+			width: 120px;
+		  	height: 80px;
+			padding: 5px;
+			background: linear-gradient(-45deg, transparent 10px, #58a 0) top right;
+			background-size: 100% 100%;
+		    background-repeat: no-repeat;
+		}
+		.in-rect{
+			width: 100%;
+			height: 100px;
+			transform: translateY(5px);
+			background: linear-gradient(-45deg, transparent 8px, #fff 0) top right;
+			background-size: 100% 100%;
+		    background-repeat: no-repeat;
+		}
+	</style>
+</head>
+<body>
+	<div class="h-arrange">
+		<div class="bg cover"></div>
+		<div class="bg missAngle"></div>
+		<div class="bg rect"></div>
+		<div class="bg cricle"></div>
+		<div class="bg clip5"></div>
+		<div class="bg rect-clip"></div>
+		<div class="line-box">
+			<div class="line line1"></div>
+			<div class="line line2"></div>
+			<div class="line line3"></div>
+		</div>
+		<!-- <div class="box"></div>
+		<div class="box1"></div> -->
+	</div>
+	<div class="h-arrange">
+		<div class="out-rect">
+			<div class="in-rect"></div>
+		</div>
+	</div>
+</body>
+</html>

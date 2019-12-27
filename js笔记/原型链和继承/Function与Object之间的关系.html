@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	console.log(Function.__proto__ === Function.prototype); // true
+	console.log(Function instanceof Function === true); // true
+	console.log(Function instanceof Object === true); // true
+	console.log(Object instanceof Function === true); // true
+
+	console.log(Object.__proto__ === Function.prototype); // true
+	console.log(Function.__proto__.__proto__ === Object.prototype); // true
+</script>
+</html>

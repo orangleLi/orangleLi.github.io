@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>借用构造函数</title>
+</head>
+<body>
+	<script>
+		// 借用构造函数
+		function Person(name, age, sex) {
+			this.name = name;
+			this.age = age;
+			this.sex = sex;
+		}
+
+		Person.prototype.sayHi = function() {
+			console.log('Hi');
+		}
+
+		// 子类型
+		function Student(name, age, sex, score) {
+			// 改变this指向，使得Person中的this指向Student
+			Person.call(this, name, age, sex);
+			this.score = score;
+		}
+
+		var s1 = new Student('zs', 19, '男', 90);
+		console.dir(s1);
+
+		// 缺点：不能继承方法
+	</script>
+</body>
+</html>

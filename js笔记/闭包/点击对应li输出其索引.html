@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击对应li输出其索引</title>
+</head>
+<body>
+	<ul id="heroes">
+		<li>安琪拉</li>
+		<li>甄姬</li>
+		<li>周瑜</li>
+		<li>李白</li>
+	</ul>
+	<script>
+		// 点击对应li输出其索引
+		var ulObj = document.getElementById('heroes');
+		var liArr = ulObj.children;
+
+		// for (var i = 0; i < liArr.length; i++) {
+		// 	var li = liArr[i];
+		// 	li.onclick = function() {
+		// 		console.log(i); // 每次都会输出4
+		// 	}
+		// }
+
+		// 方法1 自定义属性（性能佳于闭包）
+		// for (var i = 0; i < liArr.length; i++) {
+		// 	var li = liArr[i];
+		// 	li.index = i;
+		// 	li.onclick = function() {
+		// 		console.log(this.index); // 每次都会输出4
+		// 	}
+		// }
+
+
+		// 方法2 使用闭包
+		// for (var i = 0; i < liArr.length; i++) {
+		// 	var li = liArr[i];
+		// 	(function(i) {
+		// 		li.onclick = function() {
+		// 			console.log(i); // 每次都会输出4
+		// 		}
+		// 	})(i);
+		// }
+		// 优点：延展作用域
+		// 闭包缺点：作用域没有立即释放，所以性能降低  内存泄漏
+
+
+		// 方法3  当有很多个li时，每一个li都绑定点击事件很耗性能，可以绑到ul上
+		// ulObj.onclick = function(e) {
+		// 	for (var i = 0; i < liArr.length; i++) {
+		// 		if (liArr[i].innerHTML === e.target.innerHTML) {
+		// 			console.log(i);
+		// 			break;
+		// 		}
+		// 	}
+		// }
+	</script>
+</body>
+</html>

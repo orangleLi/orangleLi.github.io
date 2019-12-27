@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<title>数组与树形结构的转化</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+</head>
+
+<body>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	
+	// 数组转为树形结构
+	function convert(list) {
+	  const ret = [];
+	  const map = list.reduce((res, v) => {
+	  	res[v.id] = v
+	  	return res;
+	  }, {}); // 4.88507080078125ms
+	  // 上下两种方法结果相同，上述性能好那么零点几毫秒 试了8次取均值
+	  // const map = {};
+	  // list.forEach(item=>(map[item.id] = item)) // 5.0714111328125ms
+
+	  for (const item of list) {
+	    if (item.parentId === '') {
+	      ret.push(item);
+	      continue;
+	    }
+	    if (item.parentId in map) {
+	      const parent = map[item.parentId];
+	      parent.children = parent.children || [];
+	      parent.children.push(item);
+	      // 改变了map的值，这里都是浅拷贝，所以list的值也改变了，自然，对于ret的值即根节点的值来说，它children的值也变化了
+	    }
+	  }
+	  return ret;
+	}
+	console.time('time')
+	let ret = convert(dataArr);
+	console.log(ret);
+	console.timeEnd('time')
+	// 树形结构扁平化转为数组
+	function flatten(data) {
+	  return data.reduce((arr, {id, name, parentId, children = []}) =>
+	    arr.concat([{id, name, parentId}], flatten(children)), []);
+	}
+	console.time('time1')
+	console.log(flatten(ret));
+	console.timeEnd('time1')
+
+	// 获取每个最深层节点的完整路径，从根节点到每个最深层节点
+	function getPath(tree) {
+		let ret = {};
+		let str = '';
+		let path = function(data) {
+			data.forEach(item => {
+				if (item && item.children) {
+					str += (item.name + ',');
+					path(item.children)
+				} else {
+					str += (item.name);
+					ret[item.id] = str;
+					str = str.substring(0, str.lastIndexOf(',')+1);
+					return false;
+				}
+			});
+			str = str.substring(0, str.lastIndexOf(',', str.length-2)+1);
+		}
+		path(tree)
+		return ret;
+	}
+
+	console.log(getPath([dataTree])); // 1.72509765625ms
+</script>
+
+</body>
+</html>

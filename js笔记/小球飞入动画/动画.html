@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画</title>
+	<style>
+		.box{
+            width: 400px;
+            height: 400px;
+            border: 2px solid #ff8800;
+        }
+
+		.span{
+            display: block;
+            position: absolute;
+            left: 325.5px; 
+            top: 95.5px;
+            width: 40px;
+            height: 40px;
+            float: right;
+            animation: runTop .6s cubic-bezier(.66,.1,1,.41), runLeft .6s linear;
+			animation-fill-mode: forwards;
+        }
+        .span1{
+            display: block;
+            width: 40px;
+            height: 40px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            background: greenyellow;
+        }
+
+        @keyframes runTop {
+            from{
+			    top:  95.5px;
+			}
+			to{
+			      top: 574px;
+			}
+        }
+        @keyframes runLeft {
+            from{
+			    left: 325.5px;
+			}
+			to{
+			    left: 37.5px;
+			}
+        }
+	</style>
+</head>
+<body>
+	<div class="box">
+	    <span class="span">
+	    	<span class="span1"></span>
+	    </span>
+	</div>
+</body>
+</html>

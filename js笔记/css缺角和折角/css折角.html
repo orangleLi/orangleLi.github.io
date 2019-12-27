@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS折角</title>
+	<style>
+		.bg{
+		  width: 120px;
+		  height: 80px;
+		  background: #58a;
+		}
+	    .foldingAngle{
+	    	margin-top: 30px;
+			background: linear-gradient(-135deg, transparent 1em, #58a 0);
+	    }
+	    .foldingAngle1{
+	    	margin-top: 30px;
+			background:
+				linear-gradient(to left top, transparent 50%, rgba(0, 0, 0, 0.4) 0) no-repeat 100% 100% / 1.4em 1.4em,
+			    linear-gradient(-45deg, transparent 1em, #58a 0);
+	    }
+	    .foldingAngle2{
+	    	margin-top: 30px;
+		    position: relative;
+		    border-radius: .3em;
+			background: linear-gradient(-150deg, transparent 1em, #58a 0);
+	    }
+	    .foldingAngle3{
+	    	margin-top: 30px;
+		    position: relative;
+		    border-radius: .3em;
+			background: linear-gradient(-150deg, transparent 1em, #58a 0);
+	    }
+	    .foldingAngle3::before{
+	    	content: '';
+	    	position: absolute;
+	    	right: 0;
+	    	top: 0;
+	    	width: 1.15em;
+	    	height: 2em;
+			background: linear-gradient(to left bottom, transparent 50%, rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.3)) 100% 0 no-repeat;
+			transform: translateY(-0.85em) rotate(-30deg);
+			transform-origin: bottom right; /* 让三角形的右下角成为旋转的中心 */
+			box-shadow: -.2em .2em .3em -.1em rgba(0, 0, 0, .15);
+			border-bottom-left-radius: inherit;
+	    }
+	</style>
+</head>
+<body>
+	<div class="bg foldingAngle"></div>
+	<div class="bg foldingAngle1"></div>
+	<div class="bg foldingAngle2"></div>
+	<div class="bg foldingAngle3"></div>
+</body>
+<script>
+	
+</script>
+</html>

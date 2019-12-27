@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定</title>
+</head>
+<body>
+	<main>
+	  <p>请输入:</p>
+	  <input type="text" id="input">
+	  <p id="p"></p>
+	</main>
+</body>
+<script>
+	// Dep // 订阅器  订阅器Dep主要负责收集订阅者，然后在属性变化的时候执行对应订阅者的更新函数
+	// Watcher // 订阅者 可以收到属性的变化通知并执行相应的函数，从而更新视图
+	// Observe // 监听器  用来劫持和监听所有属性，如果有变动的，就通知订阅者
+	function defineReactive(data, key, val) {
+		observe(val) // 子级属性深层监听
+		let dep = new Dep();
+		Object.defineProperty(data, key, {
+			enumberable: true, // 当且仅当该属性enumberable为true时，该属性才能够出现在对象的枚举属性中
+			configurable: true, // 当且仅当该属性configurable为true时，该属性描述符才能被改变，同时该属性也能从对应的对象上删除
+			get() {
+				// 将订阅器Dep添加一个订阅者设计在getter中，是为了让Watcher初始化进行触发，因此需要判断是否要添加订阅者
+				if (Dep.target) {
+					dep.addSub(Dep.target);
+				}
+				return val
+			},
+			set(newVal) {
+				if (newVal === val) return;
+				val = newVal;
+				// console.log(`该属性${key}已被监听，目前值为：${newVal}`)
+				dep.notify();
+			}
+		})
+	}
+	function observe(data) {
+		if (!data || typeof data !== 'object') return;
+		Object.keys(data).forEach(key => {
+			defineReactive(data, key, data[key]);
+		})
+	}
+
+	// Dep 订阅器  订阅器Dep主要负责收集订阅者，然后在属性变化的时候执行对应订阅者的更新函数
+	function Dep() {
+		this.subs = [];
+	}
+	Dep.prototype = {
+		addSub(sub) {
+			this.subs.push(sub)
+		},
+		notify() {
+			this.subs.forEach(sub => {
+				sub.update(); // 通知每个订阅者检查更新
+			})
+		}
+	}
+	Dep.target = null;
+
+	// 订阅者Watcher初始化时要将自己添加到订阅器Dep中
+	// 监听器Observe是在get函数中执行了添加订阅者Watcher的操作，
+	// 所以只需要在Watcher初始化的时候触发监听器Observe的函数就好
+	// 那怎么出发呢？获取对应的属性值就可以触发，核心原因是因为使用了Object.defineProperty进行数据监听
+	function Watcher(vm, attr, cb) {
+		this.vm = vm;
+		this.attr = attr;
+		this.cb = cb;
+		this.value = this.get();
+	}
+	Watcher.prototype = {
+		get() {
+			// 初始化的时候才需要添加订阅者，所以初始化的时候Dep.target = this，初始化完成之后置为null
+			Dep.target = this; // 缓存自己
+			const value = this.vm[this.attr]; // 强制执行监听器里的get函数   这里获取属性值，触发defineReactive的get
+			Dep.target = null; // 释放自己
+			return value;
+		},
+		update() {
+			this.run();
+		},
+		run() {
+			let value = this.vm[this.attr];
+			let oldValue = this.value;
+			if (value !== oldValue) {
+				this.value = value;
+				this.cb.call(this.vm, value);
+			}
+		}
+	}
+	
+	// let data = {
+	// 	text: ''
+	// };
+	// observe(data)
+	// new Watcher(data, 'text', (res) => {
+	// 	console.log(res)
+	// 	document.getElementById('p').innerHTML = res;
+	// })
+	// data.text = 123
+
+	function Vue(option = {}) {
+		let data = option.data;
+		this._data = data;
+		// 这里的目的是：
+		// 触发set，demo._data.text = 123, 但是实际我们要的效果是demo.text = 123所以要使用代理，让访问Vue的属性代理为访问Vue.data的属性
+		// 实现原理还是使用Object.defineProperty对属性值再包一层
+		Object.keys(data).forEach(key => this._proxy(key))
+		observe(data)	
+		new Watcher(data, 'text', (res) => {
+			document.getElementById('p').innerHTML = res;
+		})
+	}
+	Vue.prototype = {
+		$watch(attr, cb) {	
+			new Watcher(this._data, attr, cb)
+		},
+		_proxy(key) {
+			Object.defineProperty(this, key, {
+				enumberable: true,
+				configurable: true,
+				get() {
+					return this._data[key];
+				},
+				set(newVal) {
+					this._data[key] = newVal;
+				}
+			})
+		}
+	}
+	let demo = new Vue({
+		data: {
+			text: ''
+		}
+	})
+	demo.$watch('text', (res) => {
+		document.getElementById('p').innerHTML = res;
+	})
+	document.getElementById('input').addEventListener('keyup', e => {
+		// demo._data.text = e.target.value;
+		demo.text = e.target.value;
+	})
+</script>
+</html>

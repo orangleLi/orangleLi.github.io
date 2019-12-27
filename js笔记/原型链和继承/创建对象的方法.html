@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建对象的方法</title>
+</head>
+<body>
+	
+</body>
+<script>
+	// new Object
+	var hero = new Object();
+	hero.name = '12';
+	hero.blood = 100;
+
+	hero.attack = function (argument) {
+		console.log(this.name, this.blood);
+	}
+	hero.attack();
+
+	// 对象字面量
+	var hero1 = {
+		blood: 100,
+		name: 'zs',
+		attack: function() {
+			console.log(this.name, this.blood);
+		}
+	}
+	hero1.attack();
+
+	// 工厂函数 创建多个对象 无法获取具体类型
+	function createHero(name, blood) {
+		var o = new Object();
+		o.name = name;
+		o.blood = blood;
+		o.attack = function () {
+			console.log(this.name, this.blood);
+		}
+		return o;
+	}
+
+	var h = createHero('zss', 100);
+	var h1 = createHero('li', 100);
+	h.attack();
+	h1.attack();
+
+	// 构造函数 第一个字母大写来区分
+	function Hero(name, blood) {
+		this.name = name;
+		this.blood = blood;
+
+		this.attack = function () {
+			console.log(this.name, this.blood);
+		}
+	}
+	// 1.会在内存中创建一个空对象
+	// 2.设置构造函数的this，让this指向刚刚创建好的对象
+	// 3.执行构造函数的代码
+	// 4.返回对象
+	var a = new Hero('zss', 100);
+	var a1 = new Hero('li', 100);
+	a.attack();
+	a1.attack();
+
+	// 获取对象的具体类型
+	// 不建议这种方法，因为会被改变
+	console.log(a.constructor);
+	console.log(a.constructor === Hero);
+	// instanceof 判断某个对象是否是某个构造函数的实例/对象
+</script>
+</html>

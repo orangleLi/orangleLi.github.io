@@ -3,7 +3,7 @@
 		if (!json) return;
 		let type = json.type.toUpperCase();
 		let url = json.url;
-		let data = json.data;
+		let data = json.data || {};
 		let success = json.success;
 		let error = json.error;
 		
@@ -16,8 +16,10 @@
 		 * rl：文件在服务器上的位置
 		 * async：true（异步）(默认) 或 false（同步）
 		*/
-		xmlHttp.open(type, url, true);
 		if (type === "GET") {
+	      	let res = Object.keys(data).map((key) => `${key}=${data[key]}`).join('&');
+	      	url += ('?' + res);
+			xmlHttp.open(type, url, true);
 			xmlHttp.send();
 		}
 		/*
@@ -25,6 +27,7 @@
 		 * string：仅用于 POST 请求
 		*/
 		if (type === 'POST') {
+			xmlHttp.open(type, url, true);
 			xmlHttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
 			xmlHttp.send(data);
 		}

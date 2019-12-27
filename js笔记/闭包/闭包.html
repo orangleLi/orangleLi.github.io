@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+</head>
+<body>
+	<script>
+		// 闭包（Closure）： 在一个作用域中可以访问另一个作用域的变量
+
+		// 闭包特点：延展了函数的作用域范围
+		// function fn() {
+		// 	var n = 10;
+		// 	return function () {
+		// 		return n;
+		// 	}
+		// }
+		
+		// var f = fn();
+		// console.log(f()); // 全局作用域中访问了fn中的变量n
+
+
+		for (var i = 0; i < 3; i++) {
+			setTimeout(function() {
+				console.log(i);
+			}, 0);
+		}
+		for (let i = 0; i < 3; i++) {
+			setTimeout(function() {
+				console.log(i);
+			}, 0);
+		}
+		for (var i = 0; i < 3; i++) {
+			(function(i){
+				setTimeout(function() {
+					console.log(i);
+				}, 0);
+			})(i);
+		}
+		for (var i = 0; i< 3; i++){
+			setTimeout(function(i){
+				console.log(i);
+			}, 0, i)
+		}
+		for (var i = 0; i< 3; i++){
+			setTimeout(function(i){
+				console.log(i);
+			}.bind(null, i), 0)
+		}
+		// console.log('start');
+
+		// setTimeout(function() {
+		// 	console.log('timeout');
+		// }, 0)
+
+		// console.log('end');
+
+		// 执行结果  start end timeout
+
+		// console.log('start');
+		// var s = new Date().getTime();
+		// console.log(s);
+
+		// setTimeout(function() {
+		// 	console.log(new Date().getTime() - s)
+		// 	console.log('timeout');
+		// }, 1000)
+		// setTimeout(function() {
+		// 	console.log(new Date().getTime() - s)
+		// 	console.log('timeout');
+		// }, 2000)
+
+		// console.log('end');
+
+		// var name = 'The window';
+		// var obj = {
+		// 	name: 'obj name',
+		// 	fun: function() {
+		// 		return function() {
+		// 			console.log(this.name);
+		// 		}
+		// 	}
+		// }
+		// obj.fun()(); // The window
+
+
+		var name = 'The window';
+		var obj = {
+			name: 'obj name',
+			fun: function() {
+				var that = this;
+				return function() {
+					console.log(that.name);
+				}
+			}
+		}
+		obj.fun()(); // obj name
+
+		var b = 10;
+		(function b(){
+		    b = 20;
+		    console.log(b); 
+		    console.log(this);
+		    console.log(this.b);
+		    console.log(window.b);
+		})();
+	</script>
+</body>
+</html>

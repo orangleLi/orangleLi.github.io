@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手机充电动画</title>
+	<style>
+		.box{
+			width: 300px;
+			height: 500px;
+			margin: 100px;
+			position: relative;
+		}		
+		.charge{
+			position: absolute;
+			top: 20%;
+			left: 50%;
+			transform: translateX(-50%);
+		    text-align: center;
+		    color: #fff;
+		    font-size: 26px;
+		    z-index: 2;
+		}
+		.container{
+			height: 100%;
+			position: relative;
+    		filter: contrast(15) hue-rotate(0);
+			background-color: #000;
+		}
+		.main-cricle{
+			position: absolute;
+			left: 50%;
+		    bottom: 0;
+		    width: 80px;
+		    height: 40px;
+		    transform: translate(-50%, 0);
+    		border-radius: 100px 100px 0 0;
+			background: lime;
+			filter: blur(5px);
+		}
+		.cricle{
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			position: absolute;
+			bottom: 0;
+			animation: move 3s infinite;
+			background-color: lime;
+		}
+		.cricle:nth-of-type(2) {
+			animation: moveT 3.1s ease-in-out -1.8s infinite;
+		}
+		.cricle:nth-of-type(3) {
+			animation: moveO 2.8s ease-in-out -2s infinite;
+		}
+		.cricle:nth-of-type(4) {
+			animation: moveW 3s ease-in-out -2.1s infinite;
+		}
+		.cricle:nth-of-type(5) {
+			animation: moveO 2.9s ease-in-out -2.2s infinite;
+		}
+		.cricle:nth-of-type(6) {
+			animation: moveW 2.8s ease-in-out -2.3s infinite;
+		}
+		.cricle:nth-of-type(7) {
+			animation: moveT 2.9s ease-in-out -1.9s infinite;
+		}
+		.cricle:nth-of-type(8) {
+			animation: move 3s ease-in-out -2s infinite;
+		}
+		@keyframes hueRotate {
+			90% {
+		      opacity: 1;
+		    }
+		    100% {
+		      opacity: .1;
+		      	filter: contrast(15) hue-rotate(360deg);
+		    }
+		}
+		@keyframes move{
+			90% {
+		      opacity: 1;
+		    }
+		    100% {
+		      opacity: .1;
+				transform: translate(-10%, -180px);
+			}
+		}
+		@keyframes moveO{
+			90% {
+		      opacity: 1;
+		    }
+		    100% {
+		      opacity: .1;
+				transform: translate(-90%, -180px);
+			}
+		}
+		@keyframes moveW{
+			90% {
+		      opacity: 1;
+		    }
+		    100% {
+		      opacity: .1;
+				transform: translate(40%, -180px);
+			}
+		}
+		@keyframes moveT{
+			90% {
+		      opacity: 1;
+		    }
+		    100% {
+		      opacity: .1;
+				transform: translate(90%, -180px);
+			}
+		}
+		.eleQua{
+			width: 300px;
+			height: 300px;
+			position: relative;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			filter: blur(8px);
+		}
+		.eleQua::before{ /* 这个是遮住了after元素，造成空心圆的效果 */
+			content: '';
+		    position: absolute;
+		    top: 32px;
+		    width: 175px;
+		    height: 175px;
+		    left: 50%;
+		    transform: translateX(-50%);
+		    /* top: 0; */
+		    border-radius: 50%;
+		    background-color: #000;
+		    z-index: 1;
+		}
+		.eleQua::after {
+	      content: "";
+	      position: absolute;
+	      top: 40%;
+	      left: 50%;
+	      transform: translate(-50%, -50%) rotate(0);
+	      width: 200px;
+	      height: 200px;
+	      background-color: lime;
+	      border-radius: 41% 52% 43% 56% / 42% 38% 58% 49%;
+	      animation: rotate 10s infinite linear;
+	    }
+	    @keyframes rotate {
+		    50% {
+		      border-radius: 42% 38% 58% 49% / 41% 52% 43% 56%;
+		    }
+		    100% {
+		      transform: translate(-50%, -50%) rotate(720deg);
+		    }
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="charge">98.2%</div>
+		<div class="container">
+			<div class="eleQua"></div>
+			<ul class="main-cricle">
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+				<li class="cricle"></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

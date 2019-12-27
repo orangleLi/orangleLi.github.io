@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定重温</title>
+</head>
+<body>
+	<div id="app">
+		<p>请输入：</p>
+		<input id="input" />
+		<p>{{text}}</p>
+		<p>{{msg}}</p>
+	</div>
+</body>
+<!-- https://www.cnblogs.com/canfoo/p/6891868.html -->
+<script src="./compile.js"></script>
+<script>
+	function defineReactive(data, key, value) {
+		observe(value)
+		let dep = new Dep();
+		Object.defineProperty(data, key, {
+			enumberable: true,
+			configurable: true,
+			get() {
+				if (Dep.target) {
+					dep.addSub(Dep.target)
+				}
+				return value;
+			},
+			set(newVal) {
+				if (newVal === value) return;
+				value = newVal;
+				dep.notify();
+			}
+		})
+	}
+	function observe(data) {
+		if (!data || typeof data !== 'object') {
+			return;
+		}
+		Object.keys(data).forEach(key => {
+			defineReactive(data, key, data[key]);
+		})
+	}
+	class Dep{
+		constructor() {
+			this.subs = [];
+			this.ids = [];
+		}
+		addSub(sub) {
+			this.subs.push(sub)
+		}
+		notify() {
+			this.subs.forEach(sub => {
+				sub.update();
+			})
+		}
+	}
+	Dep.target = null;
+	class Watcher{
+		constructor(vm, attr, cb) {
+			this.vm = vm;
+			this.attr = attr;
+			this.cb = cb;
+			this.value = this.get();
+		}
+		get() {
+			Dep.target = this;
+			let value = this.vm[this.attr];
+			Dep.target = null;
+			return value;
+		}
+		update() {
+			this.run();
+		}
+		run() {
+			let value = this.vm[this.attr];
+			if (this.value !== value) {
+				this.value = value;
+				this.cb.call(this.vm, value)
+			}
+		}
+	}
+
+	class Vue{
+		constructor(option = {}) {
+			this.data = option.data();
+			observe(this.data);
+			Object.keys(this.data).forEach(key => {this._proxy(key)})
+			new Compile(option.el, this);		
+		}
+		_proxy(key) {
+			Object.defineProperty(this, key, {
+				enumberable: true,
+				configurable: true,
+				get() {
+					return this.data[key];
+				},
+				set(val) {
+					this.data[key] = val;
+				}
+			})
+		}
+	}
+
+	let demo = new Vue({
+		el: '#app',
+		data() {
+			return {
+				text: '',
+				msg: ''
+			}
+		}
+	})
+	document.getElementById('input').addEventListener('keyup', (e) => {
+		demo.text = e.target.value;
+	})
+	setTimeout(() => {
+		demo.msg = 'welcome Vue.js'
+	}, 2000)
+</script>	
+</html>

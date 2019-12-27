@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原型</title>
+</head>
+<body>
+	<script>
+		// function Student(name, age) {
+		// 	this.name = name;
+		// 	this.age = age;
+
+		// 	this.sayHi = function () {
+		// 		console.log(this.name, this.age);
+		// 	}
+		// }
+		// var s1 = new Student('zs', 18);
+		// var s2 = new Student('ls', 21);
+		// s1.sayHi();
+		// s2.sayHi();
+
+		// console.log(s1.sayHi === s2.sayHi);  // false 相同的方法会在内存中存储多份 
+
+
+		// function sayHi() {
+		// 	console.log(this.name, this.age);
+		// }
+		// function Student(name, age) {
+		// 	this.name = name;
+		// 	this.age = age;
+
+		// 	this.sayHi = sayHi
+		// }
+		// var s1 = new Student('zs', 18);
+		// var s2 = new Student('ls', 21);
+		// s1.sayHi();
+		// s2.sayHi();
+		// console.log(s1.sayHi === s2.sayHi);  // true 要写多个命名函数 ，可能会重名
+
+		function Student(name, age) {
+			this.name = name;
+			this.age = age;
+
+			this.sayHi = function() {
+				console.log('test');
+			}
+		}
+
+		Student.prototype.sayHi = function() {
+			console.log(this.name, this.age);
+		}
+		var s1 = new Student('zs', 18);
+		var s2 = new Student('ls', 21);
+		console.log('--------------------')
+		// 构造函数Student中有定义sayHi则打印构造函数中的sayHi,没有的话，则打印原型上的sayHi
+		s1.sayHi();
+		s2.sayHi();
+		console.log('--------------------')
+		console.log(s1.sayHi === s2.sayHi);  // true
+		console.log(s1);
+		console.dir(s1);
+
+		// 当调用对象的属性或者方法的时候，先去找对象本身的属性/方法，即在构造函数中寻找，如果对象没有该属性或方法，此时在调用构造函数的原型对象中去查找的属性/方法
+		// 如果对象本身没有该属性/方法，原型中也没有该属性或者方法。此时会报错
+		// s1.__proto__ 对象的__proto__ 等于构造函数的prototype  即：
+		console.log(s1.__proto__ === Student.prototype); // true
+		// __proto__ 属性是非标准的属性
+		console.log(s1.__proto__);
+		// constructor 获取对象的具体类型
+		console.dir(s1.__proto__.constructor);
+		console.dir(Student.prototype.constructor);
+
+		// 在原型对象中有一个属性constructor 构造函数
+		// constructor 作用记录了创建该对象的构造函数，记录了创建该对象的构造函数
+		console.log(s1.constructor === Student);
+
+		var arr = [];
+		// console.log(Array.prototype.constructor);
+		// console.log(arr.constructor === Array);
+
+		console.dir(Student.prototype.__proto__); // Object
+		var o = s1.__proto__
+		console.dir(o.__proto__); // Object   Student.prototype.__proto__ === o.__proto__  true  因为s1.__proto__ === Student.prototype true
+		var o1 = o.__proto__;
+		console.dir(o1.__proto__); // null
+
+
+		function Person(name) {
+			this.name = name;
+			// this.Hi = Hi = function() {
+			// 	console.log('Hi, i am ' + this.name + " in Person function");
+			// }
+		}
+		Person.prototype.Hi = function() {
+			console.log('Hi, i am ' + this.name + " in prototype");
+		}
+		Person.prototype.__proto__.Hi = function() {
+			console.log('Hi, i am ' + this.name + " in Object.prototype1");
+		}
+		// Object.prototype.Hi = function() {
+		// 	console.log('Hi, i am ' + this.name + " in Object.prototype2");
+		// }
+		var p1 = new Person('zs');
+		var p2 = new Person('ls');
+		console.dir(p1);
+		console.dir(Person);
+		// Hi()查找顺序为对象本身 -> Person.prototype(p1.__proto__) -> Object.prototype -> null  原型链  __proto__ 是对象上的  prototype是方法上的
+		p1.Hi();
+		console.dir(Person.prototype.__proto__);
+		console.dir(Object.prototype)
+		console.log(Person.prototype.__proto__ === s1.__proto__.__proto__); // true
+		console.log(s1.__proto__.__proto__ === Object.prototype); // true
+
+		Person.prototype.test = 'xxx';
+		console.log(p1.name);
+		console.log(p1.test);
+		p1.name = 'zsxxx';
+		p1.test = '123xxx';
+		// 读取属性，现在对象本身查找属性，如果没有找到的话，会去原型上查找
+		console.log(p1.name);
+		// 设置属性，设置属性的值的时候，不会搜索原型链，而是直接给对象新增一个属性
+		console.log(p1.test);
+
+
+		console.log(p2.name);
+		console.log(p2.test);
+	</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手写flat</title>
+</head>
+<body>
+	
+</body>
+<script>
+	const animals = ["🐷", ["🐶", "🐂"], ["🐎", ["🐑", ["🐲"]], "🐛"]];
+
+	// 使用reduce
+	// function flat(arr) {
+		// return arr.reduce((total,currentValue) => {
+		// 	return total.concat(currentValue instanceof Array ? flat(currentValue) : currentValue)
+		// }, [])
+	// }
+
+	// 使用栈的思想
+	// function flat(arr) {
+	// 	let stack = [].concat(arr);
+	// 	let result = [];
+	// 	while(stack.length !== 0) {
+	// 		let val = stack.pop();
+	// 		if (val instanceof Array) {
+	// 			stack.push(...val)
+	// 		} else {
+	// 			result.unshift(val);
+	// 		}
+	// 	}
+	// 	return result;
+	// }
+
+	//  reduce(), forEach(), filter(),every() 和 some() 都会跳过空位。
+	// 参数控制展开层数
+	function flat(arr, num = 1) {
+		return num > 0
+			? arr.reduce((total,currentValue) => {
+				return total.concat(Array.isArray(currentValue) ? flat(currentValue, num - 1) : currentValue)
+			}, [])
+			:
+			arr.slice()
+	}
+	
+	console.log(flat(animals))
+	console.log(flat(animals, 2))
+	console.log(flat(animals, 3))
+	console.log(flat(animals, Infinity))
+	// // 不传参数时，默认“拉平”一层
+	// animals.flat();
+	// // ["🐷", "🐶", "🐂", "🐎", ["🐑", ["🐲"]], "🐛"]
+
+	// // 传入一个整数参数，整数即“拉平”的层数
+	// animals.flat(2);
+	// // ["🐷", "🐶", "🐂", "🐎", "🐑", ["🐲"], "🐛"]
+
+	// // Infinity 关键字作为参数时，无论多少层嵌套，都会转为一维数组
+	// animals.flat(Infinity);
+	// // ["🐷", "🐶", "🐂", "🐎", "🐑", "🐲", "🐛"]
+
+	// // 传入 <=0 的整数将返回原数组，不“拉平”
+	// animals.flat(0);
+	// animals.flat(-10);
+	// // ["🐷", ["🐶", "🐂"], ["🐎", ["🐑", ["🐲"]], "🐛"]];
+
+	// // 如果原数组有空位，flat()方法会跳过空位。
+	// ["🐷", "🐶", "🐂", "🐎",,].flat();
+	// // ["🐷", "🐶", "🐂", "🐎"]
+</script>
+</html>

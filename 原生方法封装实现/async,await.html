@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Async/Await</title>
+</head>
+<body>
+	<script src="./base64Util.js" type="text/javascript"></script>
+	<script src="./ajax.js" type="text/javascript"></script>
+	<script>
+		const request = (url, data) => {
+			return new Promise((resolve, reject) => {
+				$.ajax({
+					type: 'get',
+			        url: url,
+			        success: function(res) {
+			        	resolve(res);
+			        },
+			        error: function(err) {
+			        	reject(err, data)
+			        }
+				})
+			})
+		}
+
+		function getProvices() {
+			let url = 'https://int.ening.cn/api/AppCommunity/GetProvinceList?appParam=' + new Base64().encode(JSON.stringify({}));
+			// async/await 相比原来的Promise的优势在于处理 then 链，不必把回调嵌套在then中，只要await 即可
+			return request(url);
+		}
+		function getCitys(provinceId) {
+			let paramData = {
+		        param: {
+		          provinceId: provinceId
+		        }
+		      };
+		    let url = 'https://int.ening.cn/api/AppCommunity/GetCityList?appParam=' + new Base64().encode(JSON.stringify(paramData));
+			return request(url);
+		}
+		function getArea(cityId) {
+			let paramData = {
+		        param: {
+		          cityId: cityId
+		        }
+		    };
+
+		    let url = 'https://int.ening.cn/api/AppCommunity/GetDistrictList?appParam=' + new Base64().encode(JSON.stringify(paramData));
+			return request(url);
+		}
+
+		async function getOneArea() {
+			// try{
+				let pro = await getProvices();
+				console.log(pro.resultValue[9])
+				let city = await getCitys(pro.resultValue[9].Id);
+				console.log(city.resultValue[14])
+				let area = await getArea(city.resultValue[14].Id);
+				console.log(area.resultValue[9]);
+			// } catch(e) {
+			// 	console.log(e);
+			// }
+		}
+		getOneArea();
+	</script>
+</body>
+</html>

@@ -9,7 +9,9 @@
 	<script>
 		// 这里不能用公司项目地址，所以就空着了，已经过测试，此代码可行
 		// url格式为： 'http://www.lilian.com/api/getInfo?appParam=qwerjidnasjkgnrejanfagnri'
-		let url = '';
+		let url = 'https://int.ening.cn/api/AppGroupon/GetAllGrouponList?appParam=eyJjYWxsU291cmNlIjoiMiIsInBhcmFtIjp7ImNvbW11bml0eUlkIjoiNzQyZDM3YjgtOWZmYi00YmNiLTk5YzctMmE3ZmNlNmJlYjU5Iiwia2V5d29yZCI6IiIsIm1heFByaWNlIjoiIiwibWluUHJpY2UiOiIiLCJwYWdlTm8iOiIxIiwicGFnZVNpemUiOiIyIiwic2VsZWN0ZWRTdGF0ZSI6IjAiLCJzb3J0VHlwZSI6IkluUHJvZ3Jlc3MifSwic2Vzc2lvbktleSI6IiIsInVzZXJJZCI6IjdkZDI4MDE2LWU1OWUtNGI4YS1iMTI0LTUzYjBlYzIzNmVmNyJ9';
+		
+		let url1 = 'https://int.ening.cn/API/APPAdvert/GetADList?appParam=eyJjYWxsU291cmNlIjoiMiIsInBhcmFtIjp7ImNvbW11bml0eUlkIjoiNzQyZDM3YjgtOWZmYi00YmNiLTk5YzctMmE3ZmNlNmJlYjU5IiwicG9zaXRpb25Db2RlIjoiV2VDaGF0X0hvbWVfMDFfRm9vdCJ9LCJzZXNzaW9uS2V5IjoiIiwidXNlcklkIjoiN2RkMjgwMTYtZTU5ZS00YjhhLWIxMjQtNTNiMGVjMjM2ZWY3In0=';
 		
 		$.ajax({
 			type: 'get',
@@ -21,7 +23,30 @@
 	        	console.log(err)
 	        }
 		})
+		$.ajax({
+			type: 'get',
+	        url: url1,
+	        success: function(res) {
+	        	console.log(res)
+	        },
+	        error: function(err) {
+	        	console.log(err)
+	        }
+		})
 
+		$.ajax({
+			type: 'get',
+			url: 'http://mall.einwin.com/API/NewAdvertiser/getAdvrCatePos',
+	        success: function(res) {
+	        	console.log(res)
+	        },
+	        error: function(err) {
+	        	console.log(err)
+	        }
+		})
+
+
+		
 		
 	</script>
 </body>

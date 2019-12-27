@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this指向</title>
+</head>
+<body>
+	<button id="btn">click me</button>
+	<script>
+		// 1 普通函数调用  this指向window
+		// function fn() {
+		// 	console.log(this);
+		// }
+
+		// 2 方法调用    this指向调用该方法的对象
+		var obj = {
+			fn: function() {
+				console.log(this);
+			}
+		}
+		obj.fn();
+
+		// 3 作为构造函数调用   构造函数内部的this指向由该构造函数创建的对象
+
+		// 4 作为事件的处理函数   this指向触发该事件的对象
+		document.getElementById('btn').onclick = function() {
+			console.log(this);
+		}
+
+		// 5 作为定时器的参数  // 指向window
+		setTimeout(function() {
+			console.log(this);
+		}, 1000);
+
+		// 终极总结：函数内部的this,是由函数调用的时候来确定其指向的
+	</script>
+</body>
+</html>

@@ -79,6 +79,20 @@
 		}
 
 		console.log(parse('{ "age": 20, "name": "jack" }'))
+
+		let origin = {
+			a: 1,
+			b: {
+				name: 'zs'
+			},
+			c: Symbol(),
+			d: function(){}
+		}
+		// 此方法赋值时，第一次可以理解为深拷贝，新值去赋值旧值不会受影响，但是第二层及以下，就会受影响，相当于浅拷贝
+		let res = Object.assign({}, origin);
+		res.a = 2;
+		res.b.name = 'ls'
+		console.log(origin, res)
 	</script>
 </body>
 </html>

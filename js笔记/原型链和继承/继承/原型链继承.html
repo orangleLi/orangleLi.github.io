@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承</title>
+</head>
+<body>
+	<script>
+		var wjl = {
+			name: '王健林',
+			money: 10000000,
+			houes: '别墅'
+		};
+		var wsc = {
+			name: '王思聪'
+		};
+
+		// 对象的拷贝
+		function copy(child, parent) {
+			for (let key in parent) {
+				if (child[key]) {
+					continue;
+				}
+				child[key] = parent[key];
+			}
+		}
+		copy(wsc, wjl);
+		console.dir(wsc);
+
+
+		// 原型继承 
+		function Person() {
+			this.name = 'zs';
+			this.age = 18;
+			this.sex = '男'
+		}
+
+		function Student() {
+			this.score = 100;
+		}
+
+		Student.prototype = new Person();
+		Student.prototype.constructor = Student; // 不进行此项设置，构造函数就会变成Person
+
+		var s1 = new Student();
+		console.dir(s1);
+		console.dir(s1.constructor);
+		// 原型继承缺点：无法设置构造函数的参数
+
+
+
+
+
+		{
+			// Object是Function的实例对象
+			console.log(Object.__proto__ === Function.prototype);
+			console.log(Function.constructor === Function);
+
+			function S(){
+
+			}
+			var s = new S();
+			console.log(s.__proto__ === S.prototype)
+			console.log(s.constructor === S)
+		}
+	</script>
+</body>
+</html>

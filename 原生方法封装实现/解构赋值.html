@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES6</title>
+</head>
+<body>
+	<script>
+		function test(t) {
+			return t;
+		}
+		test(() => {
+			console.log('123');
+		})();
+
+
+		{
+			let a, b, rest;
+			[a, b] = [1, 2];
+			console.log(a, b);
+		}
+		{
+			let a, b, rest;
+			[a, b, rest] = [1, 2, 3, 4];
+			console.log(a, b, rest); // 1, 2, 3
+		}
+		{
+			let a, b, rest;
+			[a, b, ...rest] = [1, 2, 3, 4];
+			console.log(a, b, rest); // 1, 2, [3, 4]
+		}
+		{
+			let a, b, rest;
+			({a, b} = {a: 1, b: 2});
+			console.log(a, b); // 1, 2
+		}
+		{
+			let a, b, rest;
+			[a, b, rest=3] = [1, 2];
+			console.log(a, b, rest); // 1, 2, 3
+		}
+		{
+			// 可用于两值交换
+			let a=1, b=2;
+			[a, b] = [b, a];
+			console.log(a, b); // 2, 1
+		}
+		{
+			function f(){
+				return [1, 2];
+			}
+			let a,b;
+			[a, b] = f();
+			console.log(a, b); // 1, 2
+		}
+		{
+			function f(){
+				return [1, 2, 3, 4, 5];
+			}
+			let a,b;
+			[a, , , b] = f();
+			console.log(a, b); // 1, 4
+		}
+		{
+			function f(){
+				return [1, 2, 3, 4, 5];
+			}
+			let a,b;
+			[a, , ...b] = f();
+			console.log(a, b); // 1, [3, 4, 5]
+		}
+
+		{
+			let metaData = {
+				title: 'abc',
+				test: [{
+					title: 'test',
+					desc: 'description'
+				}]
+			}
+			let {title: esTitle, test: [{desc: cnDesc}]} = metaData;
+			console.log(esTitle, cnDesc);
+		}
+
+		{
+			console.log([1] === [1]) // false
+			console.log([1].toString() === [1].toString()) // false
+		}
+
+		{
+			console.log('s', `\u20BB7`);
+			console.log('s', `\u{20BB7}`);
+		}
+
+		{
+			[1, 2, 3].forEach( function(element, index) {
+				console.log(element)
+			});
+		}
+
+		{
+			var a1 = Symbol();
+			var a2 = Symbol();
+			console.log(a1 === a2); // false
+
+			var a3 = Symbol.for('a3');  // 作为key值，创建之前先检查全局变量有没有这个字符串，没有了再创建Symbol
+			var a4 = Symbol.for('a3');
+			console.log(a3 === a4); // true
+		}
+
+		{
+			
+		}
+	</script>
+</body>
+</html>
