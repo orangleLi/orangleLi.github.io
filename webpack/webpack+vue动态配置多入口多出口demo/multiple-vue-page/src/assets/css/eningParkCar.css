@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url("../lib/液晶数字字体.TTF");
+}
+body{
+    background-image: url("../images/BG.png");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    color: #FFF;
+    /*padding:0 20px;*/
+    font-size: 0.25rem;
+    margin: 0;
+    width: 2.2416112315777865rem;
+    height: 1.6935572788415596rem;
+    /*background-image: url("../images/BG.png");*/
+    /*overflow: hidden;*/
+}
+.title{
+    padding: 0.125rem 0.2rem;
+    background-image: url("../images/pic21.png");
+}
+.title img{
+    width: 0.08rem;
+    height: 0.4rem;
+}
+.title span:last-child{
+    padding: 0 0.125rem;
+}
+.content{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 0.6rem;
+    right: 0.02rem;
+}
+.con{
+    list-style: none;
+}
+.dataCls{
+    text-align: center;
+    float: left;
+    position: relative;
+    top: 0.2rem;
+    width: 21%;
+    margin-bottom: 0.2rem;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.dataCls p{
+    margin: 0;
+}
+.dataCls img{
+    width: 100%;
+    height: 100%;
+}
+.data{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 80%;
+    /*pading: 0.3rem 0;*/
+    margin: 8% 0;
+
+}
+.dataTitle{
+    font-size: 0.2rem;
+    color: #40c5fa;
+}
+.dataContent{
+    font-family: 液晶数字字体;
+    font-size: 0.3rem;
+    height: 0.5rem;
+}
+.footer{
+    list-style: none;
+    position: absolute;
+    top: 1.8rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.footer li{
+    float: left;
+    width: 47%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: 1%  0.1rem 1.5% 0.1rem;
+}
+.footer li:nth-of-type(1){
+    left: 0.2rem;
+}
+.footer li:nth-of-type(2){
+    right: 0;
+}
+.footTitle{
+    padding: 0.125rem;
+    position: absolute;
+    top: 0;
+    font-size: 0.1rem;
+}
+.footTitle span:last-child{
+    padding: 0.1rem;
+}
+.contentChart{
+    width: 90%;
+    height: 72%;
+    position: absolute;
+    top: 13%;
+    padding-left: 3%;
+    padding-top: 1%;
+}
+.foot{
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding-right: 1.5%;
+}
+.bgImg{
+    width: 100%;
+    /* height: 100%; */
+    background-color: #083967;
+    opacity: 0.35;
+    padding-bottom: 0.1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.titleCls{
+    position: absolute;
+    bottom: 0.25rem;
+    left: 1.3rem;
+    font-size: 0.1rem;
+}
+.titleClsSub{
+    position: absolute;
+    bottom: 0.2rem;
+    left: 1.35rem;
+    font-size: 0.1rem;
+}
+.chartTop{
+    padding-top: 6%;
+}

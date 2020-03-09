@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url("../lib/液晶数字字体.TTF");
+}
+body{
+    background-image: url("../images/BG.png");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    color: #FFF;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.title{
+    padding: 0.2rem 0 0 0.2rem;
+}
+.mainTitle{
+    font-size: 0.2rem;
+}
+.subTitle{
+    font-size: 0.1rem;
+}
+.styleCls{
+    color: #40c5fa;
+}
+.fontCls{
+    font-family: 液晶数字字体;
+    color: #40c5fa;
+}
+.dateInfo{
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+    font-size: 0.1rem;
+}
+.mapShadow{
+    width: 100%;
+    height: 4.3rem;
+    position: absolute;
+    top: 0.1rem;
+}
+.mapShadow img{
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    top: 0.1rem;
+    left: 0.5rem;
+}
+.mapCls{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.statistics{
+    background-image: url("../images/rect.png");
+    position: absolute;
+    bottom: 0.3rem;
+    left: 0.3rem;
+    padding: 0.1rem 0.1rem 0.1rem 0.1rem;
+}
+.countTitle{
+    padding-bottom: 0.1rem;
+}
+.countTitle img{
+    width: 0.02rem;
+    height: 0.1rem;
+    z-index: 1000;
+}
+.titleContent{
+    padding-left: 0.05rem;
+}
+.countContent{
+    background-image: url("../images/rect1.png");
+    list-style: none;
+    z-index: 1001;
+    float: left;
+    padding: 0.05rem 0.5rem 0.05rem 0.03rem;
+}
+.countContent li{
+    float: left;
+}
+.earlyWarning{
+    background-image: url("../images/rectGreen.png");
+    padding: 0.01rem 0.04rem;
+    border-radius: 20%;
+    font-size: 0.05rem;
+}
+.alarm{
+    background-image: url("../images/rectYellow.png");
+    padding: 0.01rem 0.04rem;
+    border-radius: 20%;
+    font-size: 0.05rem;
+}
+.countFontStyle{
+    padding: 0 0.05rem;
+    font-family: 液晶数字字体;
+    font-size: 0.12rem;
+}
+.alarmCls{
+    list-style: none;
+    padding-left: 0.05rem;
+}
+.alarmCls li{
+    float: none;
+    padding-right: 0.1rem;
+}
+
+.explain{
+    position: absolute;
+    bottom: 1.05rem;
+    right: 1.5rem;
+}
+.iconCue{
+    list-style: none;
+    float: left;
+    padding: 0;
+}
+.iconCue li{
+    float: left;
+    padding: 0.02rem 0.05rem;
+}
+.iconCue img{
+    width: 0.08rem;
+    height: 0.09rem;
+}
+.iconContent{
+    padding-left: 0.05rem;
+}
+.explainContent{
+    padding: 0.1rem 0;
+    background-image: url("../images/rect.png");
+    position: absolute;
+    top: 0.3rem;
+    padding: 0.1rem;
+    width: 1.4rem;
+
+}
+.showInfo{
+    width: 0.5rem;
+    height: 0.05rem;
+    padding: 0.1rem 0.3rem;
+    background-color: #000;
+    opacity: 0.5;
+}
+.refreshCls{
+    background-image: url("../images/back_btn_unlock.png");
+    background-size: 100% 100%;
+    position: absolute;
+    top: 2rem;
+    left: 6.5rem;
+    width: 0.3rem;
+    height: 0.3rem;
+}

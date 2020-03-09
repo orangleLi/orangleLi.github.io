@@ -1,0 +1,5 @@
+npm install html-loader --save-dev
+{
+	test: /\.html$/,
+	loader: 'html-loader'
+}

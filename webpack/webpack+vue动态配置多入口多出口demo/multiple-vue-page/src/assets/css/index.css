@@ -1,0 +1,133 @@
+@charset "utf-8";
+/*index style end*/
+#main{width: 100%;height:100%;background-image:url("../images/bg.png");background-size: auto 100%; }
+#geoContent{width: 100%;height:100%;position: relative;z-index: 2;}
+/*标题样式*/
+.main_title{width:100%;position: absolute;top:3.75rem;left:0;z-index: 10;box-sizing: border-box;-webkit-box-sizing: border-box;padding: 0 5rem;}
+.main_title .title_bg{display:none;width: 8.125rem;position: relative;z-index: 10;}
+.main_title .title_bg img{display: block;width: 100%;height: auto;}
+/*.main_title .title_content{padding-left:4.125rem;position: absolute;top:50%;z-index: 11;*/
+    /*-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);transform: translateY(-50%);}*/
+.main_title .title_content{width: 100%;position: relative;z-index: 10;}
+.main_title .titleAndVersion{float: left;}
+.main_title .title_info{font-family: "微软雅黑 Light";}
+/*.main_title .title_info span{float:left;font-size:3rem;}*/
+.main_title .title_info span{font-size:3rem;}
+.main_title .title_info span#title_member_name,
+.main_title .title_info span.title_platform_name{color: #ffffff;}
+.main_title .title_info span#title_info_name{color:#40c5fa; }
+/*.main_title .title_info span:nth-of-type(3){font-weight:bold;color: #ffffff;margin-left: 0.625rem;  }*/
+.main_title .version_info{font-size: 1.625rem;color:#40c5fa; }
+.main_title .version_info span:nth-of-type(2){font-family: LcdD;}
+/*.main_title .title_time_info{font-family: "微软雅黑";line-height: 1.125rem;margin-top: 0.5rem;float: right; }*/
+.main_title .title_time_info{font-family: "微软雅黑";position: absolute;top:50%;z-index: 11;right: 0;
+    -webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);transform: translateY(-50%);}
+.main_title .title_time_info span{float:left;font-size: 1.625rem;color: #ffffff;}
+.main_title .title_time_info span i{font-style: normal;color: #40c5fa;font-family: LcdD;}
+.main_title .title_time_info .title_week i{font-family: "微软雅黑";}
+.main_title .title_time_info .title_week,
+.main_title .title_time_info .title_time{margin-left:1.875rem; }
+.main_title .title_time_info .title_time{color: #40c5fa;}
+/*.main_title .title_time_info span:nth-of-type(1){margin-right: 0.625rem;}*/
+/*标题样式*/
+/*返回按钮样式*/
+.back_btn_contain{width:4.875rem;height:100%;position: absolute;top:0;right:5rem;z-index: 10;}
+.back_btn_border{width: 1px;height: 100%;background-color:#2f323c;position: relative;left:50%;z-index: 10;}
+.back_btn{width:4.875rem;position: absolute;top:50%;right:0;z-index: 11;background: url('../images/back_btn_lock.png') no-repeat center center;background-size: 100% auto;cursor: pointer;
+    -webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);transform: translateY(-50%);}
+.back_btn img{opacity:0;}
+div.back_btn_unlock{background-image: url('../images/back_btn_unlock.png');}
+div.back_btn_unlock:hover{background-image: url('../images/back_btn_cursor.png');}
+/*返回按钮样式*/
+/*告警数据信息样式*/
+.warn_data_info{padding:2.5rem 1.25rem;position: absolute;bottom:2.5rem;left:5rem;z-index:10;background-color: rgba(0,0,0,.15)}
+.warn_data_info .warn_data_title{padding-left:1.25rem;border-left: 4px solid #40c5fa;font-size: 1.625rem;color: #ffffff;line-height: 2rem; }
+.warn_data_info .warn_data_con{background-color:rgba(64,197,250,.05);margin-top: 1.5rem;padding: 1.5rem 0;}
+.warn_data_info .warn_amount,
+.warn_data_info .warning_amount{width:170px;float: left;padding-left: 40px;}
+.warn_data_info .warning_amount{border-right:1px solid rgba(0,208,228,.1); }
+.warn_data_info .warn_amount_title span,
+.warn_data_info .warning_amount_title span{display: inline-block;line-height:1.125rem;padding:0.375rem 0.625rem;border-radius: 6px;margin-bottom:0.625rem }
+.warn_data_info .warn_amount_title span{background-color:#e5cf1a; }
+.warn_data_info .warning_amount_title span{background-color:#00ae6c; }
+/*.warn_data_info .warn_amount_title{background-color: #e5004f;margin:0.375rem 0 0.1875rem 0;}*/
+/*.warn_data_info .warning_amount_title{background-color: #ff7800;margin:0.1875rem 0;}*/
+.warn_data_info .warn_amount_title span,
+.warn_data_info .warning_amount_title span{font-family: "微软雅黑";font-size: 1.125rem;color: #ffffff;}
+.warn_data_info .warn_amount_con,
+.warn_data_info .warning_amount_con{height:36px;line-height:36px;position: relative;z-index: 10;}
+.warn_data_info .warn_amount_con span,
+.warn_data_info .warning_amount_con span{float:left;position: relative;z-index: 10;top:0;left:0;}
+.warn_data_info .warn_amount_con i,
+.warn_data_info .warning_amount_con i{display:block;font-family: LcdD;font-size:2.25rem;font-style:normal;color: #ffffff;}
+/*告警数据信息样式*/
+/*tooltip样式*/
+/*1、修改tooltip的位置请在echarts.js文件中修改refixTooltipPosition方法
+ 2、修改tooltip样式请修改echarts.js文件中（48622行）的show方法
+ 3、修改tooltip内容请修改echarts.js文件中（48646行）的setContent方法
+*/
+.tooltip_contain{position: relative;z-index:9999999;}
+.tooltip_left_bg,
+.tooltip_right_bg,
+.tooltip_con{position: relative;z-index: 9999999;}
+.tooltip_con{min-width:7rem;height:5.25rem;text-align:center;color: #ffffff;background: url('../images/tooltip_middle_bg.png') repeat-x top center;background-size: auto 100%;}
+.tooltip_con:before{display: block;content: '';width: 0;height:0;position: absolute;z-index: 10000000;bottom:-17px;left: 50%;
+    -webkit-transform:translateX(-50%) ;-moz-transform:translateX(-50%) ;-ms-transform:translateX(-50%) ;-o-transform:translateX(-50%) ;transform:translateX(-50%) ;
+    border: 9px dashed transparent;
+    border-top:9px solid rgba(255,255,255,0.1);
+}
+.tooltip_con:after{display: block;content: '';width: 0;height:0;position: absolute;z-index: 10000001;bottom:-14px;left: 50%;
+    -webkit-transform:translateX(-50%) ;-moz-transform:translateX(-50%) ;-ms-transform:translateX(-50%) ;-o-transform:translateX(-50%) ;transform:translateX(-50%) ;
+    border: 8px dashed transparent;
+    border-top:8px solid rgba(255,255,255,0.1);
+}
+.tooltip_left_bg,
+.tooltip_right_bg{width: 1.875rem;height: 5.25rem;}
+/*tooltip样式*/
+/*弹出层样式*/
+.warn_info_masker{position:absolute;z-index: 11;top:50%;left:50%;
+    top:50%;left: 50%;-webkit-transform: translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform: translate(-50%,-50%);transform: translate(-50%,-50%);}
+.video_makser .video_makser_con{position:absolute;z-index: 11;top:16.666667%;left:0;
+    /*top:50%;left: 50%;-webkit-transform: translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform: translate(-50%,-50%);transform: translate(-50%,-50%);*/}
+.warn_info_masker{width:480px;}
+.warn_info_masker .pop_con{width:100%;position: relative;z-index: 12;border-radius: 20px;box-shadow:0 0 40px 10px rgba(0,0,0,0.15);overflow: hidden;}
+.warn_info_masker .warn_info_title{width: 100%;height: 72px;line-height: 72px;font-family: "微软雅黑";font-size:1.875rem;color:#ffffff;text-align: center;background-color: #ed7b15; }
+.warn_info_masker .warn_info_con{width:100%;padding:20px 30px;background: url('../images/warn_info_con_bg.png') no-repeat top center;background-size: 100% 100%;border:1px solid rgba(255,255,255,0.1);border-top: 0;box-sizing: border-box;}
+.warn_info_masker .warn_info_con p{width: 100%;line-height:38px;font-family: "微软雅黑";font-size:1.125rem;color:#bbbbbb; }
+.warn_info_masker .warn_info_con p span:first-of-type{white-space: pre-wrap;}
+.masker_close_btn_container{width: 48px;position: absolute;bottom: -69px;left: 50%;z-index: 11;
+    -webkit-transform: translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);}
+.masker_close_btn_container .masker_close_btn_line,
+.masker_close_btn_container .masker_close_btn{width: 100%;}
+.masker_close_btn_container .masker_close_btn{cursor: pointer;}
+.masker_close_btn_container .masker_close_btn:hover{animation:closeBtnRotate 0.7s ease both;-webkit-animation:closeBtnRotate 0.7s ease both; }
+.video_makser{width: 100%;height: 100%;position: absolute;z-index: 11;top:0;left:0;background-color: rgba(0,0,0,0.5);overflow: hidden; }
+.video_makser .video_makser_con{width: 100%;}
+.video_makser .monitor_video,
+.video_makser .no_monitor_image{width: 1281px;height: 720px;box-shadow:0 0 40px 10px #000000;border-radius: 20px;overflow: hidden;margin: 0 auto;}
+@keyframes closeBtnRotate {
+    0%{transform: rotateZ(0deg);}
+    100%{transform: rotateZ(360deg);}
+}
+@-webkit-keyframes closeBtnRotate {
+    0%{-webkit-transform: rotateZ(0deg);}
+    100%{-webkit-transform: rotateZ(360deg);}
+}
+/*弹出层样式*/
+/*index style end*/
+/*index3 style begin*/
+.switch_BI_module_list{width:342px;position:absolute;z-index:10;bottom:60px;left:80px;background:url('../images/switch_BI_module_bg.png') no-repeat center center;background-size: 100% auto;border:none;box-shadow:0 0 40px 10px rgba(0,0,0,0.15);}
+.switch_BI_module_list .switch_BI_module_item{width:114px;height:60px;list-style: none;cursor: pointer;}
+.switch_BI_module_list .switch_BI_module_item p{height: 60px;line-height: 60px;font-family:"微软雅黑";font-size:1.125rem;color:#ffffff;text-align: center;}
+.switch_BI_module_list .switch_BI_module_active{background-color:#40c5fa;border-radius:10px; }
+.switch_BI_module_list .switch_BI_module_active p{color:#ffffff; }
+
+.project_BI_detail_info{position:absolute;z-index:10;right:80px;bottom:40px;background-color: rgba(0,0,0,.15);padding: 2.25rem 2.25rem;}
+.project_BI_detail_info i{font-style: normal;}
+.project_BI_detail_info .project_name span{font-family:"微软雅黑 Light";font-size:1.5rem;color:#ffffff;}
+.project_BI_detail_info .project_name span:nth-of-type(1){margin-left: 10px;margin-bottom:10px; }
+.project_BI_detail_info .project_BI_info span{font-family:"微软雅黑 Light";font-size:1.125rem;}
+.project_BI_detail_info .project_BI_info span:not(:last-of-type){margin-right:30px; }
+.project_BI_detail_info .project_BI_info span i:nth-of-type(even){color: #ffffff;}
+.project_BI_detail_info .project_BI_info span i:nth-of-type(odd){color: #757587;}
+/*index3 style end*/

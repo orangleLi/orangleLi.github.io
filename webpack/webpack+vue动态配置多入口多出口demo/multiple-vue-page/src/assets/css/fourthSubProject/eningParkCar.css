@@ -1,0 +1,159 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url('../fonts/液晶数字字体.eot');
+    src:
+            url('../fonts/液晶数字字体.eot?#iefix') format('embedded-opentype'),
+            url('../fonts/液晶数字字体.woff') format('woff'),
+            url('../fonts/液晶数字字体.ttf') format('truetype'),
+            url('../fonts/液晶数字字体.svg') format('svg');
+}
+body{
+    background-image: url("../../images/bg.png");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    color: #FFF;
+    font-size: 0.2rem;
+    margin: 0;
+    width: 23.272283%;
+    height: 50%;
+}
+
+.title img {
+    position: absolute;
+    top: 4.783333%;
+    left: 0;
+    /*padding-top: 0.17085774739583331rem;*/
+    padding-bottom: 0.15229923922231612rem;
+    padding-left: 0.11996030725127714rem;
+    width: 0.01176081443639972rem;
+    height: 0.07526921239295821rem;
+    /*display: block;*/
+}
+.title span{
+    position: absolute;
+    top: 4.583333%;
+    left: 0.04939542063287883rem;
+    /*padding-top: 0.15585774739583331rem;*/
+    padding-bottom: 0.15229923922231612rem;
+    padding-left: 0.11996030725127714rem;
+    font-size: 0.07526921239295821rem;
+}
+
+.content{
+    text-align: center;
+    position: absolute;
+    top: 10.833333%;
+    width: 21.086081%;
+    height: 7.291667%;
+    margin-left: 0.14762137528023816rem;
+    margin-right: 0.07762137528023816rem;
+    float: none;
+    list-style: none;
+    display: block;
+}
+.dataCls{
+    text-align: center;
+    float: left;
+    position: relative;
+    top: 0;
+    width: 21.945433%;
+    height: 100%;
+    margin: 0 2%;
+}
+.dataCls:nth-of-type(1){
+    margin-left: 0;
+}
+.dataCls:nth-of-type(4){
+    margin-right: 0;
+}
+.dataCls p{
+    margin: 0;
+}
+.dataCls img{
+    width: 100%;
+    height: 100%;
+}
+.data{
+    position: absolute;
+    top: 22%;
+    width: 100%;
+
+}
+.dataTitle{
+    font-size: 0.03528244330919916rem;
+    color: #40c5fa;
+}
+.dataContent{
+    font-family: 液晶数字字体;
+    font-size: 0.0878804072181998596rem;
+}
+.footer{
+    list-style: none;
+    position: absolute;
+    top: 20.625%;
+    left: 0.11996030725127714rem;
+    right: 0;
+    bottom: 0;
+    width: 22.062882%;
+    height: 26.666667%;
+}
+.footer li{
+    float: left;
+    width: 48.291572%;
+    height: 100%;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+}
+.footer li:nth-of-type(1){
+    padding-right: 0.02234554742915947rem;
+}
+.footer li:nth-of-type(2){
+    padding-left: 1.527778%;
+}
+.footTitle{
+    padding: 0.02528244330919916rem;
+    position: absolute;
+    top: 0;
+    font-size: 0.03704325774559888rem;
+}
+.footTitle img{
+    width: 0.02352162887279944rem;
+}
+.footTitle span:last-child{
+    padding: 0.025873791760079385rem;
+}
+.contentChart{
+    width: 48.291572%;
+    height:100%;
+    position: absolute;
+    top: 0.05rem;
+}
+.foot{
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding-right: 1.5%;
+}
+.bgImg{
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.2;
+}
+.titleCls{
+    position: absolute;
+    bottom: 0.25rem;
+    left: 1.3rem;
+    font-size: 0.1rem;
+}
+.titleClsSub{
+    position: absolute;
+    bottom: 0.2rem;
+    left: 1.35rem;
+    font-size: 0.1rem;
+}

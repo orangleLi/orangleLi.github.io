@@ -1,0 +1,31 @@
+***************file-loader***************
+npm install file-loader --save-dev
+
+{
+	test: /\.(png|jpg|gif|svg)$/i,   //不区分大小写
+	loader: 'file-loader',
+	query: {
+		name: 'assets/[name]-[hash:5].[ext]'  // 设置打包路径及文件名 :5表示5位，ext是后缀
+	}
+}
+
+***************url-loader***************
+会将url转为base64的编码
+npm install url-loader --save-dev
+{
+	test: /\.(png|jpg|gif|svg)$/i,   //不区分大小写
+	loader: 'url-loader',
+	query: {
+		limit: 20000,   //限制当图片大于20000k是进行处理
+		name: 'assets/[name]-[hash:5].[ext]'
+	}
+}
+***************image-loader***************
+npm install image-webpack-loader --save-dev
+{
+	test: /\.(png|jpg|gif|svg)$/i,   //不区分大小写
+	loaders: [
+		'url-loader?limit=10000&name=assets/[name]-[hash:5].[ext]',
+		'image-webpack'
+	]
+}

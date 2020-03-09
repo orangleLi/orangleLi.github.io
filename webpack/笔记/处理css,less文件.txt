@@ -1,0 +1,64 @@
+处理css文件
+npm i style-loader css-loader --save-dev
+  webpack.config.js中
+******************************************************************************
+**  loader是从右向左执行的即先是postcss-loader,再是css-loader,style-loader  **
+******************************************************************************
+
+
+module: {
+	loaders: [
+		{
+			test: /\.css$/,
+			loader: 'style-loader!css-loader!postcss-loader'
+
+		}
+	]
+}
+
+
+npm install postcss-loader --save-dev
+对css进行处理
+
+npm install autoprefixer --save-dev
+css样式加前缀，例如display: flex是有兼容性问题的，需要加浏览器前缀
+modele的同级
+postcss: [
+	require('autoprefixer')({
+		broswers: ['last 5 versions]
+	})
+]
+
+
+common.css中
+@import './flex.css'
+{
+	test: /\.css$/,
+	loader: 'style-loader!css-loader?importLoaders=1!postcss-loader'
+}
+@import引入的文件，postcss-loader不会进行处理，即不会加浏览器前缀
+需要对css-loader加参数
+等于1表示后边有一个，就是poscss-loader
+
+处理Less文件
+npm i less-loader --save-dev
+若未安装less要先进行安装
+{
+	test: /\.less$/,
+	loader: 'style!css!postcss!less'  //-loader可以不写
+}
+*******************postcss-loader使用说明：*******************
+若是在webpack.config.js中使用postcss-loader ，则要放在css-loader,style-loader之前，less-loader,sass-loader之后
+
+
+在less中使用@import 引入less文件时，不需要对css加参数，less会自动进行处理，结果是有浏览器前缀的
+
+
+处理sass文件
+npm i sass-loader --save-dev
+
+{
+	test: /\.sass$/,
+	loader: 'style!css!postcss!sass'  //-loader可以不写
+}
+

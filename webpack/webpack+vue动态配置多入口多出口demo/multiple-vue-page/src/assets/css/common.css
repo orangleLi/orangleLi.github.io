@@ -1,0 +1,27 @@
+@charset "utf-8";
+@font-face {
+    font-family: "LcdD";
+    src: url("fonts/液晶数字字体.woff2") format("woff2"),
+    url("fonts/液晶数字字体.woff") format("woff"),
+    url("fonts/液晶数字字体.ttf") format("truetype"),
+    url("fonts/液晶数字字体.eot") format("embedded-opentype"),
+    url("fonts/液晶数字字体.svg") format("svg");
+    font-style: normal;
+    font-weight: normal;
+}
+*{margin: 0;padding: 0;}
+html{width: 100%;height: 100%;-webkit-text-size-adjust: 100%;-moz-text-size-adjust: 100%;font-size:16px;font-family: "微软雅黑"}
+body{width: 100%;height: 100%;}
+.clear:after{display: block;content: '';height: 0;visibility: hidden;clear: both;}
+.dpb{display: block;}
+.dpnone{display: none;}
+
+.pxp100{width: 100%;}
+
+
+.fl{float: left;}
+.fr{float: right;}
+.ofh{overflow: hidden;}
+.chartTop{
+    padding-top: 6%;
+}

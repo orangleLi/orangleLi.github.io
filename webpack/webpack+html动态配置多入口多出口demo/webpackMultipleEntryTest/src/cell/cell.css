@@ -1,0 +1,7 @@
+div{
+	width: 500px;
+	height: 300px;
+	background-color: red;
+	display: flex;
+	/*background-image: url('../images/0.jpg');*/
+}

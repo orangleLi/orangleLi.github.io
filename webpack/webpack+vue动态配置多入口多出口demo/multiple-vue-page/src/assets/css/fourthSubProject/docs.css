@@ -1,0 +1,145 @@
+
+
+ html{-webkit-text-size-adjust:none; /*解决chrome浏览器下字体不能小于12px*/}
+ body{ color:#000000; font-family:Verdana, Arial, Helvetica, sans-serif;}
+ * {}
+a{outline:none; text-decoration:none;} a:hover{ text-decoration:underline;}
+html{zoom:1;}html *{outline:0;zoom:1;} html button::-moz-focus-inner{border-color:transparent!important;} 
+body{overflow-x: hidden; font-size:12px;} body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;} table{/*border-collapse:collapse;border-spacing:0;*/} fieldset,a img{border:0;} address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;} li{list-style:none;} caption,th{text-align:left;} h1,h2,h3,h4,h5,h6{ margin-top:20px;} q:before,q:after{content:'';}
+input[type="submit"], input[type="reset"], input[type="button"], button { -webkit-appearance: none; /*去掉苹果的默认UI来渲染按�?*/} em,i{ font-style:normal;}
+
+
+pre{ border:#CCC solid 1px; padding:10px; background-color:#F9F9F9;
+font-family:"Courier New", Courier, Arial; font-size:12px; line-height:150%;
+white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;
+	margin-top:20px;
+}
+
+textarea{
+	width:100%; padding:20px 0; border:none;
+}
+
+body{
+	
+}
+body,input,textarea,select{
+	font-family:"微软雅黑", "黑体"; 
+}
+.wrapper{
+	width:800px; margin:0 auto; background:#f3f3f3; font-size:18px; line-height:32px; color:#333; position:relative; overflow:hidden;
+}
+p{
+	margin-top:20px;
+}
+a{
+	color:#666666;
+}
+a:hover{
+	text-decoration:none;
+}
+header{
+	background:#313131; height:79px; position:relative; padding:0 20px;
+}
+header h2{
+	text-align:center; font-size:36px; color:#fff; line-height:79px;
+}
+
+
+.slider{
+	padding:50px 50px; text-align:center; 
+}
+.slider h1{
+	font-size:38px; font-weight:bold; 
+}
+.slider p{
+	margin-top:20px; line-height:28px;
+}
+.slider .btn{	
+border:#ccc solid 1px; padding:10px 50px; display:inline-block; background:#fefefe; border-radius:5px; margin:0 10px;
+}
+
+ 
+
+section{
+	padding:20px;
+}
+.list{
+	margin-top:20px;
+}
+.list .item{
+	border:#dedede solid 1px; margin:0 auto; padding:1px; background:#ffffff; margin-bottom:20px; border-radius:5px;
+}
+.list .item.selected{
+	border:#e95549 solid 2px; padding:0; box-shadow:#d3d3d3 5px 5px 2px;
+}
+.list .item .img{
+	width:608px; height:300px; position:relative;
+}
+.list .item .img img{
+	border-radius:5px 5px 0 0;
+}
+
+.list .item .text{
+	padding:10px 20px 20px 20px;
+}
+.list .item .title{	
+	font-size:30px; line-height:46px; padding:10px 0;
+}
+.list .item .title_bordered{
+	border-bottom:#dddddd solid 1px;
+}
+
+.list .item .desc{	
+	font-size:24px; padding:15px 0; line-height:35px;
+}
+
+.list .item .attr{
+	margin-top:15px;
+}
+.list .item .attr dl{
+	height:auto; overflow:hidden;
+}
+.list .item .attr dd{
+	width:33.33%; float:left; display:inline;
+}
+.list .item .attr dd.d2{
+	text-align:center;
+}
+.list .item .attr dd.d3{
+	text-align:right;
+}
+.list .item .attr dd h3{
+	color:#e95549; font-size:30px; font-weight:bold;
+}
+.list .item .lst{
+	margin-top:10px;
+}
+.list .item .lst dl{
+	height:auto; overflow:hidden;
+}
+.list .item .lst dd{
+	width:50%; float:left; display:inline; font-size:24px; line-height:40px;
+}
+.list .item .lst dd span{
+	color:#e95549; margin-left:10px;
+}
+.list .item .tags{
+	margin-top:15px;
+}
+.list .item .tags span{
+	background:#f8f8f8; height:32px; line-height:32px; display:inline-block; padding:0 20px; margin-right:15px;
+}
+
+
+footer{
+	padding:30px 0 30px 0; text-align:center; background:#fff; border-top:#ccc solid 1px;
+}
+
+footer span,
+footer a{
+}
+footer a{
+	color:#40c0bf;
+}
+ 
+ 

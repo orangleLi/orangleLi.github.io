@@ -1,0 +1,78 @@
+npm install --save-dev babel-loader babel-core
+babel-loader 转换ES6代码
+
+module:{
+	rules: [
+		{
+			test: /\.js$/, 
+			loader: 'babel-loader'
+		}
+	]
+}
+
+presets字段设定转码规则
+1.babel-preset-env: 用于编译es6语法, 是一个新的 preset，可以根据配置的目标运行环境（environment）自动启用需要的 babel 插件。
+
+2.babel-preset-es2015: 用于编译es6语法.
+
+3.babel-preset-es2017:用于编译es7语法.
+
+4.babel-preset-latest:一个特殊的presets，包括了es2015，es2016，es2017的插件（目前为止，以后有es2018也会包括进去）。
+
+5.babel-preset-react: 用于编译jsx和flow语法加入
+7.babel-preset-stage-x(stage-0/1/2/3/4)
+
+
+
+
+npm install --save-dev babel-preset-latest
+webpack.config,js中
+modele: {
+	rules: [
+		{
+			test: /\.js$/, 
+			loader: 'babel-loader',
+			query: {
+				presets: ['latest']
+			}
+		}
+	]
+}
+package.json中
+"babel": {
+	"presets": ["latest"]
+},
+"script" : {...}
+
+也可以新建.babelrc
+
+
+  {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-2"
+    ],
+    "plugins": []
+  }
+
+三者选其一
+
+优化打包速度
+modele: {
+	rules: [
+		{
+			test: /\.js$/, 
+			loader: 'babel', 
+			exclude: './node_modules/',  //排除不进行打包的文件
+			include: './src/',  //打包包含的文件
+			query: {
+				presets: ['latest']
+			}
+		}
+	]
+}
+
+var path = require("path")
+
+path.resolve(___dirname, 'node-modules')   //将路径解析为绝对路径

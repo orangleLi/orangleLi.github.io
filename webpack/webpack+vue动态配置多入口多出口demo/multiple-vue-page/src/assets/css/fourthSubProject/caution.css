@@ -1,0 +1,348 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url('../fonts/液晶数字字体.eot');
+    src:
+            url('../fonts/液晶数字字体.eot?#iefix') format('embedded-opentype'),
+            url('../fonts/液晶数字字体.woff') format('woff'),
+            url('../fonts/液晶数字字体.ttf') format('truetype'),
+            url('../fonts/液晶数字字体.svg') format('svg');
+}
+body{
+    background-image: url("../../images/bg.png");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container5{
+    width: 24.302564%;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-size: 0.02704325774559888rem;
+}
+.cautionFooter{
+    list-style: none;
+    position: absolute;
+    top: 1.527778%;
+    left: 0.09306030725127714rem;
+    right: 0.07104007104007104rem;
+    bottom: 5.2577778%;
+}
+.cautionFooter li{
+    float: left;
+    width: 48.291572%;
+    height: 48.397436%;
+    position: absolute;
+ }
+.cautionFooter li:nth-of-type(1){
+    width: 100%;
+    height: 49.198718%;
+}
+.cautionFooter li:nth-of-type(3){
+    right: 0;
+}
+.cautionFooter li:nth-of-type(1),
+.cautionFooter li:nth-of-type(2){
+
+}
+.cautionFooter li:nth-of-type(2),
+.cautionFooter li:nth-of-type(3){
+    top: 51.762821%;
+}
+.cautionFootTitle{
+    padding: 0.02528244330919916rem;
+    position: absolute;
+    top: 0rem;
+    font-size: 0.03704325774559888rem;
+}
+.cautionFootTitle img {
+    width: 0.02352162887279944rem;
+}
+.cautionFootTitle span:last-child {
+    padding: 0.025873791760079385rem;
+}
+.cautionContentChart{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0rem;
+}
+.bgPolygon{
+    position: absolute;
+    top: 10%;
+    margin: auto 0;
+    width: 60%;
+    height: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/*.bgPolygon1{*/
+    /*position: absolute;*/
+    /*height: 100%;*/
+    /*left: -60%;*/
+    /*top: -5%;*/
+/*}*/
+/*!*./images/GeneralSituationOfFireFighting/polygon.png*!*/
+.iconCls{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.contentInfo{
+    position: absolute;
+    top: 0.06rem;
+    left: 0.16rem;
+    width: 0.15rem;
+}
+.contentInfoLeft{
+    position: absolute;
+    top: 0.06rem;
+    left: -0.128rem;
+    width: 0.12rem;
+    text-align: right;
+}
+.contentInfoBottom{
+    position: absolute;
+    top: 0.15rem;
+    left: 0.05rem;
+    width: 0.15rem;
+}
+#GeneralSituationOfElevator .contentInfoBottom{
+    left: 0.02rem;
+}
+.contentInfoTop{
+    position: absolute;
+    top: -0.03rem;
+    left: 0.04rem;
+    width: 0.15rem;
+}
+
+.iconException{
+    background-size: 100% 100%;
+    width: 15%;
+    /*height: 18%;*/
+}
+.waterPressure{
+    position: absolute;
+    top: 22.404255%;
+    left: 64.415730%;
+    /*background-image: url("../../images/GeneralSituationOfFireFighting/1.png");*/
+}
+.waterPressure img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.ElectricLeakage{
+    position: absolute;
+    top: 55.787234%;
+    left: 64.415730%;
+    /*background-image: url("../../images/GeneralSituationOfFireFighting/2.png");*/
+}
+.ElectricLeakage img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.EliminationOfNewspaper{
+    position: absolute;
+    top: 70.914894%;
+    left: 43.955056%;
+    /*background-image: url("../../images/GeneralSituationOfFireFighting/3.png");*/
+}
+.EliminationOfNewspaper img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.HandReport{
+    position: absolute;
+    top: 55.361705%;
+    left: 18.780761%;
+    /*background-image: url("../../images/GeneralSituationOfFireFighting/4.png");*/
+}
+.HandReport img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.TemperatureSensitivity{
+    position: absolute;
+    top: 22.404255%;
+    left: 18.780761%;
+    /*background-image: url("../../images/GeneralSituationOfFireFighting/5.png");*/
+}
+.TemperatureSensitivity img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.SmokeFeeling{
+    position: absolute;
+    top: 6.469083%;
+    left: 43.955056%;
+    /*background-image: url("../../images/GeneralSituationOfFireFighting/6.png");*/
+}
+.SmokeFeeling img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+
+.AbnormalVibration{
+    position: absolute;
+    top: 25.106383%;
+    left: 15.415730%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/1.png");*/
+}
+.AbnormalVibration img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.KeyAlarm{
+    position: absolute;
+    top: 52.234043%;
+    left: 15.415730%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/2.png");*/
+}
+.KeyAlarm img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.SwitchDoorAbnormal{
+    position: absolute;
+    top: 72.702128%;
+    left: 30.617978%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/3.png");*/
+}
+.SwitchDoorAbnormal img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.PowerOutageFailure{
+    position: absolute;
+    top: 72.702128%;
+    left: 56.404494%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/4.png");*/
+}
+.PowerOutageFailure img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.Stranded{
+    position: absolute;
+    top: 52.234043%;
+    left: 68.494382%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/5.png");*/
+}
+.Stranded img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.Speeding{
+    position: absolute;
+    top: 25.106383%;
+    left: 68.494382%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/6.png");*/
+}
+.Speeding img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.SquattingBottom{
+    position: absolute;
+    top: 5.425532%;
+    left: 52.404494%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/7.png");*/
+}
+.SquattingBottom img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+.summitAttempt{
+    position: absolute;
+    top: 5.425532%;
+    left: 30.617978%;
+    /*background-image: url("../../images/GeneralSituationOfElevator/8.png");*/
+}
+.summitAttempt img{
+    margin-left: 0.015rem;
+    margin-top: 0.015rem;
+}
+
+.exclamatoryMark{
+    position: absolute;
+    top: 43.914894%;
+    left: 44.568539%;
+    font-size: 0.02704325774559888rem;
+    width: 0.2rem;
+}
+.exclamatoryMark span{
+    position: absolute;
+    top: 0.02rem;
+    padding-left: 0.02rem;
+}
+.exclamatoryMarkSecond{
+    left: 43.568539%;
+    top: 45%;
+}
+.exclamatoryMarkSecond span{
+    top: 0.01rem;
+}
+.exclamatoryMark img{
+    width: 30%;
+}
+
+.exception{
+    display: none;
+}
+
+/*异常发光动画*/
+.exceptionImg{
+    width: 100%;
+    border-radius: 50%;
+    animation:myfirst 0.5s alternate infinite;
+    -moz-animation:myfirst 0.5s alternate infinite; /* Firefox */
+    -webkit-animation:myfirst 0.5s alternate infinite; /* Safari and Chrome */
+    -o-animation:myfirst 0.5s alternate infinite; /* Opera */
+
+    box-shadow: -0.01rem 0 0.12rem #1d5837,   /*左边阴影*/
+    0 -0.01rem 0.12rem #1d5837,  /*上边阴影*/
+    0.01rem 0px 0.12rem #1d5837,  /*右边阴影*/
+    0px 0.01rem 0.12rem #1d5837; /*下边阴影*/
+
+}
+@keyframes myfirst
+{
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}

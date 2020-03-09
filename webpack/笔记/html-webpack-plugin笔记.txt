@@ -1,0 +1,76 @@
+<title><%= htmlWebpackPlugin.options.title %></title>  --->  可以取到new htmlWebpackPlugin中title的值
+
+<body>
+	<% for (var key in htmlWebpackPlugin) {%>
+		<%=key%>
+	<% } %>
+***************************************************
+	<% for (var key in htmlWebpackPlugin.files) { %>
+		<%= key %> : <%= JSON.stringify(htmlWebpackPlugin.files[key]) %>
+	<% } %>
+***************************************************
+	<% for (var key in htmlWebpackPlugin.options) { %>
+		<%= key %> : <%= JSON.stringify(htmlWebpackPlugin.options[key]) %>
+	<% } %>
+
+</body>
+************ a,b,c,main均是html文件***********
+new htmlWebpackPlugin({
+	template: 'a.html',
+	filename: 'index.html',
+	inject: 'head',
+	chunks: ['a'],
+	title: 'xxx',
+	date: new Date(),
+	//代码压缩
+	minify: {
+		removeComments: true  //删除注释
+		collpaseWhitespace: true //删除空格
+	}
+})
+new htmlWebpackPlugin({
+	template: 'main.html',
+	filename: 'index.html',
+	inject: 'head',
+	chunks: ['main'],
+	title: 'xxx',
+	date: new Date(),
+	//代码压缩
+	minify: {
+		removeComments: true  //删除注释
+		collpaseWhitespace: true //删除空格
+	}
+})
+
+
+
+www.npmjs.com插件官网
+
+<script src="<%= htmlWebapckPlugin.files.chunks.main.entry %>"></script>
+<body>
+	<script src="<%= htmlWebapckPlugin.files.chunks.a.entry %>"></script>
+</body>
+
+
+output: {
+	publicPath: 'http://ening.com/'   //占位符，项目上线对这个值进行设置，html中引用的地址的路径就会被替换成这个路径
+}
+
+
+
+
+
+
+
+<%= compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substr(htmlWebpackPlugin.files.publicPath.length)].source() %>
+
+<%= htmlWebpackPlugin.files.chunks.main.entry.substr(htmlWebpackPlugin.files.publicPath.length) %>  ---> 可以获得文件路径 js/a.js
+
+
+<body>
+	<% for (var k in htmlWebapckPlugin.files.chunks) { %>
+		<%= if (k !== 'main') { %>
+			<script src="<%= htmlWebapckPlugin.files.chunks[k].entry %>"></script>
+		<%= } %>
+	<% } %>
+</body>

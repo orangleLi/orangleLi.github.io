@@ -1,0 +1,2 @@
+webpackJsonp([3],{91:function(e,o,n){"use strict";Object.defineProperty(o,"__esModule",{value:!0});const c=function(e){switch(e){case"indexOne":console.log("去第一屏");break;case"indexTwo":console.log("去第二屏");break;case"indexThree":console.log("去第三屏");break;case"indexFour":console.log("去第四屏")}};o.transformScreenCommon=c}},[91]);
+//# sourceMappingURL=transformScreen.727ebfbe0e6fd2da7cdc.js.map

@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url("../lib/液晶数字字体.TTF");
+}
+body{
+    background-image: url("../images/BG.png");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    color: #FFF;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.title{
+    padding: 0.2rem 0 0 0.2rem;
+}
+.mainTitle{
+    font-size: 0.2rem;
+}
+.subTitle{
+    font-size: 0.1rem;
+}
+.styleCls{
+    color: #40c5fa;
+}
+.fontCls{
+    font-family: 液晶数字字体;
+    color: #40c5fa;
+}
+.dateInfo{
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+    font-size: 0.1rem;
+}
+.mapShadow{
+    width: 100%;
+    height: 4.3rem;
+    position: absolute;
+    top: 0.1rem;
+}
+.mapShadow img{
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    top: 0.1rem;
+    left: 0.5rem;
+}
+.mapCls{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.statistics{
+    background-image: url("../images/rect.png");
+    position: absolute;
+    bottom: 0.2rem;
+    left: 0.2rem;
+    padding: 0.1rem 0.1rem 0.1rem 0;
+}
+.countTitle{
+    list-style: none;
+    background-image: url("../images/rect1.png");
+    width: 95%;
+    height: 0.4rem;
+    margin: 0 0.1rem 0 0.1rem;
+    padding: 0.05rem 0.1rem;
+
+}
+.titleCls{
+    list-style: none;
+    padding: 0;
+}
+.countTitle li{
+    float: left;
+    padding: 0 0.04rem;
+}
+.titleCls li{
+    float: none;
+}
+.numberCls{
+    font-family: 液晶数字字体;
+    font-size: 0.1rem;
+}
+.content{
+    color: #40c5fa;
+    font-size: 0.08rem;
+}
+.infoContent{
+    list-style: none;
+    padding-top: 0.05rem;
+}
+.infoContent li{
+    padding: 0.02rem 0;
+}
+.infoCls{
+    padding-left: 0.02rem;
+}
+
+
+.explain{
+    position: absolute;
+    bottom: 1.05rem;
+    right: 1.5rem;
+}
+.iconCue{
+    list-style: none;
+    float: left;
+    padding: 0;
+}
+.iconCue li{
+    float: left;
+    padding: 0.02rem 0.05rem;
+}
+.iconCue img{
+    width: 0.08rem;
+    height: 0.09rem;
+}
+.iconContent{
+    padding-left: 0.05rem;
+}
+.explainContent{
+    padding: 0.1rem 0;
+    background-image: url("../images/rect.png");
+    position: absolute;
+    top: 0.3rem;
+    padding: 0.1rem;
+    width: 1.5rem;
+
+}
+.refreshCls{
+    background-image: url("../images/back_btn_unlock.png");
+    background-size: 100% 100%;
+    position: absolute;
+    top: 2rem;
+    left: 6.5rem;
+    width: 0.3rem;
+    height: 0.3rem;
+}
+.spacing{
+    height: 0.3rem;
+}

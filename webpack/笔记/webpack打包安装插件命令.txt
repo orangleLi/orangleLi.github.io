@@ -1,0 +1,32 @@
+
+CSS分离 npm i extract-text-webpack-plugin@next -D
+
+extract-text-webpack-plugin 最新版本为 3.0.2，这个版本还没有适应 webpack 4 的版本
+
+解决办法：使用 4.0 beta 版，npm install --save-dev extract-text-webpack-plugin@next
+
+
+npm install uglifyjs-webpack-plugin --save-dev
+
+webpack 拷贝插件的使用 copy-webpack-plugin
+npm install --save-dev copy-webpack-plugin
+
+
+npm i --save-dev html-webpack-plugin
+
+
+extract-text-webpack-plugin该插件的主要是为了抽离css样式,防止将样式打包在js中引起页面样式加载错乱的现象
+npm install extract-text-webpack-plugin --save-dev
+
+
+npm install -D babel-loader @babel/core @babel/preset-env webpack
+
+
+//在项目下，运行下列命令行
+npm install --save-dev sass-loader
+//因为sass-loader依赖于node-sass，所以还要安装node-sass
+npm install --save-dev node-sass
+
+
+自动添加浏览器前缀 ，我们这里使用postcss-loader
+npm install --save-dev postcss-loader autoprefixer

@@ -1,0 +1,307 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url("../lib/液晶数字字体.TTF");
+}
+body{
+    background-image: url("../images/BG.png");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    color: #FFF;
+    /*padding:0 20px;*/
+    font-size: 0.25rem;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    /*background-image: url("./images/BG.png");*/
+    /*overflow: hidden;*/
+}
+.footer{
+    list-style: none;
+    position: absolute;
+    top: 0.15rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.footer li{
+    float: left;
+    width: 47%;
+    height: 47%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: 1%  0.1rem 1.5% 0.1rem;
+    z-index: 1;
+}
+.footer li:nth-of-type(1){
+    width: 94.7%;
+}
+.footer li:nth-of-type(3){
+    right: 0;
+}
+.footer li:nth-of-type(1),
+.footer li:nth-of-type(2){
+    left: 0.2rem;
+}
+.footer li:nth-of-type(2),
+.footer li:nth-of-type(3){
+    top: 49%;
+}
+.footTitle{
+    padding: 0.125rem;
+    position: absolute;
+    top: 0;
+    font-size: 0.1rem;
+}
+.footTitle span:last-child{
+    padding: 0.1rem;
+}
+#commonAlarmLastMonth{
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 85%;
+    padding-top: 0.1rem;
+}
+.contentChart{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    z-index: 1;
+    font-size: 0.07rem;
+}
+.contentChart img{
+    border-radius: 50%;
+}
+.bgImg{
+    width: 100%;
+    /* height: 100%; */
+    background-color: #083967;
+    opacity: 0.35;
+    padding-bottom: 0.1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.titleCls{
+    position: absolute;
+    bottom: 0.1rem;
+    left: 1.45rem;
+    font-size: 0.1rem;
+}
+.titleClsSub{
+    left: 3rem;
+}
+
+.bgPolygon{
+    position: relative;
+    display: block;
+    width: auto;
+    height: 100%;
+}
+/*./images/GeneralSituationOfFireFighting/polygon.png*/
+.iconCls{
+    width: 0.3rem;
+}
+.contentInfo{
+    position: absolute;
+    top: 0.12rem;
+    left: 0.35rem;
+    width: 0.3rem;
+}
+.contentInfoLeft{
+    position: absolute;
+    top: 0.12rem;
+    left: -0.2rem;
+    width: 0.3rem;
+}
+#GeneralSituationOfElevator .contentInfoLeft{
+    left: -0.3rem;
+}
+.contentInfoBottom{
+    position: absolute;
+    top: 0.35rem;
+    left: 0.07rem;
+    width: 0.35rem;
+}
+#GeneralSituationOfElevator .contentInfoBottom{
+    left: 0rem;
+}
+.contentInfoTop{
+    position: absolute;
+    top: -0.12rem;
+    left: 0.09rem;
+    width: 0.3rem;
+}
+
+.waterPressure{
+    position: absolute;
+    top: 33.404255%;
+    left: 58.415730%;
+}
+.ElectricLeakage{
+    position: absolute;
+    top: 59.787234%;
+    left: 58.415730%;
+}
+.EliminationOfNewspaper{
+    position: absolute;
+    top: 71.914894%;
+    left: 46.955056%;
+}
+.HandReport{
+    position: absolute;
+    top: 59.361705%;
+    left: 33.932584%;
+}
+.TemperatureSensitivity{
+    position: absolute;
+    top: 33.404255%;
+    left: 33.780761%;
+}
+.SmokeFeeling{
+    position: absolute;
+    top: 20.469083%;
+    left: 46.955056%;
+}
+
+.AbnormalVibration{
+    position: absolute;
+    top: 35.106383%;
+    left: 37.415730%;
+}
+.KeyAlarm{
+    position: absolute;
+    top: 57.234043%;
+    left: 37.415730%;
+}
+.SwitchDoorAbnormal{
+    position: absolute;
+    top: 72.702128%;
+    left: 46.617978%;
+}
+.PowerOutageFailure{
+    position: absolute;
+    top: 72.702128%;
+    left: 57.404494%;
+}
+.Stranded{
+    position: absolute;
+    top: 57.234043%;
+    left: 65.494382%;
+}
+.Speeding{
+    position: absolute;
+    top: 35.106383%;
+    left: 65.494382%;
+}
+.SquattingBottom{
+    position: absolute;
+    top: 18.425532%;
+    left: 56.404494%;
+}
+.summitAttempt{
+    position: absolute;
+    top: 18.425532%;
+    left: 45.617978%;
+}
+
+.exclamatoryMark{
+    position: absolute;
+    top: 51.914894%;
+    left: 46.568539%;
+    font-size: 0.08rem;
+}
+.exclamatoryMarkSecond{
+    left: 52.568539%;
+}
+.exclamatoryMark img{
+    width: 35%;
+}
+
+/*异常发光动画*/
+.exceptionImg{
+    animation:myfirst 0.8s infinite;
+    -moz-animation:myfirst 0.8s infinite; /* Firefox */
+    -webkit-animation:myfirst 0.8s infinite; /* Safari and Chrome */
+    -o-animation:myfirst 0.8s infinite; /* Opera */
+}
+@keyframes myfirst
+{
+    from {
+        border-radius: 50%;
+        box-shadow: -0.01rem 0 0.01rem #1f632c,   /*左边阴影*/
+        0 -0.01rem 0.01rem #1f632c,  /*上边阴影*/
+        0.01rem 0px 0.01rem #1f632c,  /*右边阴影*/
+        0px 0.01rem 0.01rem #1f632c; /*下边阴影*/
+    }
+    to {
+        border-radius: 50%;
+        box-shadow: -0.04rem 0 0.04rem #216830,   /*左边阴影*/
+        0 -0.04rem 0.04rem #216830,  /*上边阴影*/
+        0.04rem 0px 0.04rem #216830,  /*右边阴影*/
+        0px 0.04rem 0.04rem #216830; /*下边阴影*/
+    }
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    from {
+        border-radius: 50%;
+        box-shadow: -0.01rem 0 0.01rem #1f632c,   /*左边阴影*/
+        0 -0.01rem 0.01rem #1f632c,  /*上边阴影*/
+        0.01rem 0px 0.01rem #1f632c,  /*右边阴影*/
+        0px 0.01rem 0.01rem #1f632c; /*下边阴影*/
+    }
+    to {
+        border-radius: 50%;
+        box-shadow: -0.04rem 0 0.04rem #216830,   /*左边阴影*/
+        0 -0.04rem 0.04rem #216830,  /*上边阴影*/
+        0.04rem 0px 0.04rem #216830,  /*右边阴影*/
+        0px 0.04rem 0.04rem #216830; /*下边阴影*/
+    }
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+    from {
+        border-radius: 50%;
+        box-shadow: -0.01rem 0 0.01rem #1f632c,   /*左边阴影*/
+        0 -0.01rem 0.01rem #1f632c,  /*上边阴影*/
+        0.01rem 0px 0.01rem #1f632c,  /*右边阴影*/
+        0px 0.01rem 0.01rem #1f632c; /*下边阴影*/
+    }
+    to {
+        border-radius: 50%;
+        box-shadow: -0.04rem 0 0.04rem #216830,   /*左边阴影*/
+        0 -0.04rem 0.04rem #216830,  /*上边阴影*/
+        0.04rem 0px 0.04rem #216830,  /*右边阴影*/
+        0px 0.04rem 0.04rem #216830; /*下边阴影*/
+    }
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+    from {
+        border-radius: 50%;
+        box-shadow: -0.01rem 0 0.01rem #1f632c,   /*左边阴影*/
+        0 -0.01rem 0.01rem #1f632c,  /*上边阴影*/
+        0.01rem 0px 0.01rem #1f632c,  /*右边阴影*/
+        0px 0.01rem 0.01rem #1f632c;/*下边阴影*/
+    }
+    to {
+        border-radius: 50%;
+        box-shadow: -0.04rem 0 0.04rem #216830,   /*左边阴影*/
+        0 -0.04rem 0.04rem #216830,  /*上边阴影*/
+        0.04rem 0px 0.04rem #216830,  /*右边阴影*/
+        0px 0.04rem 0.04rem #216830; /*下边阴影*/
+    }
+}

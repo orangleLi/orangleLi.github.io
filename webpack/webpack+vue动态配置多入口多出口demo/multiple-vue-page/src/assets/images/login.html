@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一应智能监控平台-前台</title>
+    <script src="js/lib/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <style type="text/css">
+        body {background: url(images/login/index_bj.gif); }
+        #logo {background: url(images/login/index_logobg.jpg) repeat-x #eaeaea;  height: 500px; }
+        .px900 {width: 900px;}
+        .px660{ width:660px;}
+        .mainbox{ margin:0 auto; overflow:hidden;}
+        .logbox{ margin:30px 0 0 0; height:42px;}
+        .logbox input{ width:232px; height:36px; background:#ffffff; border:#232a34 3px solid; line-height:36px; font-size:18px; text-indent:5px; margin:0 0 0 50px;}
+        .logbox input.logbtn{ width:36px; height:36px; margin:3px 50px 0 0; background:url(images/login/index_logbtn.png) no-repeat; filter:alpha(opacity=70); -moz-opacity:0.7; opacity:0.7; border:0; cursor:pointer;}
+        .logbox input.sec{ margin:0 0 0 10px;}
+        .clr{ width:100%; height:0; clear:both;}
+        .blank10{ width:100%; height:10px; clear:both;}
+        .zeng_msgbox_layer,
+        .zeng_msgbox_layer .gtl_ico_succ,
+        .zeng_msgbox_layer .gtl_ico_fail,
+        .zeng_msgbox_layer .gtl_ico_hits,
+        .zeng_msgbox_layer .gtl_ico_clear,
+        .zeng_msgbox_layer .gtl_end{display:inline-block;height:54px;line-height:54px;font-weight:bold;font-size:14px;color:#606060;background-image:url("images/login/gb_tip_layer.png");background-repeat:no-repeat}
+        .zeng_msgbox_layer .gtl_ico_succ{background-position:-6px 0;left:-45px;top:0;width:45px;position:absolute}
+        .zeng_msgbox_layer .gtl_end{background-position:0 0;position:absolute;right:-6px;top:0;width:6px}
+        .zeng_msgbox_layer .gtl_ico_fail{background-position:-6px -108px;position:absolute;left:-45px;top:0;width:45px}
+        .zeng_msgbox_layer .gtl_ico_hits{background-position:-6px -54px;position:absolute;left:-45px;top:0;width:45px}
+        .zeng_msgbox_layer .gtl_ico_clear{background-position:-6px 0;left:-5px;width:5px;position:absolute;top:0}
+        .zeng_msgbox_layer_wrap{width:100%;position:fixed;_position:absolute;top:46%;left:0;text-align:center;z-index:65533}
+        .zeng_msgbox_layer{background-position:0 -161px;background-repeat:repeat-x;padding:0 18px 0 9px;margin:0 auto;position:relative}
+    </style>
+</head>
+<body>
+    <div class="pxp100 ofh">
+        <div class="px100 ofh" id="logo">
+            <div class="px900 mainbox">
+                <img src="images/login/index_logo.jpg" width="900" height="500" class="dpb">
+            </div>
+        </div>
+        <div class="clr ie6dfd"></div>
+        <div class="px660 mainbox ofh">
+            <div class="px660 logbox ofh">
+                <input class="fl fir ie6dfd" id="UserName" name="UserName" onblur="OnBlurFun(this,'请输入用户名')" onfocus="OnFocusFun(this,'请输入用户名')" style=" background:#eaeaea; color:#999999; font-size:18px; line-height:36px;" type="text" value="">
+                <input class="fl sec" id="PassWord" name="PassWord" onblur="OnBlurFun(this,'000000')" onfocus="OnFocusFun(this,'000000')" style=" background:#eaeaea; color:#999999; font-size:18px; line-height:36px;" type="password">
+                <input type="submit" value="" class="dpb fr logbtn" title="登录" onclick="login()">
+            </div>
+            <div class="blank10"></div>
+        </div>
+    </div>
+</body>
+<script>
+    //得到焦点时触发事件
+    function OnFocusFun(element, elementvalue) {
+        if (element.value == elementvalue) {
+            element.value = "";
+            element.style.background = "#ffffff";
+            element.style.color = "#333333";
+        }
+    }
+    //离开输入框时触发事件
+    function OnBlurFun(element, elementvalue) {
+        if (element.value == "" || element.value.replace(/\s/g, "") == "") {
+            element.value = elementvalue;
+            element.style.background = "#eaeaea";
+            element.style.color = "#999999";
+        }
+    }
+    //登录事件
+    $(document).keydown(function (event) {
+        var strKeyCode=event.keyCode;
+        console.log(strKeyCode);
+
+        if(strKeyCode==13){
+            login();
+        }
+    });
+    function login() {
+        var oUserName=$('#UserName');
+        var oPassWord=$('#PassWord');
+        var strUserName=oUserName.val().trim();
+        var strPassWord=oPassWord.val().trim();
+
+        if(strUserName==''){
+            operatorTipShow('warn','用户名不能为空');
+            return;
+        }
+
+        if(strPassWord==''){
+            operatorTipShow('warn','密码不能为空');
+            return;
+        }
+
+        if(strUserName!='ccpgAdmin'||strPassWord!='wulitaotao'){
+            operatorTipShow('error','用户名或密码错误');
+            return;
+        }
+
+        if(strUserName=='ccpgAdmin'&&strPassWord=='wulitaotao'){
+            operatorTipShow('success','登录成功');
+            return;
+        }
+    }
+    //显示操作提示浮窗
+    var operatorTipTimer=null;
+    function operatorTipShow(flag,con) {
+        var str='<div class="zeng_msgbox_layer_wrap" id="q_Msgbox"  style="top: 360px;">'
+        +'<span class="zeng_msgbox_layer" style="z-index: 10000;">';
+
+        switch(flag){
+            case 'error':
+                str+='<span class="gtl_ico_fail">'
+                break;
+            case 'warn':
+                str+='<span class="gtl_ico_hits">'
+                break;
+            case 'success':
+                str+='<span class="gtl_ico_succ">'
+                break;
+        }
+
+        str+='</span>'+con+'<span class="gtl_end"></span></span></div>';
+
+        clearTimeout(operatorTipTimer);
+
+        if($('#q_Msgbox').length>0){
+            $('#q_Msgbox').remove();
+        }
+
+        $(document.body).append(str);
+
+        operatorTipTimer=setTimeout(function () {
+            $('#q_Msgbox').animate({opacity:0},function () {
+                $(this).remove();
+            });
+
+            if(flag!='success'){
+                return;
+            }
+
+            var strGoToPage=localStorage.goToPage;//回调跳转的页面
+
+            localStorage.loginStatus='已登录';
+
+            if(strGoToPage!=null&&strGoToPage!=undefined){
+                localStorage.removeItem('goToPage');//移除本地存储goToPage这个值
+                setTimeout(function () {
+//                    window.location.href=strGoToPage;
+                    window.location.href=localStorage.server_ip+'/StaticPage/'+strGoToPage;
+                },500);
+            }
+        },800);
+    }
+</script>
+</html>

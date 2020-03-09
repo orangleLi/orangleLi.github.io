@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 液晶数字字体;
+    src: url('../fonts/液晶数字字体.eot');
+    src:
+            url('../fonts/液晶数字字体.eot?#iefix') format('embedded-opentype'),
+            url('../fonts/液晶数字字体.woff') format('woff'),
+            url('../fonts/液晶数字字体.ttf') format('truetype'),
+            url('../fonts/液晶数字字体.svg') format('svg');
+}
+body{
+    background-image: url("../../images/BG.png");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container4{
+    color: #FFF;
+    margin: 0;
+    width: 24.302564%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.EOMContent img{
+    top: 9.530556%;
+}
+.EOMContent span{
+    top: 8.930556%;
+    font-size: 0.06526921239295821rem;
+}
+.key{
+    color: #40c5fa;
+}
+.value{
+    color: #FFF;
+    font-family: 液晶数字字体;
+    font-size: 0.06804325774559888rem;
+}
+.EOMTitle .right{
+    position: absolute;
+    top: 9.230556%;
+    font-size: 0.04704325774559888rem;
+    right: 0.07104007104007104rem;
+}
+.EOMFooter{
+    list-style: none;
+    position: absolute;
+    top: 18.791667%;
+    left: 0.06996030725127714rem;
+    right: 0.07104007104007104rem;
+    bottom: 2.777778%;
+}
+.EOMFooter li{
+    float: left;
+    width: 48.291572%;
+    height: 47.955390%;
+    position: absolute;
+    /* top: 0; */
+    /* bottom: 0; */
+}
+.EOMFooter li:nth-of-type(1),
+.EOMFooter li:nth-of-type(3){
+    left: 0.02234554742915947rem;
+    padding-right: 1.527778%;
+}
+.EOMFooter li:nth-of-type(2),
+.EOMFooter li:nth-of-type(4){
+    right: 0;
+}
+.EOMFooter li:nth-of-type(3),
+.EOMFooter li:nth-of-type(4){
+    top: 52.044610%;
+    padding-top: 1.527778%;
+}
+.EOMFootTitle{
+    padding: 0.02528244330919916rem;
+    position: absolute;
+    top: 0.03528244330919916rem;
+    font-size: 0.03704325774559888rem;
+}
+.EOMFootTitle img {
+    width: 0.02352162887279944rem;
+}
+.EOMFootTitle span:last-child {
+    padding: 0.025873791760079385rem;
+}
+.EOMContentChart {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    top: 0rem;
+}
