@@ -6,5 +6,5 @@ webpack学习笔记
 
 学习时练手代码  webpack-config/
 
-[笔记](http://note.youdao.com/noteshare?id=ade13de94c8d8040429c540a082f7676)
+[笔记-有道云笔记](http://note.youdao.com/noteshare?id=ade13de94c8d8040429c540a082f7676)
 
