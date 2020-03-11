@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>深拷贝</title>
+	<style>
+		.parent{
+			width: 300px;
+			height: 300px;
+			border: 10px solid #000;
+			padding: 30px;
+			margin: 100px;
+			position: relative;
+		}
+		.child{
+			width: 100px;
+			height: 100px;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<!-- 子元素是相对父元素的padding、border还是content进行定位之类的 -->
+	<div class="parent">
+		<div class="child"></div>
+	</div>
+	<script>
+		const map = new Map();
+		map.set('key', 'value');
+		map.set('ConardLi', 'code秘密花园');
+
+		const set = new Set();
+		set.add('ConardLi');
+		set.add(new Set().add('code秘密花园'));
+
+		let obj = {
+			field1: 1,
+		    field2: undefined,
+		    field3: {
+		        child: 'child'
+		    },
+		    field4: [2, 4, 8],
+		    empty: null,
+		    map,
+		    set,
+		    bool: new Boolean(true),
+		    num: new Number(2),
+		    str: new String(2),
+		    symbol: Object(Symbol(1)),
+		    date: new Date(),
+		    reg: /\d+/,
+		    error: new Error(),
+		    func1: () => {
+		        console.log('code秘密花园');
+		    },
+		    func2: function (a, b) {
+		        return a + b;
+		    }
+		}
+
+		const deepClone = function(obj) {
+			let type = Object.prototype.toString.call(obj);
+			let targetObj;
+			switch(type) {
+				case '[object Number]':
+				case '[object Undefined]':
+				case '[object String]':
+				case '[object Null]':
+				case '[object Boolean]':
+				case '[object Symbol]':
+				case '[object Date]':
+				case '[object RegExp]':
+				case '[object Error]':
+				case '[object Function]':
+					return obj;
+				case '[object Object]':
+					targetObj = {};
+					for (const item in obj) {
+						targetObj[item] = deepClone(obj[item]);
+					}
+					return targetObj;
+				case '[object Array]':
+					targetObj = []
+					for (const item in obj) {
+						targetObj[item] = deepClone(obj[item]);
+					}
+					return targetObj;
+				case '[object Map]':
+					targetObj = new Map();
+					obj.forEach((value, key) => {
+						targetObj.set(key, value);
+					})
+					return targetObj;
+				case '[object Set]':
+					targetObj = new Set();
+					obj.forEach((value) => {
+						targetObj.add(value);
+					})
+					return targetObj;
+			}
+		}
+		let cloneObj = deepClone(obj);
+		cloneObj.field1 = 2;
+		cloneObj.field3.child = 'child1';
+		cloneObj.field4[2] = 6;
+		cloneObj.bool = new Boolean(false);
+		cloneObj.map.set('li', 'lian');
+		cloneObj.set.add('lilian');
+		cloneObj.num = new Number(3);
+		cloneObj.str = new String(3);
+		cloneObj.symbol = Object(Symbol(2));
+		cloneObj.date = new Date('2019-10-01');
+		cloneObj.reg = /\w+/;
+		console.log(obj);
+		console.log(cloneObj);
+	</script>
+</body>
+</html>
