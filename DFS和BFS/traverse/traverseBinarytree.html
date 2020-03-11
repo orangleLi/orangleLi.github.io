@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>traverseBinarytree</title>
+</head>
+<body>	
+</body>
+<script>
+	const tree = {
+		node: 1,
+		left: {
+			node: 2,
+			left: {
+				node: 3,
+				left: null,
+				right: {
+					node: 4
+				}
+			},
+			right: {
+				node: 5
+			}
+		},
+		right: {
+			node: 6,
+			left: {
+				node: 7,
+				left: {
+					node: 8
+				},
+				right: {
+					node: 9
+				}
+			},
+			right: {
+				node: 10
+			}
+		}
+	}
+
+	// 深度优先遍历 - 二叉树
+	function dfs(t) {
+		dfs.res = dfs.res || [];
+		if (t.node) {
+			dfs.res.push(t.node)
+		}
+		if (t.left) {
+			dfs(t.left);
+		}
+		if (t.right) {
+			dfs(t.right)
+		}
+		return dfs.res;
+	}
+	// 广度优先遍历 - 二叉树
+	function bfs(t) {
+		bfs.res = bfs.res || [];
+		bfs.queue = bfs.queue || [];
+		
+		if (t.node) {
+			bfs.res.push(t.node)
+		}
+		if (t.left) {
+			bfs.queue.push(t.left)
+		}
+		if (t.right) {
+			bfs.queue.push(t.right);
+		}
+		while (bfs.queue.length > 0) {
+			bfs(bfs.queue.shift())
+		}
+		return bfs.res;
+	}
+	console.log(dfs(tree))
+	console.log(bfs(tree))
+</script>
+</html>
