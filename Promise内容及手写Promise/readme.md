@@ -4,7 +4,9 @@
 
 ### 内容
 Promise是js中进行异步编程的解决方案
+
 语法上：Promise是一个构造函数
+
 功能上：Promise对象用来封装一个异步操作并可以获得其结果
 
 ### 状态
@@ -25,11 +27,40 @@ pending -> rejected（失败）
 2. 支持链式调用，可以解决回到地狱问题
 
 ### 方法
-...
-then()、catch()
-由实例对象调用，所以是挂在原型对象上的
-resolve()、reject()、all()、race()
-挂在函数对象上
+#### 1. Promise构造函数：Promise(excutor) {}
+excutor函数：同步执行(resolve, reject) -> {} <br>
+resolve函数：内部定义成功时调用的函数 value => {} <br>
+reject函数：内部定义失败时调用的函数 reason => {} <br>
+
+#### 2. Promise.prototype.then()方法： (onResolved, onRejected) => {}
+onResolved函数：成功的回调函数 value => {} <br>
+onRejected函数：失败的回调函数 reason => {} <br>
+说明：指定用于得到成功value的成功回调和用于得到失败reason的失败回调，返回一个新的promise对象
+
+#### 3. Promise.prototype.catch()：(onRejected) => {}
+onRejected函数：失败的回调函数 reason => {} <br>
+说明：then()的语法糖，相当于then(undefined, onRejected)
+
+#### 4. Promise.resolve方法：value => {}
+value：成功的数据或promise对象 <br>
+说明：返回一个成功/失败的promise对象
+
+#### 5. Promise。reject方法：reason => {}
+reason：失败的原因 <br>
+说明：返回一个失败的promise对象
+
+#### 6. Promise.all方法：promises => {}
+promises：包含n个promise的数据 <br>
+说明：有一个失败就失败
+
+#### 7. Promise.race方法：promises => {}
+promises：包含n个promise的数据 <br>
+说明：以第一个执行完成的结果为结果（看谁执行的快）
+
+then()、catch()  <br>
+由实例对象调用，所以是挂在原型对象上的  <br>
+resolve()、reject()、all()、race()  <br>
+挂在函数对象上  <br>
 
 ### 如何改变promise的状态
 1) resolve(value) ：如果当前是pending就会变为resolved
@@ -39,22 +70,20 @@ resolve()、reject()、all()、race()
 ### 一个promise指定多个成功/失败回调函数，当promise改变为对应状态时都会调用
 
 ### 改变promse状态和指定回调函数谁先谁后？
- 1) 都有可能，正常情况下时先指定回调函数再改变状态，但也可以先改状态再指定回调
- 2) 如何先改状态再指定回调
-	① 在执行器中直接调用resolve()/reject()
-	
-	② 延迟更长时间调用then()
- 2) 什么时候才能得到数据？
-	① 如何先指定的回调，那当状态发生变化时，回调函数就会调用，得到数据
-	
-	② 如果先改变的状态，那当指定回调时，回调函数就会调用，得到数据
+ 1) 都有可能，正常情况下时先指定回调函数再改变状态，但也可以先改状态再指定回调 <br>
+ 2) 如何先改状态再指定回调 <br>
+	① 在执行器中直接调用resolve()/reject() <br>	
+	② 延迟更长时间调用then() <br>
+ 2) 什么时候才能得到数据？ <br>
+	① 如何先指定的回调，那当状态发生变化时，回调函数就会调用，得到数据 <br>	
+	② 如果先改变的状态，那当指定回调时，回调函数就会调用，得到数据 <br>
 
 ```
 代码
 ```
 ### promise.then()返回的新promise的结果状态由什么决定？
 1) 简单表达：由then()指定的回调函数执行的结果决定
-2) 详细表达：
+2) 详细表达：  <br>
 	 ① 如果抛出异常，新promise变为rejected，reason为抛出的异常
 	 
 	 ② 如果返回的是非promise的任意值，新promise变为resolved，value为返回的值
@@ -246,8 +275,7 @@ function resolvePromise(promise2, x, resolve, reject) {
 		} catch(e){
 			if (used) return;
 			used = true;
-
-			reject(x)
+			reject(e)
 		}
 	} else {
 		resolve(x)
