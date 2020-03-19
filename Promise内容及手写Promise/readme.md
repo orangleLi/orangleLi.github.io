@@ -1,70 +1,84 @@
 # Promise及一步步实现自定义Promise
 
 ## Promise
-	### 内容
-	Promise是js中进行异步编程的解决方案
-	语法上：Promise是一个构造函数
-	功能上：Promise对象用来封装一个异步操作并可以获得其结果
-	### 状态
-	三种状态pending、resolved、rejected
-	pending -> resolved （成功）
-	pending -> rejected（失败）
-	状态只能改变一次，且不可逆
-	无论成功失败，都会有一个结果数据value or reason
-	### 流程
+
+### 内容
+Promise是js中进行异步编程的解决方案
+语法上：Promise是一个构造函数
+功能上：Promise对象用来封装一个异步操作并可以获得其结果
+
+### 状态
+三种状态pending、resolved、rejected
+
+pending -> resolved （成功）
+
+pending -> rejected（失败）
+
+状态只能改变一次，且不可逆
+
+无论成功失败，都会有一个结果数据value or reason
+
+### 流程
+
+### 为什么引入Promise
+1. 指定回调函数的方式更加灵活
+2. 支持链式调用，可以解决回到地狱问题
+
+### 方法
+...
+then()、catch()
+由实例对象调用，所以是挂在原型对象上的
+resolve()、reject()、all()、race()
+挂在函数对象上
+
+### 如何改变promise的状态
+1) resolve(value) ：如果当前是pending就会变为resolved
+2) reject(value) ：如果当前是pending就会变为rejected 
+3) 抛出异常：如果当前是pending就会变为rejected，抛出的是啥，reson就是啥
+
+### 一个promise指定多个成功/失败回调函数，当promise改变为对应状态时都会调用
+
+### 改变promse状态和指定回调函数谁先谁后？
+ 1) 都有可能，正常情况下时先指定回调函数再改变状态，但也可以先改状态再指定回调
+ 2) 如何先改状态再指定回调
+	① 在执行器中直接调用resolve()/reject()
 	
-	### 为什么引入Promise
-	1. 指定回调函数的方式更加灵活
-	2. 支持链式调用，可以解决回到地狱问题
-	### 方法
-	...
-	then()、catch()
-	由实例对象调用，所以是挂在原型对象上的
-	resolve()、reject()、all()、race()
-	挂在函数对象上
+	② 延迟更长时间调用then()
+ 2) 什么时候才能得到数据？
+	① 如何先指定的回调，那当状态发生变化时，回调函数就会调用，得到数据
 	
-	### 如何改变promise的状态
-	1) resolve(value) ：如果当前是pending就会变为resolved
-	2) reject(value) ：如果当前是pending就会变为rejected 
-	3) 抛出异常：如果当前是pending就会变为rejected，抛出的是啥，reson就是啥
+	② 如果先改变的状态，那当指定回调时，回调函数就会调用，得到数据
+
+```
+代码
+```
+### promise.then()返回的新promise的结果状态由什么决定？
+1) 简单表达：由then()指定的回调函数执行的结果决定
+2) 详细表达：
+	 ① 如果抛出异常，新promise变为rejected，reason为抛出的异常
+	 
+	 ② 如果返回的是非promise的任意值，新promise变为resolved，value为返回的值
+	 
+	 ③ 如果返回的是另一个promise，此promise的结果就会成为新promise的结果
 	
-	### 一个promise指定多个成功/失败回调函数，当promise改变为对应状态时都会调用
-	### 改变promse状态和指定回调函数谁先谁后？
-	 1) 都有可能，正常情况下时先指定回调函数再改变状态，但也可以先改状态再指定回调
-	 2) 如何先改状态再指定回调
-		① 在执行器中直接调用resolve()/reject()
-		② 延迟更长时间调用then()
-	 2) 什么时候才能得到数据？
-		① 如何先指定的回调，那当状态发生变化时，回调函数就会调用，得到数据
-		② 如果先改变的状态，那当指定回调时，回调函数就会调用，得到数据
-		
-		```
-		代码
-		```
-	### promise.then()返回的新promise的结果状态由什么决定？
-	1) 简单表达：由then()指定的回调函数执行的结果决定
-	2) 详细表达：
-		 ① 如果抛出异常，新promise变为rejected，reason为抛出的异常
-		 ② 如果返回的是非promise的任意值，新promise变为resolved，value为返回的值
-		 ③ 如果返回的是另一个promise，此promise的结果就会成为新promise的结果
-	
-	### promise异常传/穿透
-	
-	### 中断promise链
-		
+### promise异常传/穿透
+
+### 中断promise链		
 	
 ## 自定义Promise
 
 ### 先写一个整体结构（各种方法）
-	```
-	new Promise((resolve, reject) => {
-		
-	})
-	```
-	// 接收一个执行器函数（同步执行）的参数
-	// 执行器函数接收两个参数（resolve, reject）
-	// 立即同步执行执行器函数
-	```
+```
+new Promise((resolve, reject) => {
+
+})
+```
+// 接收一个执行器函数（同步执行）的参数
+
+// 执行器函数接收两个参数（resolve, reject）
+
+// 立即同步执行执行器函数
+```
 function Promise(excutor) {
 	excutor(resolve, reject)
 }
@@ -80,6 +94,7 @@ function Promise(excutor) {
 }
 ```
 上文有提到过，可能先指定回调，再改变状态
+
 // 判断当有回调函数时，异步执行回调
 ```
 function Promise(excutor) {
@@ -100,6 +115,7 @@ function Promise(excutor) {
 }
 ```
 Promise构造函数就写好了
+
 then()方法
 
 then()是挂在实例对象上的,并且接收两个参数，onFulfilled, onRejected
@@ -168,6 +184,8 @@ onRejected = typeof onRejected === 'function' ? onRejected : reason => {throw re
 // 重复的部分封装handle
 
 Promise/A+规范
+
+```
 2.3 resolvePromise
 resolvePromise(promise2, x, resolve, reject)
 2.3.1 如果 promise2 和 x 相等，那么 reject promise with a TypeError
@@ -188,6 +206,7 @@ resolvePromise(promise2, x, resolve, reject)
 2.3.3.4 如果 then 不是一个function. fulfill promise with x.
 2.3.4 如果 x 不是一个 object 或者 function，fulfill promise with x.
 
+```
 ```
 function resolvePromise(promise2, x, resolve, reject) {
 	// 2.3.1 如果 promise2 和 x 相等，那么 reject promise with a TypeError
@@ -246,6 +265,7 @@ catch()是then()方法的语法糖
 ### 脚本测试
 
 测试promise是否符合Promise/A+规范
+
 首先在promise代码中加入
 
 ```
@@ -260,9 +280,11 @@ Promise.defer = Promise.deferred = function () {
 module.exports = Promise;
 ```
 安装测试脚本
+
 npm install -g promises-aplus-tests
 
 执行命令 promises-aplus-tests 文件名
+
 promises-aplus-tests promise.js
 
 
