@@ -1,4 +1,4 @@
-﻿class Promise {
+class Promise {
 	constructor(excutor) {
 		this.status = 'pending'; // 给promise对象指定status属性，初始值为pending
 		this.data = null; // 给promise对象指定一个用于存储结果数据的属性
@@ -51,6 +51,7 @@
 						3. 如果返回的结果是promise类型，那return的promise的结果就是返回的promise对象的结果
 					*/
 					try{
+						// 2.2.7.1 onFulfilled 或 onRejected 执行的结果为x,调用 resolvePromise
 						let x = callback(this.data);
 						resolvePromise(promise2, x, resolve, reject)
 					} catch(e) {
@@ -126,7 +127,15 @@ Promise.resolve = (value) => {
 		try {
 			if (value && value.then && typeof value.then === 'function') {
 				setTimeout(() => {
-					value.then(resolve,reject)
+					// value.then(
+					// 	value => {
+					// 		resolve(value)
+					// 	},
+					// 	reason => {
+					// 		reject(reason)
+					// 	}
+					// )
+					value.then(resolve,reject) // 上面代码的简写
 				})
 			} else {
 				resolve(value)
