@@ -80,6 +80,78 @@ class Promise {
 	catch(onRejected) {
 		this.then(undefined, onRejected)
 	}
+
+	// 参数为一般值，则直接返回，参数若为promise对象，则返回promise对象的结果
+	static resolve(value) {
+		if (value instanceof Promise) {
+			return value
+		}
+		return new Promise((resolve, reject) => {
+			try {
+				if (value && value.then && typeof value.then === 'function') {
+					setTimeout(() => {
+						// value.then(
+						// 	value => {
+						// 		resolve(value)
+						// 	},
+						// 	reason => {
+						// 		reject(reason)
+						// 	}
+						// )
+						value.then(resolve,reject) // 上面代码的简写
+					})
+				} else {
+					resolve(value)
+				}
+			} catch(e) {
+				reject(e)
+			}
+		})
+	}
+
+	static reject(reason) {
+		return new Promise((resolve, reject) => {
+			reject(reason)
+		})
+	}
+
+	static all(promises) {
+		return new Promise((resolve, reject) => {
+			if (promises && promises.length === 0) {
+				resolve([])
+			} else {
+				let values = [];
+				promises.forEach((fn, index) => {
+					Promise.resolve(fn).then(
+						value => {
+							values[index] = value
+							if (values.length === promises.length) {
+								resolve(values)
+							}
+						},
+						reason => {
+							reject(reason)
+						}
+					)
+				})
+			}
+		})
+	}
+
+	static race(promises) {
+		return new Promise((resolve, reject) => {
+			promises.forEach((fn, index) => {
+				Promise.resolve(fn).then(
+					value => {
+						resolve(value)
+					},
+					reason => {
+						reject(reason)
+					}
+				)
+			})
+		})
+	}
 }
 
 function resolvePromise(promise2, x, resolve, reject) {
@@ -116,79 +188,6 @@ function resolvePromise(promise2, x, resolve, reject) {
 	} else {
 		resolve(x)
 	}
-}
-
-// 参数为一般值，则直接返回，参数若为promise对象，则返回promise对象的结果
-Promise.resolve = (value) => {
-	if (value instanceof Promise) {
-		return value
-	}
-	return new Promise((resolve, reject) => {
-		try {
-			if (value && value.then && typeof value.then === 'function') {
-				setTimeout(() => {
-					// value.then(
-					// 	value => {
-					// 		resolve(value)
-					// 	},
-					// 	reason => {
-					// 		reject(reason)
-					// 	}
-					// )
-					value.then(resolve,reject) // 上面代码的简写
-				})
-			} else {
-				resolve(value)
-			}
-		} catch(e) {
-			reject(e)
-		}
-	})
-}
-
-Promise.reject = (reason) => {
-	return new Promise((resolve, reject) => {
-		reject(reason)
-	})
-}
-
-Promise.all = (promises) => {
-	return new Promise((resolve, reject) => {
-		if (promises && promises.length === 0) {
-			resolve([])
-		} else {
-			let values = [];
-			promises.forEach((fn, index) => {
-				Promise.resolve(fn).then(
-					value => {
-						values[index] = value
-						if (values.length === promises.length) {
-							resolve(values)
-						}
-					},
-					reason => {
-						reject(reason)
-					}
-				)
-			})
-		}
-	})
-}
-
-
-Promise.race = (promises) => {
-	return new Promise((resolve, reject) => {
-		promises.forEach((fn, index) => {
-			Promise.resolve(fn).then(
-				value => {
-					resolve(value)
-				},
-				reason => {
-					reject(reason)
-				}
-			)
-		})
-	})
 }
 
 
