@@ -59,7 +59,7 @@ function selectImg(obj) {
 	    alert('上传错误,文件格式必须为：png/jpg/jpeg');
 		return;
 	}else{
-		image.src= src;
+		image.src = src;
 		image.name = obj.files[0].name;
 		selectImgClsDom.style.display = 'none';
 		refreshSelectImgDom.style.display = 'inline-block';
@@ -77,6 +77,16 @@ imageHandle.prototype = {
 			ctx.drawImage(image,0, 0,  width, height);
 			offScreenCtx.drawImage(image, 0, 0, width, height);
 		}
+		let domPos = dom.getBoundingClientRect();
+		let xP = domPos.left + domPos.width;
+		let yP = domPos.top + domPos.height;
+		dom.addEventListener('mousemove', e => {
+			if (Math.abs(e.clientX === xP) < 1.5 && Math.abs(e.clientY - yP) < 1.5 ) {
+				dom.style.cursor = 'crosshair'
+			} else {
+				dom.style.cursor = 'default'
+			}
+		})
 	},
 	setCanvasSize(w, h) {
 			width = w;
@@ -90,7 +100,7 @@ imageHandle.prototype = {
 	},
 	setBoxSize(w) {
 		document.getElementsByClassName('main')[0].style.width = w + 2 + 'px';
-		document.getElementsByClassName('btnGroup')[0].style.width = w + 2 + 'px';
+		// document.getElementsByClassName('btnGroup')[0].style.width = w + 2 + 'px';
 	},
 	// 缩放效果
 	drawImageByScale() {
