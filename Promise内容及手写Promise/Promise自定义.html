@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise自定义</title>
+</head>
+<body>
+	
+</body>
+<script src="./promise_class.js"></script>
+<script>
+	// 1. 定义整体结构
+	// 2. Promise构造函数的实现
+	// 3. promise.then()/catch()的实现
+	// 4. Promise.resolve()/reject()的实现
+	// 5. Promise.all()/race的实现
+	// 6. Promise.resolveDealy()/rejectDelay()的实现  延迟指定事件成功/失败 自定义事件
+	// 7. ES5 function版本
+	// 8. ES6 class版本
+	new Promise((resolve, reject) => {
+		setTimeout(() => {
+			// resolve(1)
+			reject(1)
+		}, 100)
+	})
+	.then(
+		value => {
+			console.log('onResolved1()', value)
+			return value;
+		},
+		reason => {
+			console.log('onRejected1()', reason)
+		}
+	)
+	// .catch(
+	// 	reason => {
+	// 		console.log('onRejected2()', reason)
+	// 		return new Promise(() => {})
+	// 	}
+	// )
+	.then(
+		value => {
+			console.log('onResolved3()', value)
+			throw 3
+		},
+		reason => {
+			console.log('onRejected3()', reason)
+			console.log(reason)
+			throw 4
+		}
+	)
+	.catch(
+		reason => {
+			console.log('onRejected4()', reason)
+		}
+	)
+
+	/*
+		Promise.resolve测试代码
+	*/
+	// let p = Promise.resolve(20);
+	// p.then((data) => {
+	//     console.log(data);
+	// });
+
+
+	// let p2 = Promise.resolve({
+	//     then: function(resolve, reject) {
+	//         resolve(30);
+	//     }
+	// });
+
+	// p2.then((data)=> {
+	//     console.log(data)
+	// });
+
+	// let p3 = Promise.resolve(new Promise((resolve, reject) => {
+	//     resolve(400)
+	// }));
+	// p3.then((data) => {
+	//     console.log(data)
+	// });
+
+	/*
+		Promise.reject测试代码
+	*/
+	// Promise.reject(new Error('fail')).then(function() {
+	//   // not called
+	// }, function(error) {
+	//   console.log(error); // Stacktrace
+	// });
+
+	/*
+		Promise.all测试代码
+	*/
+	// var promise1 = new Promise((resolve, reject) => {
+	//     resolve(3);
+	// })
+	// var promise2 = 42;
+	// var promise3 = new Promise(function(resolve, reject) {
+	//   setTimeout(resolve, 100, 'foo');
+	// });
+
+	// Promise.all([promise1, promise2, promise3]).then(function(values) {
+	//   console.log(values); //[3, 42, 'foo']
+	// },(err)=>{
+	//     console.log(err)
+	// });
+
+	// var p = Promise.all([]); // will be immediately resolved
+	// var p2 = Promise.all([1337, "hi"]); // non-promise values will be ignored, but the evaluation will be done asynchronously
+	// console.log(p);
+	// console.log(p2)
+	// setTimeout(function(){
+	//     console.log('the stack is now empty');
+	//     console.log(p2);
+	// });
+
+	/*
+		Promise.race测试代码
+	*/
+ //    Promise.race([
+	//     new Promise((resolve, reject) => { setTimeout(() => { resolve(100) }, 1000) }),
+	//     undefined,
+	//     new Promise((resolve, reject) => { setTimeout(() => { reject(100) }, 100) })
+	// ]).then((data) => {
+	//     console.log('success ', data);
+	// }, (err) => {
+	//     console.log('err ',err);
+	// });
+
+	// Promise.race([
+	//     new Promise((resolve, reject) => { setTimeout(() => { resolve(100) }, 1000) }),
+	//     new Promise((resolve, reject) => { setTimeout(() => { resolve(200) }, 200) }),
+	//     new Promise((resolve, reject) => { setTimeout(() => { reject(100) }, 100) })
+	// ]).then((data) => {
+	//     console.log(data);
+	// }, (err) => {
+	//     console.log(err);
+	// });
+
+</script>
+</html>
