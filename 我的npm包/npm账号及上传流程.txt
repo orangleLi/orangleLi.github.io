@@ -1,0 +1,21 @@
+orangleli
+199***lian  *请自行补充  
+
+
+如果以前使用过npm淘宝镜像的下载链接，这个时候要将下载链接设置回来 
+npm config set registry http://registry.npmjs.org
+
+
+
+npm login 输入用户名、密码、邮箱
+orangleli
+199***lian  *请自行补充   密码不会显示，放心大胆的输
+18291003389@163.com
+
+
+
+npm publish
+
+发布的时候包名不能和已有的包名重复
+
+更新自己的包的时候，记得改一下版本号再publish
