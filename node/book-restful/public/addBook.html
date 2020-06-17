@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>添加图书</title>
+	<script src="/www/util/include.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        inclu.Include.include();
+    </script>
+</head>
+<body>
+	<h4>添加图书</h4>
+	<!-- <form> -->
+		名称：<input type="text" name="name"><br>
+		作者：<input type="text" name="author"><br>
+		分类：<input type="text" name="category"><br>
+		描述：<input type="text" name="desctiption"><br>
+		<input type="submit" value="提交">
+	<!-- </form> -->
+</body>
+<script type="text/javascript" charset="utf-8">
+	var param = decodeURIComponent(location.search);
+	// 修改
+	if (param) {
+		$('h4').text('修改图书')
+		let id = getParam(param).id;
+		
+		$.ajax({
+		    type : 'get',
+		    url : '/books/book/' + id,
+		    dataType : 'json',
+		    success : function(data){
+		    	$("input[name='name']").val(data.name);
+				$("input[name='author']").val(data.author);
+				$("input[name='category']").val(data.category);
+				$("input[name='desctiption']").val(data.desctiption);
+				bindClick('put', data.id, (data) => {
+					window.location.href = $.baseServiceUrl + '/www/index.html';
+				})
+		    }
+		});
+		
+	} else {
+		// 新增
+		$('h4').text('添加图书')
+		bindClick('post', '', (data) => {
+			window.location.href = $.baseServiceUrl + '/www/index.html';
+		})
+		
+	}
+
+	function bindClick(type, id, callback) {
+
+		$("input[type='submit']").click(() => {		
+			var name = $("input[name='name']").val();
+			var author = $("input[name='author']").val();
+			var category = $("input[name='category']").val();
+			var desctiption = $("input[name='desctiption']").val();
+			console.log(name, author, category, desctiption);
+			let data = {
+				name: name,
+				author: author,
+				category: category,
+				desctiption: desctiption,
+			}
+			if (id) {
+				data.id = id;
+			}
+			let url = $.baseServiceUrl + '/books/book';
+			$.ajax({
+			    type : type,
+			    url : url,
+			    data: data,
+			    dataType : 'json',
+			    success : function(data){
+			    	alert(data.msg)
+			    	callback && callback(data)
+			    }
+			});
+		});
+	}
+	function getParam(param) {
+		let q={};
+		param.replace(/([^?&=]+)=([^&]+)/g,(_,k,v)=>q[k]=v);
+		return q;
+	}
+</script>
+</html>

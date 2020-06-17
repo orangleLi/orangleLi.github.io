@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>index</title>
+	<link rel="stylesheet" href="./stylesheets/style.css">
+</head>
+<body>
+	<div>
+		hello
+	</div>
+	<img src="./images/1.png" alt="">
+	<script src="./javascripts/index.js"></script>
+</body>
+<script>
+	// let _arr = [0, 1, 2];
+	// let arr = _arr;
+	// console.log(_arr);
+	// console.log(arr);
+	// arr[0] = 100;
+	// console.log(_arr); // 100，1，2
+	// console.log(arr); // 100，1，2
+
+
+	let _arr = [0, 1, 2];
+	let arr = [..._arr];
+	console.log(_arr);
+	console.log(arr);
+	arr[0] = 100;
+	console.log(_arr); // 0，1，2
+	console.log(arr); // 100，1，2
+</script>
+</html>

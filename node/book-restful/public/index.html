@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>图书管理系统</title>
+	<script src="/www/util/include.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        inclu.Include.include();
+    </script>
+    <script type="text/template" charset="utf-8" id="indexTpl">
+    	{{each list}}
+			<tr>
+				<td>{{$value.id}}</td>
+				<td>{{$value.name}}</td>
+				<td>{{$value.author}}</td>
+				<td>{{$value.category}}</td>
+				<td>{{$value.desctiption}}</td>
+				<td><a href="javascript:void(0);" onclick="toEditBook('{{$value.id}}')">修改</a>|<a href="javascript:void(0);" onclick="deleteConfirm('{{$value.id}}')">删除</a></td>
+			</tr>
+		{{/each}}
+    </script>
+</head>
+<body>
+	<div class="title">图书管理系统<a href="/toAddBook">添加图书</a></div>
+	<div class="content">
+		<table cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>名称</th>
+					<th>作者</th>
+					<th>分类</th>
+					<th>描述</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody"></tbody>
+		</table>
+	</div>
+</body>
+
+</html>

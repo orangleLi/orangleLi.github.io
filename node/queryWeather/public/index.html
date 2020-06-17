@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>获取天气信息</title>
+	<script src="./jquery.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="./cloudy.css">
+	<link rel="stylesheet" type="text/css" href="./sunny.css">
+	<link rel="stylesheet" type="text/css" href="./snowy.css">
+	<style>
+		.weather {
+	      width: 100%;
+	      height: 500px;
+	      background: #212125;
+	      display: flex;
+	      justify-content: space-around;
+	      align-items: center;
+	      color: #e6e8db;
+	    }
+
+	    
+	</style>
+</head>
+<body>
+	<!-- <div class="weather">
+	    <div class="cloudy">
+	        <span class="cloud"></span>
+	        <span class="cloud2"></span>
+	    </div>
+	    <div class="sunny">
+	        <span class="sun"></span>
+	        <span class="sun1"></span>
+	        <span class="sun2"></span>
+	    </div>
+	</div>	 -->
+	<div class="weather">
+	    <div class="snowy">
+	        <span class="snowman"></span>
+	        <span class="snow1"></span>
+	    </div>
+	    <!-- <div class="sunny">
+	        <span class="sun"></span>
+	        <span class="sun1"></span>
+	        <span class="sun2"></span>
+	    </div> -->
+	</div>	
+	<button onclick='getWeather()'>点击获取天气信息</button>
+	<button onclick='getCityWeather()' >点击北京天气温度</button>
+	<div id="showInfo"></div>
+</body>
+<script type="text/javascript" charset="utf-8">
+	function getWeather() {
+		$.ajax({
+			type: 'get',
+			url: '/queryWeather/101010100',
+		    dataType : 'json',
+			success: function(data) {
+				let str = '';
+				for(var o in data){
+				    str += `<div>${o} : ${data[o]}</div>`;
+				} 
+				$("#showInfo").html(str)
+			}
+		})
+	}
+	function getCityWeather() {
+		$.ajax({
+			type: 'get',
+			url: '/queryCityWeather/101010100',
+		    dataType : 'json',
+			success: function(data) {
+				let str = '';
+				for(var o in data){
+				    str += `<div>${o} : ${data[o]}</div>`;
+				} 
+				$("#showInfo").html(str)
+			}
+		})
+	}
+</script>
+</html>

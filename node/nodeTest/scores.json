@@ -1,0 +1,20 @@
+{
+	"no123": {
+		"chinese": 105,
+		"math": 159,
+		"english": 120,
+		"summary": 289
+	},
+	"no124": {
+		"chinese": 115,
+		"math": 159,
+		"english": 130,
+		"summary": 262
+	},
+	"no125": {
+		"chinese": 100,
+		"math": 120,
+		"english": 120,
+		"summary": 320
+	}
+}
