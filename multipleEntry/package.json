@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "fastclick": "^1.0.6",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsonp": "^0.2.1",
     "swiper": "^3.4.2",
     "velocity-animate": "^1.5.2",
