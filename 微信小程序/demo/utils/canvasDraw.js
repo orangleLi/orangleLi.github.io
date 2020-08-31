@@ -3,7 +3,22 @@ function canvasDraw(id, obj) {
   this.nowHeight;
   this.winWidth = wx.getSystemInfoSync().windowWidth * 2;
 }
-
+// 绘制圆角矩形,这种比下文那种好用，有空了再改
+// function roundRect(x, y, w, h, r, c) {
+//     g.save();
+//     if (w < 2 * r) {r = w / 2;}
+//     if (h < 2 * r){ r = h / 2;}
+//     g.beginPath();
+// 	   g.fillStyle = c;
+//     g.moveTo(x+r, y);
+//     g.arcTo(x+w, y, x+w, y+h, r);
+//     g.arcTo(x+w, y+h, x, y+h, r);
+//     g.arcTo(x, y+h, x, y, r);
+//     g.arcTo(x, y, x+w, y, r);
+//     g.fill(); // g.stroke()
+//     g.closePath();
+//     g.restore();
+// }
 canvasDraw.prototype = {
   getImagesInfo: function (imgArr) {
     let that = this;
